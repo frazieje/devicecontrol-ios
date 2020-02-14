@@ -56,8 +56,7 @@ class MainViewController : UITabBarController {
         
         homeViewController.tabBarItem = UITabBarItem(title: "Home", image: homeIcon, selectedImage: homeSelectedIcon)
         
-        
-        let devicesViewController = DevicesViewController(profileLogin: profileLogin)
+        let devicesViewController = DevicesViewController(presenter: <#T##DevicesPresenter#>)
         
         let devicesIcon = UIImage.fontAwesomeIcon(icon: "\u{f2db}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
         

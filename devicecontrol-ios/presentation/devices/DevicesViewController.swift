@@ -10,21 +10,14 @@ import UIKit
 
 class DevicesViewController : UIViewController, DevicesView {
     
-    func showDevices(devices: [ProfileDevice]) {
-        
-        tableView.reloadData()
-    }
-    
-    func showError(message: String) {
-        
-    }
-    
     weak var tableView: UITableView!
     
-    let profileLogin: ProfileLogin
+    let presenter: DevicesPresenter
     
-    init(profileLogin: ProfileLogin) {
-        self.profileLogin = profileLogin
+    var devicesData: [ProfileDevice] = []
+    
+    init(presenter: DevicesPresenter) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -51,8 +44,15 @@ class DevicesViewController : UIViewController, DevicesView {
         self.tableView = tableView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewWillAppear()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter.viewWillAppear()
         
         view.backgroundColor = .white
         
@@ -68,16 +68,27 @@ class DevicesViewController : UIViewController, DevicesView {
         print("Devices viewDidAppear")
     }
     
+    func showDevices(devices: [ProfileDevice]) {
+        devicesData = devices
+        tableView.reloadData()
+    }
+    
+    func showError(message: String) {
+        devicesData = []
+        tableView.reloadData()
+    }
+    
 }
 
 extension DevicesViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return devicesData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellID", for: indexPath)
+        cell.textLabel?.text = "Row \(devicesData[indexPath.row].deviceId)"
         return cell
     }
     

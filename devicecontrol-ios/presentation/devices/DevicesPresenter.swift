@@ -12,8 +12,6 @@ protocol DevicesPresenter {
     
     func viewWillAppear()
     
-    func getDevice(deviceId: String)
-    
-    func getDevicesCount()
+    func viewDidAppear()
     
 }

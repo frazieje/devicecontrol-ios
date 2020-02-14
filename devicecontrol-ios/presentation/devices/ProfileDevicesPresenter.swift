@@ -38,12 +38,11 @@ class ProfileDevicesPresenter : DevicesPresenter {
         
     }
     
-    func getDevice(deviceId: String) {
+
+    func viewDidAppear() {
         
-    }
-    
-    func getDevicesCount() {
-        <#code#>
+        print("DevicesPresenter viewDidAppear")
+        
     }
     
     

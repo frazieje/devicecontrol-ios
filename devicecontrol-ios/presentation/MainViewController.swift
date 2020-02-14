@@ -21,10 +21,10 @@ class MainViewController : UITabBarController {
     let settingsViewController: UIViewController
     
     init(devicesViewController: UIViewController, homeViewController: UIViewController, settingsViewController: UIViewController) {
-        super.init(nibName: nil, bundle: nil)
         self.devicesViewController = devicesViewController
         self.homeViewController = homeViewController
         self.settingsViewController = settingsViewController
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -86,7 +86,7 @@ class MainViewController : UITabBarController {
             
             let button  = UIButton(type: .custom)
             
-            let profileIcon = UIImage.profileIcon(profileName: profileLogin.profile.name, size: CGSize(width: 30.0, height: 30.0), color: .orange, textColor: .white)
+            let profileIcon = UIImage.profileIcon(profileName: "H", size: CGSize(width: 30.0, height: 30.0), color: .orange, textColor: .white)
                 .withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
             
             button.setImage(profileIcon, for: .normal)

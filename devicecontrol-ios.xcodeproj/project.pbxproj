@@ -45,6 +45,12 @@
 		2B846992234ED2D000234153 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B846991234ED2D000234153 /* AnyDecodable.swift */; };
 		2B846994234ED30700234153 /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B846993234ED30700234153 /* AnyEncodable.swift */; };
 		2B86C56F23F6677A00D502A2 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C56E23F6677A00D502A2 /* View.swift */; };
+		2B86C57223F6737D00D502A2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57123F6737D00D502A2 /* LoginService.swift */; };
+		2B86C57423F6741300D502A2 /* ProfileLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57323F6741300D502A2 /* ProfileLoginService.swift */; };
+		2B86C57623F6753500D502A2 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57523F6753500D502A2 /* MenuPresenter.swift */; };
+		2B86C57823F6754700D502A2 /* ProfileMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57723F6754700D502A2 /* ProfileMenuPresenter.swift */; };
+		2B86C57A23F675D300D502A2 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57923F675D300D502A2 /* MenuView.swift */; };
+		2B86C57C23F6760100D502A2 /* ProfileMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57B23F6760100D502A2 /* ProfileMenuView.swift */; };
 		2B8CFBBC2341808C000B7628 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8CFBBB2341808C000B7628 /* Alamofire.framework */; };
 		2B8CFBBF2341907E000B7628 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CFBBE2341907E000B7628 /* Profile.swift */; };
 		2B8CFBC12341A224000B7628 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CFBC02341A224000B7628 /* UserLogin.swift */; };
@@ -127,6 +133,12 @@
 		2B846991234ED2D000234153 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 		2B846993234ED30700234153 /* AnyEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEncodable.swift; sourceTree = "<group>"; };
 		2B86C56E23F6677A00D502A2 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		2B86C57123F6737D00D502A2 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		2B86C57323F6741300D502A2 /* ProfileLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginService.swift; sourceTree = "<group>"; };
+		2B86C57523F6753500D502A2 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
+		2B86C57723F6754700D502A2 /* ProfileMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuPresenter.swift; sourceTree = "<group>"; };
+		2B86C57923F675D300D502A2 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		2B86C57B23F6760100D502A2 /* ProfileMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuView.swift; sourceTree = "<group>"; };
 		2B8CFBBB2341808C000B7628 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2B8CFBBE2341907E000B7628 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2B8CFBC02341A224000B7628 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
@@ -322,6 +334,10 @@
 			isa = PBXGroup;
 			children = (
 				2BF57B1B23431CA600B617B1 /* ProfileMenuViewController.swift */,
+				2B86C57523F6753500D502A2 /* MenuPresenter.swift */,
+				2B86C57723F6754700D502A2 /* ProfileMenuPresenter.swift */,
+				2B86C57923F675D300D502A2 /* MenuView.swift */,
+				2B86C57B23F6760100D502A2 /* ProfileMenuView.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -374,6 +390,8 @@
 				2B758696234BCC45006B2E56 /* DeviceService.swift */,
 				2B72E6392352DD3C00F85258 /* ProfileDeviceService.swift */,
 				2BBC9416236FC856004D507D /* ProfileService.swift */,
+				2B86C57123F6737D00D502A2 /* LoginService.swift */,
+				2B86C57323F6741300D502A2 /* ProfileLoginService.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -547,6 +565,7 @@
 				2B72E627235235E400F85258 /* Device.swift in Sources */,
 				2B8EA92D231A378900B404AF /* User.swift in Sources */,
 				2B8CFBBF2341907E000B7628 /* Profile.swift in Sources */,
+				2B86C57C23F6760100D502A2 /* ProfileMenuView.swift in Sources */,
 				2B846990234ED21400234153 /* AnyCodable.swift in Sources */,
 				2B6D7E3D2320C7FE00081579 /* HomeViewController.swift in Sources */,
 				2B86C56F23F6677A00D502A2 /* View.swift in Sources */,
@@ -562,11 +581,15 @@
 				2B72E630235245AF00F85258 /* DeviceApi.swift in Sources */,
 				2B581AE52314E7CA007D0D86 /* AppDelegate.swift in Sources */,
 				2B8CFBC12341A224000B7628 /* UserLogin.swift in Sources */,
+				2B86C57A23F675D300D502A2 /* MenuView.swift in Sources */,
 				2B72E6292352375000F85258 /* DeviceType.swift in Sources */,
 				2B72E62B23523B5E00F85258 /* EUI48Address.swift in Sources */,
+				2B86C57423F6741300D502A2 /* ProfileLoginService.swift in Sources */,
 				2B19B60F23662C4600F5E8D5 /* ProfileDevice.swift in Sources */,
 				2B72E6402352E98500F85258 /* ProfileRepositoryFactory.swift in Sources */,
+				2B86C57823F6754700D502A2 /* ProfileMenuPresenter.swift in Sources */,
 				2B84698C234EBC8E00234153 /* CachedMessage.swift in Sources */,
+				2B86C57623F6753500D502A2 /* MenuPresenter.swift in Sources */,
 				2B6D7E412320C82000081579 /* SettingsViewController.swift in Sources */,
 				2B19B6082364F06B00F5E8D5 /* DoorLock.swift in Sources */,
 				2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */,
@@ -576,6 +599,7 @@
 				2B75869D234BD444006B2E56 /* Message.swift in Sources */,
 				2BBC941923712C8A004D507D /* Presenter.swift in Sources */,
 				2BF57B1C23431CA600B617B1 /* ProfileMenuViewController.swift in Sources */,
+				2B86C57223F6737D00D502A2 /* LoginService.swift in Sources */,
 				2B8CFBC52341A45E000B7628 /* ProfileLoginList.swift in Sources */,
 				2B19B60A2364FAA500F5E8D5 /* GasCylinder.swift in Sources */,
 				2B6D7E3B2320C5EF00081579 /* MainViewController.swift in Sources */,

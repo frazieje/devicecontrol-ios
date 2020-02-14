@@ -14,6 +14,6 @@ protocol DevicesPresenter : Presenter {
     
     func deviceGroupClicked(type: String)
     
-    func setView(view: View)
+    func setView(view: DevicesView)
     
 }

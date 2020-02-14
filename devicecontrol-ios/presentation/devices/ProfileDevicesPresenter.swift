@@ -12,7 +12,7 @@ class ProfileDevicesPresenter : DevicesPresenter {
     
     let deviceService: DeviceService
     
-    let devicesView: DevicesView
+    var devicesView: DevicesView? = nil
     
     let deviceMapper: DeviceMapper
     
@@ -28,10 +28,10 @@ class ProfileDevicesPresenter : DevicesPresenter {
                 
                 let deviceTypes = devices.map { self.deviceMapper.from(cachedDevice: $0) }
                     
-                self.devicesView.showDevices(devices: deviceTypes)
+                self.devicesView?.showDevices(devices: deviceTypes)
                 
             } else {
-                self.devicesView.showError(message: error!.message)
+                self.devicesView?.showError(message: error!.message)
             }
         }
         
@@ -45,8 +45,8 @@ class ProfileDevicesPresenter : DevicesPresenter {
         
     }
     
-    func setView(view: View) {
-        self.devicesView = devicesView
+    func setView(view: DevicesView) {
+        self.devicesView = view
     }
     
 }

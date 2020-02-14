@@ -12,10 +12,7 @@ class SettingsViewController : UIViewController {
     
     weak var testView: UIView!
     
-    let profileLogin: ProfileLogin
-    
-    init(profileLogin: ProfileLogin) {
-        self.profileLogin = profileLogin
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     

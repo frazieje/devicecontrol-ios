@@ -15,10 +15,7 @@
 		2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */; };
 		2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */; };
 		2B46A0FA2317630F0063740A /* RoundedLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B46A0F82317630F0063740A /* RoundedLoginButton.swift */; };
-		2B46A0FC2317634D0063740A /* ProfilesResultViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B46A0FB2317634D0063740A /* ProfilesResultViewControllerTableViewController.swift */; };
 		2B581AE52314E7CA007D0D86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B581AE42314E7CA007D0D86 /* AppDelegate.swift */; };
-		2B581AE72314E7CA007D0D86 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B581AE62314E7CA007D0D86 /* FirstViewController.swift */; };
-		2B581AE92314E7CA007D0D86 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B581AE82314E7CA007D0D86 /* SecondViewController.swift */; };
 		2B581AEE2314E7CB007D0D86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B581AED2314E7CB007D0D86 /* Assets.xcassets */; };
 		2B581AF12314E7CB007D0D86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B581AEF2314E7CB007D0D86 /* LaunchScreen.storyboard */; };
 		2B581AFC2314E7CB007D0D86 /* devicecontrol_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B581AFB2314E7CB007D0D86 /* devicecontrol_iosTests.swift */; };
@@ -47,6 +44,7 @@
 		2B846990234ED21400234153 /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84698F234ED21400234153 /* AnyCodable.swift */; };
 		2B846992234ED2D000234153 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B846991234ED2D000234153 /* AnyDecodable.swift */; };
 		2B846994234ED30700234153 /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B846993234ED30700234153 /* AnyEncodable.swift */; };
+		2B86C56F23F6677A00D502A2 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C56E23F6677A00D502A2 /* View.swift */; };
 		2B8CFBBC2341808C000B7628 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8CFBBB2341808C000B7628 /* Alamofire.framework */; };
 		2B8CFBBF2341907E000B7628 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CFBBE2341907E000B7628 /* Profile.swift */; };
 		2B8CFBC12341A224000B7628 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CFBC02341A224000B7628 /* UserLogin.swift */; };
@@ -57,6 +55,8 @@
 		2B8EA92D231A378900B404AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EA92C231A378900B404AF /* User.swift */; };
 		2B8EA933231DB1D300B404AF /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EA932231DB1D300B404AF /* Repository.swift */; };
 		2B8EA935231DB2C800B404AF /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EA934231DB2C800B404AF /* UserDefaultsRepository.swift */; };
+		2BBC9417236FC856004D507D /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC9416236FC856004D507D /* ProfileService.swift */; };
+		2BBC941923712C8A004D507D /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC941823712C8A004D507D /* Presenter.swift */; };
 		2BD09BFF235EA9C90044116C /* AlamofireDeviceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */; };
 		2BF57B1423430B2300B617B1 /* output.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 2BF57B1123430B2300B617B1 /* output.xcfilelist */; };
 		2BF57B1523430B2300B617B1 /* input.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 2BF57B1223430B2300B617B1 /* input.xcfilelist */; };
@@ -91,11 +91,8 @@
 		2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMapper.swift; sourceTree = "<group>"; };
 		2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeviceMapper.swift; sourceTree = "<group>"; };
 		2B46A0F82317630F0063740A /* RoundedLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLoginButton.swift; sourceTree = "<group>"; };
-		2B46A0FB2317634D0063740A /* ProfilesResultViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesResultViewControllerTableViewController.swift; sourceTree = "<group>"; };
 		2B581AE12314E7CA007D0D86 /* devicecontrol-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "devicecontrol-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B581AE42314E7CA007D0D86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2B581AE62314E7CA007D0D86 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		2B581AE82314E7CA007D0D86 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		2B581AED2314E7CB007D0D86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B581AF02314E7CB007D0D86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B581AF22314E7CB007D0D86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,6 +126,7 @@
 		2B84698F234ED21400234153 /* AnyCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodable.swift; sourceTree = "<group>"; };
 		2B846991234ED2D000234153 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 		2B846993234ED30700234153 /* AnyEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEncodable.swift; sourceTree = "<group>"; };
+		2B86C56E23F6677A00D502A2 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		2B8CFBBB2341808C000B7628 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2B8CFBBE2341907E000B7628 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2B8CFBC02341A224000B7628 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
@@ -139,6 +137,8 @@
 		2B8EA92C231A378900B404AF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2B8EA932231DB1D300B404AF /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		2B8EA934231DB2C800B404AF /* UserDefaultsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepository.swift; sourceTree = "<group>"; };
+		2BBC9416236FC856004D507D /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		2BBC941823712C8A004D507D /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireDeviceApi.swift; sourceTree = "<group>"; };
 		2BF57B1123430B2300B617B1 /* output.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; path = output.xcfilelist; sourceTree = "<group>"; };
 		2BF57B1223430B2300B617B1 /* input.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; path = input.xcfilelist; sourceTree = "<group>"; };
@@ -213,15 +213,12 @@
 				2B72E62E2352457400F85258 /* api */,
 				2B7343AD23229DEE0096DED4 /* fa-solid-900.ttf */,
 				2B7343AA23220B640096DED4 /* extensions */,
-				2B6D7E392320C5D800081579 /* view */,
+				2B6D7E392320C5D800081579 /* presentation */,
 				2B8EA936231E128700B404AF /* service */,
 				2B8EA931231D9BD400B404AF /* data */,
 				2B8EA92B231A365D00B404AF /* model */,
-				2B46A0FB2317634D0063740A /* ProfilesResultViewControllerTableViewController.swift */,
 				2B46A0F82317630F0063740A /* RoundedLoginButton.swift */,
 				2B581AE42314E7CA007D0D86 /* AppDelegate.swift */,
-				2B581AE62314E7CA007D0D86 /* FirstViewController.swift */,
-				2B581AE82314E7CA007D0D86 /* SecondViewController.swift */,
 				2B581AED2314E7CB007D0D86 /* Assets.xcassets */,
 				2B581AEF2314E7CB007D0D86 /* LaunchScreen.storyboard */,
 				2B581AF22314E7CB007D0D86 /* Info.plist */,
@@ -249,17 +246,19 @@
 			path = "devicecontrol-iosUITests";
 			sourceTree = "<group>";
 		};
-		2B6D7E392320C5D800081579 /* view */ = {
+		2B6D7E392320C5D800081579 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				2B86C57023F66D1B00D502A2 /* menu */,
 				2B72E6342352488D00F85258 /* model */,
 				2B72E6332352484200F85258 /* devices */,
 				2B72E6322352483C00F85258 /* settings */,
 				2B72E6312352483800F85258 /* home */,
 				2B6D7E3A2320C5EF00081579 /* MainViewController.swift */,
-				2BF57B1B23431CA600B617B1 /* ProfileMenuViewController.swift */,
+				2BBC941823712C8A004D507D /* Presenter.swift */,
+				2B86C56E23F6677A00D502A2 /* View.swift */,
 			);
-			path = view;
+			path = presentation;
 			sourceTree = "<group>";
 		};
 		2B72E62E2352457400F85258 /* api */ = {
@@ -319,6 +318,14 @@
 			path = extensions;
 			sourceTree = "<group>";
 		};
+		2B86C57023F66D1B00D502A2 /* menu */ = {
+			isa = PBXGroup;
+			children = (
+				2BF57B1B23431CA600B617B1 /* ProfileMenuViewController.swift */,
+			);
+			path = menu;
+			sourceTree = "<group>";
+		};
 		2B8CFBBA2341808B000B7628 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +373,7 @@
 			children = (
 				2B758696234BCC45006B2E56 /* DeviceService.swift */,
 				2B72E6392352DD3C00F85258 /* ProfileDeviceService.swift */,
+				2BBC9416236FC856004D507D /* ProfileService.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -533,8 +541,6 @@
 				2B19B60C2364FAEE00F5E8D5 /* WindowShade.swift in Sources */,
 				2B758697234BCC45006B2E56 /* DeviceService.swift in Sources */,
 				2B72E62D23523EF800F85258 /* CachedDevice.swift in Sources */,
-				2B581AE92314E7CA007D0D86 /* SecondViewController.swift in Sources */,
-				2B46A0FC2317634D0063740A /* ProfilesResultViewControllerTableViewController.swift in Sources */,
 				2B72E63A2352DD3C00F85258 /* ProfileDeviceService.swift in Sources */,
 				2B72E63E2352E80E00F85258 /* RepositoryFactory.swift in Sources */,
 				2B72E6362352497C00F85258 /* ProfileDevicesPresenter.swift in Sources */,
@@ -543,6 +549,7 @@
 				2B8CFBBF2341907E000B7628 /* Profile.swift in Sources */,
 				2B846990234ED21400234153 /* AnyCodable.swift in Sources */,
 				2B6D7E3D2320C7FE00081579 /* HomeViewController.swift in Sources */,
+				2B86C56F23F6677A00D502A2 /* View.swift in Sources */,
 				2B6D7E3F2320C81000081579 /* DevicesViewController.swift in Sources */,
 				2B846994234ED30700234153 /* AnyEncodable.swift in Sources */,
 				2B8EA935231DB2C800B404AF /* UserDefaultsRepository.swift in Sources */,
@@ -550,6 +557,7 @@
 				2B8EA933231DB1D300B404AF /* Repository.swift in Sources */,
 				2BD09BFF235EA9C90044116C /* AlamofireDeviceApi.swift in Sources */,
 				2B46A0FA2317630F0063740A /* RoundedLoginButton.swift in Sources */,
+				2BBC9417236FC856004D507D /* ProfileService.swift in Sources */,
 				2B7343AC23220B930096DED4 /* UIImageExtensions.swift in Sources */,
 				2B72E630235245AF00F85258 /* DeviceApi.swift in Sources */,
 				2B581AE52314E7CA007D0D86 /* AppDelegate.swift in Sources */,
@@ -566,9 +574,9 @@
 				2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */,
 				2B758699234BD057006B2E56 /* DevicesPresenter.swift in Sources */,
 				2B75869D234BD444006B2E56 /* Message.swift in Sources */,
+				2BBC941923712C8A004D507D /* Presenter.swift in Sources */,
 				2BF57B1C23431CA600B617B1 /* ProfileMenuViewController.swift in Sources */,
 				2B8CFBC52341A45E000B7628 /* ProfileLoginList.swift in Sources */,
-				2B581AE72314E7CA007D0D86 /* FirstViewController.swift in Sources */,
 				2B19B60A2364FAA500F5E8D5 /* GasCylinder.swift in Sources */,
 				2B6D7E3B2320C5EF00081579 /* MainViewController.swift in Sources */,
 				2B846992234ED2D000234153 /* AnyDecodable.swift in Sources */,

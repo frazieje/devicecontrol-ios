@@ -8,10 +8,12 @@
 
 import Foundation
 
-protocol DevicesPresenter {
+protocol DevicesPresenter : Presenter {
     
-    func viewWillAppear()
+    func deviceClicked(id: String)
     
-    func viewDidAppear()
+    func deviceGroupClicked(type: String)
+    
+    func setView(view: View)
     
 }

@@ -13,21 +13,26 @@ class ProfileDeviceService : DeviceService {
     let deviceApi: DeviceApi
     let devicesRepo: Repository<[CachedDevice]>
     
+    let cacheKey = "cachedDevicesList"
+    
     init(deviceApi: DeviceApi, repositoryFactory: RepositoryFactory) {
         self.deviceApi = deviceApi
         self.devicesRepo = repositoryFactory.get()
     }
     
     func getDevices(_ completion: @escaping ([CachedDevice], DeviceServiceError?) -> Void) {
-        deviceApi.getDevices(profileId: profileId) { (devices, error) -> Void in
-            if (error == nil) {
-                self.devicesRepo.put(key: profileId, value: devices)
-                completion(devices, nil)
-            } else {
-                completion([], .ErrorFetchingDevices(""))
+        if let cachedDevices = devicesRepo.get(key: cacheKey) {
+            completion(cachedDevices, nil)
+        } else {
+            deviceApi.getDevices { (devices, error) -> Void in
+                if (error == nil) {
+                    _ = self.devicesRepo.put(key: self.cacheKey, value: devices)
+                    completion(devices, nil)
+                } else {
+                    completion([], .ErrorFetchingDevices(""))
+                }
             }
         }
     }
-    
     
 }

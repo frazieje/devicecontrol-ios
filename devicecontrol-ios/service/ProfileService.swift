@@ -7,3 +7,22 @@
 //
 
 import Foundation
+
+protocol ProfileService {
+    
+    func getProfiles(_ completion: @escaping ([ProfileLogin], ProfileServiceError?) -> Void)
+
+}
+
+enum ProfileServiceError: Equatable, Error
+{
+    case ErrorFetchingProfiles(String)
+    
+    var message: String {
+        get {
+            switch self {
+                case .ErrorFetchingProfiles(let value): return "Error fetching profiles: \(value)"
+            }
+        }
+    }
+}

@@ -10,9 +10,9 @@ import Foundation
 
 protocol DeviceApi {
     
-    func getDevices(profileId: String, _ completion: @escaping ([CachedDevice], DeviceApiError?) -> Void)
+    func getDevices(_ completion: @escaping ([CachedDevice], DeviceApiError?) -> Void)
     
-    func login(profileId: String, username: String, password: String, _ completion: @escaping )
+    func login(username: String, password: String, _ completion: @escaping (ProfileLogin?, DeviceApiError?) -> Void)
     
 }
 

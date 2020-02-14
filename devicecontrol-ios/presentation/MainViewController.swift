@@ -12,13 +12,19 @@ import SideMenu
 
 class MainViewController : UITabBarController {
     
-    let profileLogin: ProfileLogin
-    
     var profileMenuViewController: SideMenuNavigationController?
     
-    init(profileLogin: ProfileLogin) {
-        self.profileLogin = profileLogin
+    let devicesViewController: UIViewController
+    
+    let homeViewController: UIViewController
+    
+    let settingsViewController: UIViewController
+    
+    init(devicesViewController: UIViewController, homeViewController: UIViewController, settingsViewController: UIViewController) {
         super.init(nibName: nil, bundle: nil)
+        self.devicesViewController = devicesViewController
+        self.homeViewController = homeViewController
+        self.settingsViewController = settingsViewController
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +37,9 @@ class MainViewController : UITabBarController {
         
         view.backgroundColor = .white
         
-        profileMenuViewController = SideMenuNavigationController(rootViewController: ProfileMenuViewController(profileLogin: profileLogin))
+        let profileMenuRootVC = ProfileMenuViewController()
+        
+        profileMenuViewController = SideMenuNavigationController(rootViewController: profileMenuRootVC)
         
         SideMenuManager.default.rightMenuNavigationController = profileMenuViewController
 
@@ -48,15 +56,11 @@ class MainViewController : UITabBarController {
         profileMenuViewController!.presentationStyle = style
         profileMenuViewController!.blurEffectStyle = .extraLight
         
-        let homeViewController = HomeViewController(profileLogin: profileLogin)
-        
         let homeIcon = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
         
         let homeSelectedIcon = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .blue, size: CGSize(width: 25.0, height: 25.0))
         
         homeViewController.tabBarItem = UITabBarItem(title: "Home", image: homeIcon, selectedImage: homeSelectedIcon)
-        
-        let devicesViewController = DevicesViewController(presenter: <#T##DevicesPresenter#>)
         
         let devicesIcon = UIImage.fontAwesomeIcon(icon: "\u{f2db}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
         
@@ -64,15 +68,11 @@ class MainViewController : UITabBarController {
         
         devicesViewController.tabBarItem = UITabBarItem(title: "Devices", image: devicesIcon, selectedImage: devicesSelectedIcon)
         
-        
-        let settingsViewController = SettingsViewController(profileLogin: profileLogin)
-        
         let settingsIcon = UIImage.fontAwesomeIcon(icon: "\u{f013}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
 
         let settingsSelectedIcon = UIImage.fontAwesomeIcon(icon: "\u{f013}", textColor: .blue, size: CGSize(width: 25.0, height: 25.0))
         
         settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: settingsIcon, selectedImage: settingsSelectedIcon)
-        
         
         let viewControllerList = [homeViewController, devicesViewController, settingsViewController]
 

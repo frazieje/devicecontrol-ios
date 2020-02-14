@@ -83,7 +83,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        let initialViewController = MainViewController(profileLogin: profileLogin)
+        let deviceApi = AlamofireDeviceApi()
+        
+        let profileRepositoryFactory = ProfileRepositoryFactory(userDefaults: UserDefaults.standard)
+        
+        let deviceService = ProfileDeviceService(deviceApi: deviceApi, repositoryFactory: profileRepositoryFactory)
+        
+        let deviceViewMapper = ProfileDeviceMapper()
+        
+        let devicesPresenter = ProfileDevicesPresenter(deviceService: deviceService, deviceMapper: deviceViewMapper)
+        
+        let devicesViewController = DevicesViewController(presenter: devicesPresenter)
+        
+        
+        let initialViewController = MainViewController(devicesViewController: devicesViewController)
         
         window!.rootViewController = initialViewController
         window!.makeKeyAndVisible()

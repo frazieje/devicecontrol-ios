@@ -16,14 +16,13 @@ class ProfileDevicesPresenter : DevicesPresenter {
     
     let deviceMapper: DeviceMapper
     
-    init(deviceService: DeviceService, deviceMapper: DeviceMapper, devicesView: DevicesView) {
+    init(deviceService: DeviceService, deviceMapper: DeviceMapper) {
         self.deviceService = deviceService
-        self.devicesView = devicesView
         self.deviceMapper = deviceMapper
     }
     
     func viewWillAppear() {
-        
+        print("devices presenter view will appear")
         deviceService.getDevices { (devices, error) -> Void in
             if (error == nil) {
                 
@@ -37,13 +36,17 @@ class ProfileDevicesPresenter : DevicesPresenter {
         }
         
     }
-    
 
-    func viewDidAppear() {
+    func deviceClicked(id: String) {
         
-        print("DevicesPresenter viewDidAppear")
+    }
+
+    func deviceGroupClicked(type: String) {
         
     }
     
+    func setView(view: View) {
+        self.devicesView = devicesView
+    }
     
 }

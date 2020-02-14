@@ -50,9 +50,8 @@ class DevicesViewController : UIViewController, DevicesView {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
-        presenter.viewWillAppear()
+        super.viewDidLoad()
         
         view.backgroundColor = .white
         
@@ -88,7 +87,7 @@ extension DevicesViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellID", for: indexPath)
-        cell.textLabel?.text = "Row \(devicesData[indexPath.row].deviceId)"
+        cell.textLabel?.text = "Device: \(devicesData[indexPath.row].deviceId)"
         return cell
     }
     

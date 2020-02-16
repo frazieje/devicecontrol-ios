@@ -14,6 +14,7 @@
 		2B19B61123664A5C00F5E8D5 /* EUI48AddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61023664A5C00F5E8D5 /* EUI48AddressTests.swift */; };
 		2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */; };
 		2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */; };
+		2B2CB88B23F8A1F700F78A5B /* ProfileRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */; };
 		2B46A0FA2317630F0063740A /* RoundedLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B46A0F82317630F0063740A /* RoundedLoginButton.swift */; };
 		2B581AE52314E7CA007D0D86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B581AE42314E7CA007D0D86 /* AppDelegate.swift */; };
 		2B581AEE2314E7CB007D0D86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B581AED2314E7CB007D0D86 /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		2B19B61023664A5C00F5E8D5 /* EUI48AddressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUI48AddressTests.swift; sourceTree = "<group>"; };
 		2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMapper.swift; sourceTree = "<group>"; };
 		2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeviceMapper.swift; sourceTree = "<group>"; };
+		2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequestInterceptor.swift; sourceTree = "<group>"; };
 		2B46A0F82317630F0063740A /* RoundedLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLoginButton.swift; sourceTree = "<group>"; };
 		2B581AE12314E7CA007D0D86 /* devicecontrol-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "devicecontrol-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B581AE42314E7CA007D0D86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,13 +188,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B19B60D23662A2800F5E8D5 /* networking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = networking;
-			sourceTree = "<group>";
-		};
 		2B581AD82314E7CA007D0D86 = {
 			isa = PBXGroup;
 			children = (
@@ -221,7 +216,6 @@
 		2B581AE32314E7CA007D0D86 /* devicecontrol-ios */ = {
 			isa = PBXGroup;
 			children = (
-				2B19B60D23662A2800F5E8D5 /* networking */,
 				2B72E62E2352457400F85258 /* api */,
 				2B7343AD23229DEE0096DED4 /* fa-solid-900.ttf */,
 				2B7343AA23220B640096DED4 /* extensions */,
@@ -276,6 +270,7 @@
 		2B72E62E2352457400F85258 /* api */ = {
 			isa = PBXGroup;
 			children = (
+				2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */,
 				2B72E62F235245AF00F85258 /* DeviceApi.swift */,
 				2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */,
 			);
@@ -562,6 +557,7 @@
 				2B72E63A2352DD3C00F85258 /* ProfileDeviceService.swift in Sources */,
 				2B72E63E2352E80E00F85258 /* RepositoryFactory.swift in Sources */,
 				2B72E6362352497C00F85258 /* ProfileDevicesPresenter.swift in Sources */,
+				2B2CB88B23F8A1F700F78A5B /* ProfileRequestInterceptor.swift in Sources */,
 				2B72E627235235E400F85258 /* Device.swift in Sources */,
 				2B8EA92D231A378900B404AF /* User.swift in Sources */,
 				2B8CFBBF2341907E000B7628 /* Profile.swift in Sources */,

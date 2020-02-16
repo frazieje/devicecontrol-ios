@@ -10,14 +10,24 @@ import Foundation
 
 class ProfileLoginService : LoginService {
     
-    let profileLogin: ProfileLogin
+    let loginRepo: Repository<ProfileLogin>
     
-    init(profileLogin: ProfileLogin) {
-        self.profileLogin = profileLogin
+    let currentLoginKey = "currentLoginProfile"
+    
+    init(repositoryFactory: RepositoryFactory) {
+        loginRepo = repositoryFactory.get()
     }
 
-    func getLogin(_ completion: @escaping (ProfileLogin, LoginServiceError?) -> Void) {
-        completion(profileLogin, nil)
+    func getLogin(_ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {
+        if let profileLogin = loginRepo.get(key: currentLoginKey) {
+            completion(profileLogin, nil)
+        } else {
+            completion(nil, .ErrorFetchingLogin("No "))
+        }
+    }
+    
+    func setLogin(login: ProfileLogin, _ completion: @escaping (Bool, LoginServiceError?) -> Void) {
+        completion(true, nil)
     }
     
 }

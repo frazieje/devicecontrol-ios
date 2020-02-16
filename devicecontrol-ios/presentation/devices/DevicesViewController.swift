@@ -68,11 +68,13 @@ class DevicesViewController : UIViewController, DevicesView {
     }
     
     func showDevices(devices: [ProfileDevice]) {
+        print("Devices showDevices")
         devicesData = devices
         tableView.reloadData()
     }
     
     func showError(message: String) {
+        print("Devices showError")
         devicesData = []
         tableView.reloadData()
     }

@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let devicesViewController = DevicesViewController(presenter: devicesPresenter)
         
+        devicesPresenter.setView(view: devicesViewController)
+        
         let homeViewController = HomeViewController()
         
         let settingsViewController = SettingsViewController()

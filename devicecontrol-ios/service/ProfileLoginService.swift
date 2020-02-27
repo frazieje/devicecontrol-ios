@@ -18,7 +18,8 @@ class ProfileLoginService : LoginService {
         loginRepo = repositoryFactory.get()
     }
 
-    func getLogin(_ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {
+    func getLogin(_ user: User, _ profile: Profile, _ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {
+        
         if let profileLogin = loginRepo.get(key: currentLoginKey) {
             completion(profileLogin, nil)
         } else {
@@ -26,7 +27,7 @@ class ProfileLoginService : LoginService {
         }
     }
     
-    func setLogin(login: ProfileLogin, _ completion: @escaping (Bool, LoginServiceError?) -> Void) {
+    func setLogin(_ login: ProfileLogin, _ completion: @escaping (Bool, LoginServiceError?) -> Void) {
         completion(true, nil)
     }
     

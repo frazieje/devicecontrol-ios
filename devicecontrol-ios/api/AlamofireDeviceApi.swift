@@ -11,12 +11,6 @@ import Alamofire
 
 class AlamofireDeviceApi : DeviceApi {
     
-        
-    
-    func login(username: String, password: String, _ completion: @escaping (ProfileLogin?, DeviceApiError?) -> Void) {
-        
-    }
-    
     func getDevices(_ completion: @escaping ([CachedDevice], DeviceApiError?) -> Void) {
         completion([], nil)
     }

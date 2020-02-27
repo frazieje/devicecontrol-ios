@@ -51,8 +51,6 @@
 		2B86C57623F6753500D502A2 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57523F6753500D502A2 /* MenuPresenter.swift */; };
 		2B86C57823F6754700D502A2 /* ProfileMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57723F6754700D502A2 /* ProfileMenuPresenter.swift */; };
 		2B86C57A23F675D300D502A2 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57923F675D300D502A2 /* MenuView.swift */; };
-		2B86C57C23F6760100D502A2 /* ProfileMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86C57B23F6760100D502A2 /* ProfileMenuView.swift */; };
-		2B8CFBBC2341808C000B7628 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8CFBBB2341808C000B7628 /* Alamofire.framework */; };
 		2B8CFBBF2341907E000B7628 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CFBBE2341907E000B7628 /* Profile.swift */; };
 		2B8CFBC12341A224000B7628 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CFBC02341A224000B7628 /* UserLogin.swift */; };
 		2B8CFBC32341A30B000B7628 /* ProfileLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CFBC22341A30B000B7628 /* ProfileLogin.swift */; };
@@ -62,13 +60,17 @@
 		2B8EA92D231A378900B404AF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EA92C231A378900B404AF /* User.swift */; };
 		2B8EA933231DB1D300B404AF /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EA932231DB1D300B404AF /* Repository.swift */; };
 		2B8EA935231DB2C800B404AF /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EA934231DB2C800B404AF /* UserDefaultsRepository.swift */; };
+		2BA05C572405ED190033F91F /* OAuthGrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA05C562405ED190033F91F /* OAuthGrant.swift */; };
+		2BA05C592406590D0033F91F /* OAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA05C582406590D0033F91F /* OAuthApi.swift */; };
+		2BA4B0CC23FA2C1A00A3FC6A /* ProfileLoginitem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4B0CB23FA2C1A00A3FC6A /* ProfileLoginitem.swift */; };
+		2BA4B0D423FA36B100A3FC6A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8CFBBB2341808C000B7628 /* Alamofire.framework */; };
+		2BA4B0D623FA36B300A3FC6A /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF57B1723430B5E00B617B1 /* SideMenu.framework */; };
 		2BBC9417236FC856004D507D /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC9416236FC856004D507D /* ProfileService.swift */; };
 		2BBC941923712C8A004D507D /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC941823712C8A004D507D /* Presenter.swift */; };
 		2BD09BFF235EA9C90044116C /* AlamofireDeviceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */; };
 		2BF57B1423430B2300B617B1 /* output.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 2BF57B1123430B2300B617B1 /* output.xcfilelist */; };
 		2BF57B1523430B2300B617B1 /* input.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 2BF57B1223430B2300B617B1 /* input.xcfilelist */; };
 		2BF57B1623430B2300B617B1 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 2BF57B1323430B2300B617B1 /* Cartfile.resolved */; };
-		2BF57B1823430B5E00B617B1 /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF57B1723430B5E00B617B1 /* SideMenu.framework */; };
 		2BF57B1C23431CA600B617B1 /* ProfileMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF57B1B23431CA600B617B1 /* ProfileMenuViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -140,7 +142,6 @@
 		2B86C57523F6753500D502A2 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		2B86C57723F6754700D502A2 /* ProfileMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuPresenter.swift; sourceTree = "<group>"; };
 		2B86C57923F675D300D502A2 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
-		2B86C57B23F6760100D502A2 /* ProfileMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuView.swift; sourceTree = "<group>"; };
 		2B8CFBBB2341808C000B7628 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2B8CFBBE2341907E000B7628 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2B8CFBC02341A224000B7628 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
@@ -151,6 +152,9 @@
 		2B8EA92C231A378900B404AF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2B8EA932231DB1D300B404AF /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		2B8EA934231DB2C800B404AF /* UserDefaultsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepository.swift; sourceTree = "<group>"; };
+		2BA05C562405ED190033F91F /* OAuthGrant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthGrant.swift; sourceTree = "<group>"; };
+		2BA05C582406590D0033F91F /* OAuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthApi.swift; sourceTree = "<group>"; };
+		2BA4B0CB23FA2C1A00A3FC6A /* ProfileLoginitem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginitem.swift; sourceTree = "<group>"; };
 		2BBC9416236FC856004D507D /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		2BBC941823712C8A004D507D /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireDeviceApi.swift; sourceTree = "<group>"; };
@@ -166,8 +170,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BF57B1823430B5E00B617B1 /* SideMenu.framework in Frameworks */,
-				2B8CFBBC2341808C000B7628 /* Alamofire.framework in Frameworks */,
+				2BA4B0D623FA36B300A3FC6A /* SideMenu.framework in Frameworks */,
+				2BA4B0D423FA36B100A3FC6A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +277,7 @@
 				2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */,
 				2B72E62F235245AF00F85258 /* DeviceApi.swift */,
 				2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */,
+				2BA05C582406590D0033F91F /* OAuthApi.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				2B19B6092364FAA500F5E8D5 /* GasCylinder.swift */,
 				2B19B60B2364FAEE00F5E8D5 /* WindowShade.swift */,
 				2B19B60E23662C4600F5E8D5 /* ProfileDevice.swift */,
+				2BA4B0CB23FA2C1A00A3FC6A /* ProfileLoginitem.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -332,7 +338,6 @@
 				2B86C57523F6753500D502A2 /* MenuPresenter.swift */,
 				2B86C57723F6754700D502A2 /* ProfileMenuPresenter.swift */,
 				2B86C57923F675D300D502A2 /* MenuView.swift */,
-				2B86C57B23F6760100D502A2 /* ProfileMenuView.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				2B72E6282352375000F85258 /* DeviceType.swift */,
 				2B72E62A23523B5E00F85258 /* EUI48Address.swift */,
 				2B72E62C23523EF800F85258 /* CachedDevice.swift */,
+				2BA05C562405ED190033F91F /* OAuthGrant.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -561,7 +567,6 @@
 				2B72E627235235E400F85258 /* Device.swift in Sources */,
 				2B8EA92D231A378900B404AF /* User.swift in Sources */,
 				2B8CFBBF2341907E000B7628 /* Profile.swift in Sources */,
-				2B86C57C23F6760100D502A2 /* ProfileMenuView.swift in Sources */,
 				2B846990234ED21400234153 /* AnyCodable.swift in Sources */,
 				2B6D7E3D2320C7FE00081579 /* HomeViewController.swift in Sources */,
 				2B86C56F23F6677A00D502A2 /* View.swift in Sources */,
@@ -585,14 +590,17 @@
 				2B72E6402352E98500F85258 /* ProfileRepositoryFactory.swift in Sources */,
 				2B86C57823F6754700D502A2 /* ProfileMenuPresenter.swift in Sources */,
 				2B84698C234EBC8E00234153 /* CachedMessage.swift in Sources */,
+				2BA05C572405ED190033F91F /* OAuthGrant.swift in Sources */,
 				2B86C57623F6753500D502A2 /* MenuPresenter.swift in Sources */,
 				2B6D7E412320C82000081579 /* SettingsViewController.swift in Sources */,
+				2BA4B0CC23FA2C1A00A3FC6A /* ProfileLoginitem.swift in Sources */,
 				2B19B6082364F06B00F5E8D5 /* DoorLock.swift in Sources */,
 				2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */,
 				2B8CFBC72341A6F7000B7628 /* Permission.swift in Sources */,
 				2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */,
 				2B758699234BD057006B2E56 /* DevicesPresenter.swift in Sources */,
 				2B75869D234BD444006B2E56 /* Message.swift in Sources */,
+				2BA05C592406590D0033F91F /* OAuthApi.swift in Sources */,
 				2BBC941923712C8A004D507D /* Presenter.swift in Sources */,
 				2BF57B1C23431CA600B617B1 /* ProfileMenuViewController.swift in Sources */,
 				2B86C57223F6737D00D502A2 /* LoginService.swift in Sources */,
@@ -769,6 +777,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B96ZR2265S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -790,6 +799,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B96ZR2265S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

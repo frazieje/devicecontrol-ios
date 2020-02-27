@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ProfileMenuViewController : UIViewController {
-
-    weak var testView: UIView!
+class ProfileMenuViewController : UIViewController, MenuView {
+    
+    weak var tableView: UITableView!
+    
+    var profilesData: [ProfileLoginItem] = []
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -27,6 +29,21 @@ class ProfileMenuViewController : UIViewController {
         navigationController!.navigationBar.shadowImage = UIImage()
         navigationController!.navigationBar.isTranslucent = true
         
+        let tableView = UITableView()
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        
+        self.tableView = tableView
+        
     }
     
     override func viewDidLoad() {
@@ -34,6 +51,7 @@ class ProfileMenuViewController : UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .clear
+        tableView.backgroundColor = .clear
         
         print("Menu viewDidLoad")
         
@@ -42,5 +60,27 @@ class ProfileMenuViewController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("Menu viewDidAppear")
     }
+    
+    func showMenu() {
+        
+    }
+    
+    func hideMeu() {
+        
+    }
 
+}
+
+extension ProfileMenuViewController : UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return profilesData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellID", for: indexPath)
+        cell.textLabel?.text = "\(profilesData[indexPath.row].id)"
+        return cell
+    }
+    
 }

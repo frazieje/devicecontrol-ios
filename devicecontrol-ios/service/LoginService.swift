@@ -9,9 +9,11 @@
 import Foundation
 
 protocol LoginService {
-    func getLogin(_ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void)
     
-    func setLogin(login: ProfileLogin, _ completion: @escaping (Bool, LoginServiceError?) -> Void)
+    func getLogin(_ user: User, _ profile: Profile, _ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void)
+    
+    func setLogin(_ login: ProfileLogin, _ completion: @escaping (Bool, LoginServiceError?) -> Void)
+    
 }
 
 enum LoginServiceError: Equatable, Error

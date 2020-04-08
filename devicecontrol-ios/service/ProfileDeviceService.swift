@@ -11,22 +11,22 @@ import Foundation
 class ProfileDeviceService : DeviceService {
     
     let deviceApi: DeviceApi
-    let devicesRepo: Repository<[CachedDevice]>
+    let devicesCache: Cache<[CachedDevice]>
     
     let cacheKey = "cachedDevicesList"
     
-    init(deviceApi: DeviceApi, repositoryFactory: RepositoryFactory) {
+    init(deviceApi: DeviceApi, cacheFactory: CacheFactory) {
         self.deviceApi = deviceApi
-        self.devicesRepo = repositoryFactory.get()
+        self.devicesCache = cacheFactory.get(prefix: "profileDeviceService_cache")
     }
     
     func getDevices(_ completion: @escaping ([CachedDevice], DeviceServiceError?) -> Void) {
-        if let cachedDevices = devicesRepo.get(key: cacheKey) {
+        if let cachedDevices = devicesCache.get(key: cacheKey) {
             completion(cachedDevices, nil)
         } else {
             deviceApi.getDevices { (devices, error) -> Void in
                 if (error == nil) {
-                    _ = self.devicesRepo.put(key: self.cacheKey, value: devices)
+                    _ = self.devicesCache.put(key: self.cacheKey, value: devices)
                     completion(devices, nil)
                 } else {
                     completion([], .ErrorFetchingDevices(""))

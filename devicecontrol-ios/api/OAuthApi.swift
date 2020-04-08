@@ -1,14 +1,13 @@
 protocol OAuthApi {
     
-    func login(_ username: String, _ password: String, _ clientId: String, _ completion: @escaping (OAuthGrant?, OAuthApiError?) -> Void)
+    func login(_ request: OAuthResourceOwnerGrantRequest, _ completion: @escaping (LoginToken?, OAuthApiError?) -> Void)
     
-    func refreshToken(_ clientId: String, _ refreshToken: String, _ completion: @escaping (OAuthGrant?, OAuthApiError?) -> Void)
-    
-    func getBaseUrl() -> String
+    func refreshToken(_ request: OAuthRefreshTokenGrantRequest, _ completion: @escaping (LoginToken?, OAuthApiError?) -> Void)
     
 }
 
 enum OAuthApiError: Equatable, Error
 {
     case HttpError(String)
+    case ErrorFormingRequest(String)
 }

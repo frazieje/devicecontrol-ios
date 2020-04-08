@@ -1,155 +1,109 @@
+import Foundation
 import Alamofire
 
 class ProfileRequestInterceptor : RetryPolicy {
-    
-    private let lock = NSLock()
-    
-    private let repositoryKey: String
-    
-    private let repository: Repository<ProfileLogin>
-    
-    private var profileLogin: ProfileLogin?
-    
-    private var isRefreshing = false
+
+    private var loginToken: LoginToken
     
     private let oAuthApi: OAuthApi
     
+    private let tokenRepository: LoginTokenRepository
+    
+    private var isRefreshing = false
+    
     private var queuedRetries: [(RetryResult) -> Void] = []
     
-    private let session: Session = {
-        let configuration = URLSessionConfiguration.af.default
-        configuration.allowsCellularAccess = false
-
-        return Session(configuration: configuration)
-    }()
+    private let concurrentQueue =
+    DispatchQueue(
+      label: "com.spoohapps.devicecontrol.requestInterceptor",
+      attributes: .concurrent)
     
-    init(profile: Profile, user: User, oAuthGrant: OAuthGrant, repositoryFactory: RepositoryFactory, oAuthApi: OAuthApi) {
-        
-        self.repository = repositoryFactory.get()
+    init(loginToken: LoginToken, oAuthApi: OAuthApi, tokenRepository: LoginTokenRepository) {
+        self.loginToken = loginToken
         self.oAuthApi = oAuthApi
-        let host = URLComponents(string: oAuthApi.getBaseUrl())?.host
-        self.repositoryKey = "profileLogin_\(profile.id)_\(host!)"
+        self.tokenRepository = tokenRepository
     }
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        var urlRequest = urlRequest
         
-        if let login = getProfileLogin() {
-            urlRequest.headers.add(.authorization(bearerToken: login.userLogin.tokenKey))
-        }
+        concurrentQueue.async { [weak self] in
+            
+            guard let self = self else { return }
+            
+            var urlRequest = urlRequest
 
-        completion(.success(urlRequest))
+            urlRequest.headers.add(.authorization(bearerToken: self.loginToken.tokenKey))
+
+            completion(.success(urlRequest))
+            
+        }
+        
+
     }
     
     override func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         
-        lock.lock() ; defer { lock.unlock() }
-        
-        if
-            let response = request.task?.response as? HTTPURLResponse,
-            response.statusCode == 401 {
-            queuedRetries.append(completion)
+        concurrentQueue.async(flags: .barrier) { [weak self] in
             
-            if !isRefreshing {
+            guard let self = self else { return }
+        
+            if
+                let response = request.task?.response as? HTTPURLResponse,
+                response.statusCode == 401 {
                 
-                refreshToken { [weak self] succeeded, accessToken, refreshToken in
+                self.queuedRetries.append(completion)
+                
+                if !self.isRefreshing {
                     
-                    guard let strongSelf = self else { return }
+                    let req = OAuthRefreshTokenGrantRequest(
+                                            secure: self.loginToken.server.secure,
+                                            host: self.loginToken.server.host,
+                                            clientId: self.loginToken.clientId,
+                                            refreshToken: self.loginToken.refreshToken)
                     
-                    strongSelf.lock.lock() ; defer { strongSelf.lock.unlock() }
-                    
-                    if let accessToken = accessToken, let refreshToken = refreshToken {
-                        if let login = strongSelf.profileLogin {
-                            let newLogin = ProfileLogin(profile: <#T##Profile#>, userLogin: <#T##UserLogin#>)
-                            strongSelf.setProfileLogin(profileLogin: login)
+                    self.oAuthApi.refreshToken(req) { [weak self] result, error in
+                        
+                        guard let self = self else { return }
+                        
+                        self.concurrentQueue.async(flags: .barrier) { [weak self] in
+                            
+                            guard let self = self else { return }
+                        
+                            var succeeded: Bool = false
+                            
+                            if error == nil, let newToken = result {
+                                
+                                let semaphore = DispatchSemaphore(value: 0)
+                                
+                                self.tokenRepository.put(newToken) { success in
+                                    succeeded = success
+                                    semaphore.signal()
+                                }
+                                
+                                semaphore.wait()
+                                
+                                self.loginToken = newToken
+                            }
+                            
+                            self.queuedRetries.forEach {
+                                $0(succeeded ? .retry : .doNotRetry)
+                            }
+                            
+                            self.queuedRetries.removeAll()
+                            
+                            self.isRefreshing = false
+                            
                         }
+                        
                     }
-                    
-                    strongSelf.queuedRetries.forEach {
-                        $0(succeeded ? .retry : .doNotRetry)
-                    }
-                    
-                    strongSelf.queuedRetries.removeAll()
                     
                 }
                 
+            } else {
+                completion(.doNotRetry)
             }
-            
-        } else {
-            completion(.doNotRetry)
         }
     }
-    
-    private func getProfileLogin() -> ProfileLogin? {
-        
-        if let login = profileLogin {
-            return login
-        }
-        
-        profileLogin = repository.get(key: repositoryKey)
-        
-        return profileLogin
-    }
-    
-    private func setProfileLogin(profileLogin: ProfileLogin) {
-        
-        if let login = repository.put(key: repositoryKey, value: profileLogin) {
-            self.profileLogin = profileLogin
-        }
-        
-    }
-    
-    private func refreshToken(completion: @escaping (_ succeeded: Bool, _ accessToken: String?, _ refreshToken: String?) -> Void) {
-        
-        guard !isRefreshing else { return }
 
-        isRefreshing = true
-        
-        if let refreshToken = profileLogin?.userLogin.refreshToken {
-            
-            oAuthApi.refreshToken(profile.id, refreshToken) { [weak self] result, error in
-                
-                guard let strongSelf = self else { return }
-                
-                if error == nil, let oAuthGrant = result {
-                    completion(true, oAuthGrant.tokenKey, oAuthGrant.refreshToken)
-                } else {
-                    completion(false, nil, nil)
-                }
-                
-                strongSelf.isRefreshing = false
-            }
-            
-        } else {
-            isRefreshing = false
-            completion(false, nil, nil)
-        }
-
-//        let urlString = "\(baseURLString)/oauth2/token"
-//
-//        let parameters: [String: String] = [
-//            "refresh_token": profileLogin?.userLogin.refreshToken ?? "",
-//            "client_id": clientId,
-//            "grant_type": "refresh_token"
-//        ]
-//
-//        session.request(urlString, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
-//            .responseDecodable { [weak self] (response: DataResponse<OAuthGrant, AFError>) in
-//
-//                guard let strongSelf = self else { return }
-//
-//                if let oauthGrant = response.value {
-//                    completion(true, oauthGrant.tokenKey, oauthGrant.refreshToken)
-//                } else {
-//                    completion(false, nil, nil)
-//                }
-//
-//                strongSelf.isRefreshing = false
-//
-//            }
-        
-    }
-    
-    
-    
 }
+

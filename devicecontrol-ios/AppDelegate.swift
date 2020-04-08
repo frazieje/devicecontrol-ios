@@ -1,13 +1,6 @@
-//
-//  AppDelegate.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 8/27/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import UIKit
 import SideMenu
+import SQLite
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,35 +9,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let deviceApi = AlamofireDeviceApi()
+        let documentsPath = NSSearchPathForDirectoriesInDomains(
+            .documentDirectory, .userDomainMask, true
+        ).first!
         
-        let profileRepositoryFactory = ProfileRepositoryFactory(userDefaults: UserDefaults.standard)
-        
-        let deviceService = ProfileDeviceService(deviceApi: deviceApi, repositoryFactory: profileRepositoryFactory)
-        
-        let deviceViewMapper = ProfileDeviceMapper()
-        
-        let devicesPresenter = ProfileDevicesPresenter(deviceService: deviceService, deviceMapper: deviceViewMapper)
-        
-        let devicesViewController = DevicesViewController(presenter: devicesPresenter)
-        
-        devicesPresenter.setView(view: devicesViewController)
-        
-        let homeViewController = HomeViewController()
-        
-        let settingsViewController = SettingsViewController()
+        do {
+
+            let db = try Connection("\(documentsPath)/db.sqlite3")
+            
+            let deviceApi = AlamofireDeviceApi()
+            
+            let cacheFactory = UserDefaultsCacheFactory()
+            
+            let oAuthApi = AlamofireOAuthApi()
+            
+            let loginService = ProfileLoginService(cacheFactory: cacheFactory, oAuthApi: oAuthApi)
+            
+    //        let semaphore = DispatchSemaphore(value: 0)
+    //
+    //        var hasSavedLogin
+    //
+    //        loginService.getAllLogins { result, error in7
+    //            semaphore.signal()
+    //        }
+    //
+    //        semaphore.wait()
+            
+            let deviceService = ProfileDeviceService(deviceApi: deviceApi, cacheFactory: cacheFactory)
+            
+            let deviceViewMapper = ProfileDeviceMapper()
+            
+            let devicesPresenter = ProfileDevicesPresenter(deviceService: deviceService, deviceMapper: deviceViewMapper)
+            
+            let devicesViewController = DevicesViewController(presenter: devicesPresenter)
+            
+            devicesPresenter.setView(view: devicesViewController)
+            
+            let homeViewController = HomeViewController()
+            
+            let settingsViewController = SettingsViewController()
         
 //        let loginService = ProfileLoginService(profileLogin: profileLogin)
         
-        let initialViewController = MainViewController(devicesViewController: devicesViewController, homeViewController: homeViewController, settingsViewController: settingsViewController)
+//        let initialViewController = MainViewController(devicesViewController: devicesViewController, homeViewController: homeViewController, settingsViewController: settingsViewController)
+            
+            let addProfilePresenter = MainAddProfilePresenter()
+            
+            let initialViewController = AddProfileViewController(presenter: addProfilePresenter)
         
-        window!.rootViewController = initialViewController
-        window!.makeKeyAndVisible()
+            window!.rootViewController = initialViewController
+            window!.makeKeyAndVisible()
 
-        return true
+            return true
+            
+        } catch {
+            return false
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

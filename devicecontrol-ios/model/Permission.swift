@@ -9,6 +9,6 @@
 import Foundation
 
 struct Permission: Codable {
-    var type: String
+    var type: PermissionType
     var deviceId: String
 }

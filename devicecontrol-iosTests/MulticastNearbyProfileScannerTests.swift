@@ -1,4 +1,5 @@
 import XCTest
+import NIO
 
 @testable import devicecontrol_ios
 

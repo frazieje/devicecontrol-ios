@@ -3,6 +3,6 @@ protocol NearbyProfileScanner {
     func stop()
 }
 
-protocol ScanResultHandler : AnyObject {
+protocol ScanResultHandler : class {
     func onResult(_ result: [String : ServiceBeaconMessage])
 }

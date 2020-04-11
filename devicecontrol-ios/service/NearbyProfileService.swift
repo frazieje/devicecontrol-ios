@@ -6,7 +6,7 @@ protocol NearbyProfileService {
     
 }
 
-protocol NearbyProfileListener {
+protocol NearbyProfileListener : AnyObject {
     func onResults(items: [ProfileServer])
 }
 

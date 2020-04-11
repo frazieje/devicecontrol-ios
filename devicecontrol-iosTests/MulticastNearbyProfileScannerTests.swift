@@ -32,9 +32,6 @@ class MulticastNearbyProfileScannerTests : XCTestCase, ScanResultHandler {
             let jsonEncoder = JSONEncoder()
             var payload: String?
             do {
-                
-
-                
                 payload = try String(data: jsonEncoder.encode(self.expectedBeaconMessage), encoding: .utf8)
             } catch {
                 print("error encoding beacon message into buffer \(error)")
@@ -75,6 +72,12 @@ class MulticastNearbyProfileScannerTests : XCTestCase, ScanResultHandler {
     func testFindsServiceName() {
         
         XCTAssert(scanResults?[expectedFromAddress]?.serviceName == expectedBeaconMessage.serviceName)
+        
+    }
+    
+    func testFindsProfileId() {
+        
+        XCTAssert(scanResults?[expectedFromAddress]?.profileId == expectedBeaconMessage.profileId)
         
     }
     

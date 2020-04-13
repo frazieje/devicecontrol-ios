@@ -1,5 +1,5 @@
 class ProfileDevicesPresenter : DevicesPresenter {
-    
+
     let deviceService: DeviceService
     
     var devicesView: DevicesView? = nil
@@ -11,11 +11,11 @@ class ProfileDevicesPresenter : DevicesPresenter {
         self.deviceMapper = deviceMapper
     }
     
-    func viewWillAppear() {
+    func onViewAppear() {
         
         print("devices presenter view will appear")
         
-        deviceService.getDevices { (devices, error) -> Void in
+        deviceService.getDevices { devices, error in
             
             if (error == nil) {
                 
@@ -27,6 +27,10 @@ class ProfileDevicesPresenter : DevicesPresenter {
                 self.devicesView?.showError(message: error!.message)
             }
         }
+        
+    }
+    
+    func onViewDisappear() {
         
     }
 

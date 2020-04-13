@@ -1,5 +1,5 @@
 struct ServiceBeaconMessage : Codable {
-    var serviceName: String?
+    var serviceName: String
     var profileId: String
     var apiPort: Int
     var authApiPort: Int

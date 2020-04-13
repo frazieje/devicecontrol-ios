@@ -1,15 +1,7 @@
-//
-//  DevicesViewController.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 9/5/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import UIKit
 
 class DevicesViewController : UIViewController, DevicesView {
-    
+
     weak var tableView: UITableView!
     
     let presenter: DevicesPresenter
@@ -46,7 +38,7 @@ class DevicesViewController : UIViewController, DevicesView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.viewWillAppear()
+        presenter.onViewAppear()
     }
     
     override func viewDidLoad() {
@@ -77,6 +69,10 @@ class DevicesViewController : UIViewController, DevicesView {
         print("Devices showError")
         devicesData = []
         tableView.reloadData()
+    }
+    
+    func viewController() -> UIViewController {
+        return self
     }
     
 }

@@ -5,8 +5,6 @@ class MulticastNearbyProfileScanner : NearbyProfileScanner, ChannelInboundHandle
 
     public typealias InboundIn = AddressedEnvelope<ByteBuffer>
     
-    private var isScanning = false
-    
     private var beaconMessages: [String : ServiceBeaconMessage] = [:]
     
     private let concurrentQueue =
@@ -14,14 +12,16 @@ class MulticastNearbyProfileScanner : NearbyProfileScanner, ChannelInboundHandle
       label: "com.spoohapps.devicecontrol.nearbyProfileScanner",
       attributes: .concurrent)
     
-    private var datagramChannel: Channel? = nil
+    private var datagramChannel: Channel?
     
-    private let group = MultiThreadedEventLoopGroup(numberOfThreads: 2)
+    private var group: EventLoopGroup?
     
     private let groupAddress: String
     private let port: Int
     
     private weak var consumer: ScanResultHandler?
+    
+    private var callbackWorkItem: DispatchWorkItem?
     
     init(groupAddress: String, port: Int) {
         self.groupAddress = groupAddress
@@ -33,14 +33,16 @@ class MulticastNearbyProfileScanner : NearbyProfileScanner, ChannelInboundHandle
             guard let self = self else { return }
             guard self.consumer == nil else { return }
             do {
-                
+                print("starting multicast scan")
                 self.consumer = resultHandler
                 
                 self.beaconMessages = [:]
                 
                 let multicastGroup = try! SocketAddress(ipAddress: self.groupAddress, port: self.port)
                 
-                let datagramBootstrap = DatagramBootstrap(group: self.group)
+                self.group = MultiThreadedEventLoopGroup(numberOfThreads: 2)
+                
+                let datagramBootstrap = DatagramBootstrap(group: self.group!)
                     .channelOption(ChannelOptions.Types.SocketOption(level: SOL_SOCKET, name: SO_REUSEADDR), value: 1)
                     .channelOption(ChannelOptions.Types.SocketOption(level: SOL_SOCKET, name: SO_REUSEPORT), value: 1)
                     .channelInitializer(self.initChannel(channel:))
@@ -55,6 +57,16 @@ class MulticastNearbyProfileScanner : NearbyProfileScanner, ChannelInboundHandle
                     }.wait()
                 
                 if self.datagramChannel?.isActive == true {
+                    self.callbackWorkItem = DispatchWorkItem { [weak self] in
+                        guard let self = self else { return }
+                        let results = self.beaconMessages
+                        if let resultConsumer = self.consumer {
+                            if (!results.isEmpty) {
+                                resultConsumer.onResult(results)
+                            }
+                            self.tryReturnResult()
+                        }
+                    }
                     self.tryReturnResult()
                 }
 
@@ -65,41 +77,39 @@ class MulticastNearbyProfileScanner : NearbyProfileScanner, ChannelInboundHandle
     }
     
     public func initChannel(channel: Channel) -> EventLoopFuture<Void> {
-        print("initializing channel")
         return channel.pipeline.addHandler(self)
     }
     
     private func tryReturnResult() {
-        print("scheduling tryReturn")
-        self.concurrentQueue.asyncAfter(deadline: .now() + 3) { [weak self] in
-            guard let self = self else { return }
-            let results = self.beaconMessages
-            if let resultConsumer = self.consumer {
-                print("tryReturn has resultConsumer")
-                if (!results.isEmpty) {
-                    print("tryReturn calling resultConsumer")
-                    resultConsumer.onResult(results)
-                }
-                self.tryReturnResult()
-            }
-        }
+        self.concurrentQueue.asyncAfter(deadline: .now() + .seconds(1), execute: callbackWorkItem!)
     }
     
     private func onReceive(_ message: ServiceBeaconMessage, _ fromAddress: String) {
         concurrentQueue.async(flags: .barrier) { [weak self] in
             guard let self = self else { return }
-            print("onReceive called")
             self.beaconMessages[fromAddress] = message
         }
     }
     
     func stop() {
-        try! datagramChannel?.close().wait()
-        try! group.syncShutdownGracefully()
-        concurrentQueue.async(flags: .barrier) { [weak self] in
-            guard let self = self else { return }
-            self.consumer = nil
+        print("stopping multicast scan")
+        callbackWorkItem?.cancel()
+        concurrentQueue.sync(flags: .barrier) {
+            consumer = nil
+            callbackWorkItem = nil
         }
+        try! datagramChannel?.close().wait()
+        try! group?.syncShutdownGracefully()
+        datagramChannel = nil
+        group = nil
+    }
+    
+    func isScanning() -> Bool {
+        var result = false
+        concurrentQueue.sync {
+            result = consumer != nil
+        }
+        return result
     }
     
     public func onChannelRead(data: () -> ByteBuffer, fromAddress: String?) {

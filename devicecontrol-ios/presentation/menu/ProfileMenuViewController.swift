@@ -1,15 +1,7 @@
-//
-//  ProfileMenuViewController.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 10/1/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import UIKit
 
 class ProfileMenuViewController : UIViewController, MenuView {
-    
+
     weak var tableView: UITableView!
     
     var profilesData: [ProfileLoginItem] = []
@@ -67,6 +59,10 @@ class ProfileMenuViewController : UIViewController, MenuView {
     
     func hideMeu() {
         
+    }
+    
+    func viewController() -> UIViewController {
+        return self
     }
 
 }

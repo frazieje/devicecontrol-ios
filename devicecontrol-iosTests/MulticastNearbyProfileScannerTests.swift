@@ -57,6 +57,10 @@ class MulticastNearbyProfileScannerTests : XCTestCase, ScanResultHandler {
         scanner.stop()
     }
     
+    func testReportsIsScanning() {
+        XCTAssert(scanner.isScanning())
+    }
+    
     func testScansUDPMulticast() {
         
         XCTAssert(scanResults!.count > 0)

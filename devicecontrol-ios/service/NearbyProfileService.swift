@@ -1,13 +1,13 @@
 protocol NearbyProfileService {
     
-    func register(listener: NearbyProfileListener)
+    func register(_ listener: @escaping ([String : [ProfileServer]]) -> Void) -> NearbyProfileServiceSubscription
     
-    func unregister(listener: NearbyProfileListener)
+    func unregister(_ subscription: NearbyProfileServiceSubscription)
     
 }
 
-protocol NearbyProfileListener : AnyObject {
-    func onResults(items: [ProfileServer])
+protocol NearbyProfileServiceSubscription {
+    func getTag() -> String
 }
 
 enum NearbyProfileServiceError: Equatable, Error

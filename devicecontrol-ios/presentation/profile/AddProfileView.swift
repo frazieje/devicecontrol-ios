@@ -1,3 +1,0 @@
-protocol AddProfileView : View {
-    
-}

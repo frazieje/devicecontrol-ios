@@ -18,7 +18,11 @@ class ProfileMenuPresenter : MenuPresenter {
         self.loginService = loginService
     }
     
-    func viewWillAppear() {
+    func onViewAppear() {
+        
+    }
+    
+    func onViewDisappear() {
         
     }
     

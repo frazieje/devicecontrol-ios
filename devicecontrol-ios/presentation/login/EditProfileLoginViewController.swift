@@ -1,11 +1,20 @@
 import UIKit
 
 class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
-
-    private let contentView: UIView = {
-        let view = UIView()
+    
+    private let scrollView: UIScrollView = {
+        let view = UIScrollView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let contentView: UIStackView = {
+        let view = UIStackView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        view.spacing = 20
         return view
     }()
     
@@ -69,6 +78,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         btn.setAttributedTitle(attributedTitle, for: .normal)
         btn.tintColor = .lightGray
         btn.layer.cornerRadius = 5
+        btn.contentHorizontalAlignment = .leading
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
@@ -88,41 +98,47 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     override func loadView() {
         super.loadView()
         
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(contentView)
+        
         btnAdvanced.addTarget(self, action: #selector(self.advancedButtonTapped), for: .touchUpInside)
         
-        contentView.addSubview(txtUsername)
+        contentView.addArrangedSubview(txtUsername)
         
-        contentView.addSubview(txtPassword)
+        contentView.addArrangedSubview(txtPassword)
         
-        contentView.addSubview(btnAdvanced)
+        contentView.addArrangedSubview(btnAdvanced)
         
-        view.addSubview(contentView)
-        
-        view.addSubview(advancedContentView)
+        contentView.addArrangedSubview(advancedContentView)
         
         NSLayoutConstraint.activate([
             
-            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: view.frame.height/3),
-            contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-            txtUsername.topAnchor.constraint(equalTo:contentView.topAnchor, constant:40),
-            txtUsername.leftAnchor.constraint(equalTo:contentView.leftAnchor, constant:20),
-            txtUsername.rightAnchor.constraint(equalTo:contentView.rightAnchor, constant:-20),
+            txtUsername.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
+            txtUsername.trailingAnchor.constraint(equalTo:contentView.trailingAnchor),
             txtUsername.heightAnchor.constraint(equalToConstant:50),
     
-            txtPassword.leftAnchor.constraint(equalTo:contentView.leftAnchor, constant:20),
-            txtPassword.rightAnchor.constraint(equalTo:contentView.rightAnchor, constant:-20),
-            txtPassword.topAnchor.constraint(equalTo:txtUsername.bottomAnchor, constant:20),
+            txtPassword.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
+            txtPassword.trailingAnchor.constraint(equalTo:contentView.trailingAnchor),
             txtPassword.heightAnchor.constraint(equalToConstant:50),
             
-            btnAdvanced.leftAnchor.constraint(equalTo:contentView.leftAnchor, constant:20),
-            btnAdvanced.topAnchor.constraint(equalTo:txtPassword.bottomAnchor, constant:20),
+            btnAdvanced.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
+
+            advancedContentView.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
+            advancedContentView.trailingAnchor.constraint(equalTo:contentView.trailingAnchor),
             
-            advancedContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            advancedContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            advancedContentView.topAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
         
     }

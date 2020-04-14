@@ -91,6 +91,7 @@
 		2BA8A69A242B058000B16588 /* EditProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8A699242B058000B16588 /* EditProfileLoginView.swift */; };
 		2BA8A69C242B059700B16588 /* EditProfileLoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8A69B242B059700B16588 /* EditProfileLoginPresenter.swift */; };
 		2BA8A69E242B05BA00B16588 /* MainEditProfileLoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8A69D242B05BA00B16588 /* MainEditProfileLoginPresenter.swift */; };
+		2BA8C7E32445619000393475 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8C7E22445619000393475 /* UIStackViewExtensions.swift */; };
 		2BBC941923712C8A004D507D /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC941823712C8A004D507D /* Presenter.swift */; };
 		2BD09BFF235EA9C90044116C /* AlamofireDeviceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */; };
 		2BED065E2442142B00659CD4 /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06592442142B00659CD4 /* AnyEncodable.swift */; };
@@ -219,6 +220,7 @@
 		2BA8A699242B058000B16588 /* EditProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileLoginView.swift; sourceTree = "<group>"; };
 		2BA8A69B242B059700B16588 /* EditProfileLoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileLoginPresenter.swift; sourceTree = "<group>"; };
 		2BA8A69D242B05BA00B16588 /* MainEditProfileLoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEditProfileLoginPresenter.swift; sourceTree = "<group>"; };
+		2BA8C7E22445619000393475 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
 		2BBC941823712C8A004D507D /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireDeviceApi.swift; sourceTree = "<group>"; };
 		2BED06592442142B00659CD4 /* AnyEncodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyEncodable.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			children = (
 				2B7343AB23220B930096DED4 /* UIImageExtensions.swift */,
 				2BED0686244414B700659CD4 /* NSAttributedString.swift */,
+				2BA8C7E22445619000393475 /* UIStackViewExtensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				2B758697234BCC45006B2E56 /* DeviceService.swift in Sources */,
 				2B72E62D23523EF800F85258 /* CachedDevice.swift in Sources */,
 				2B72E63A2352DD3C00F85258 /* ProfileDeviceService.swift in Sources */,
+				2BA8C7E32445619000393475 /* UIStackViewExtensions.swift in Sources */,
 				2B7A75FF243A84B2007C01A2 /* RepositoryFactory.swift in Sources */,
 				2B72E63E2352E80E00F85258 /* CacheFactory.swift in Sources */,
 				2BED067D2443C90300659CD4 /* ProfileLoginViewFactory.swift in Sources */,

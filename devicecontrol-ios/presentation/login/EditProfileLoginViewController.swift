@@ -18,13 +18,19 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         return view
     }()
     
-    private let advancedContentView: UIView = {
-      let view = UIView()
-      view.isHidden = true
-      view.backgroundColor = .gray
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
+    private let lblInstructions: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Enter your login information."
+        lbl.textAlignment = .center
+        lbl.textColor = .some(UIColor.init(red: 0.32, green: 0.32, blue: 0.32, alpha: 1.0))
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
     }()
+    
+    private var advancedEnabled: Bool = false
+    
+    private var advancedHidden: Bool = false
     
     let txtUsername: UITextField = {
         let txt = UITextField()
@@ -41,6 +47,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         txt.autocapitalizationType = .none
         txt.placeholder = "Username"
         txt.clipsToBounds = true
+        txt.textColor = .darkGray
         txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
     }()
@@ -60,6 +67,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         txt.returnKeyType = .done
         txt.autocapitalizationType = .none
         txt.placeholder = "Password"
+        txt.textColor = .darkGray
         txt.isSecureTextEntry = true
         txt.clipsToBounds = true
         txt.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +87,81 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         btn.tintColor = .lightGray
         btn.layer.cornerRadius = 5
         btn.contentHorizontalAlignment = .leading
+        btn.clipsToBounds = true
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
+    
+    let txtProfileId: UITextField = {
+        let txt = UITextField()
+        txt.layer.cornerRadius = 5
+        txt.layer.borderWidth = 1.0
+        txt.layer.borderColor = UIColor.lightGray.cgColor
+        txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: txt.frame.height))
+        txt.leftViewMode = .always
+        txt.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: txt.frame.height))
+        txt.rightViewMode = .always
+        txt.clearButtonMode = .whileEditing
+        txt.keyboardType = .emailAddress
+        txt.returnKeyType = .next
+        txt.autocapitalizationType = .none
+        txt.placeholder = "Profile ID"
+        txt.textColor = .darkGray
+        txt.clipsToBounds = true
+        txt.translatesAutoresizingMaskIntoConstraints = false
+        return txt
+    }()
+    
+    let txtNodeServer: UITextField = {
+        let txt = UITextField()
+        txt.layer.cornerRadius = 5
+        txt.layer.borderWidth = 1.0
+        txt.layer.borderColor = UIColor.lightGray.cgColor
+        txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: txt.frame.height))
+        txt.leftViewMode = .always
+        txt.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: txt.frame.height))
+        txt.rightViewMode = .always
+        txt.clearButtonMode = .whileEditing
+        txt.keyboardType = .emailAddress
+        txt.returnKeyType = .next
+        txt.autocapitalizationType = .none
+        txt.placeholder = "Server"
+        txt.textColor = .darkGray
+        txt.clipsToBounds = true
+        txt.translatesAutoresizingMaskIntoConstraints = false
+        return txt
+    }()
+    
+    let txtRemoteServer: UITextField = {
+        let txt = UITextField()
+        txt.layer.cornerRadius = 5
+        txt.layer.borderWidth = 1.0
+        txt.layer.borderColor = UIColor.lightGray.cgColor
+        txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: txt.frame.height))
+        txt.leftViewMode = .always
+        txt.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: txt.frame.height))
+        txt.rightViewMode = .always
+        txt.clearButtonMode = .whileEditing
+        txt.keyboardType = .emailAddress
+        txt.returnKeyType = .next
+        txt.autocapitalizationType = .none
+        txt.placeholder = "Remote Server"
+        txt.textColor = .darkGray
+        txt.clipsToBounds = true
+        txt.translatesAutoresizingMaskIntoConstraints = false
+        return txt
+    }()
+    
+    let btnLogin: UIButton = {
+        let btn = UIButton(type: .roundedRect)
+        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f105}", textColor: .systemBlue, size: CGFloat(18.0))
+        let login = NSMutableAttributedString(string: "Log in ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18.0)])
+        let attributedTitle = NSMutableAttributedString()
+        attributedTitle.append(login)
+        attributedTitle.append(iconString)
+        btn.setAttributedTitle(attributedTitle, for: .normal)
+        btn.layer.cornerRadius = 5
+        btn.contentHorizontalAlignment = .trailing
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
@@ -104,13 +187,23 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         
         btnAdvanced.addTarget(self, action: #selector(self.advancedButtonTapped), for: .touchUpInside)
         
+        contentView.addArrangedSubview(lblInstructions)
+        
         contentView.addArrangedSubview(txtUsername)
         
         contentView.addArrangedSubview(txtPassword)
         
-        contentView.addArrangedSubview(btnAdvanced)
+        if advancedEnabled {
+            contentView.addArrangedSubview(btnAdvanced)
+        }
         
-        contentView.addArrangedSubview(advancedContentView)
+        contentView.addArrangedSubview(txtProfileId)
+        
+        contentView.addArrangedSubview(txtNodeServer)
+        
+        contentView.addArrangedSubview(txtRemoteServer)
+        
+        contentView.addArrangedSubview(btnLogin)
         
         NSLayoutConstraint.activate([
             
@@ -125,19 +218,45 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
             
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-
-            txtUsername.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
-            txtUsername.trailingAnchor.constraint(equalTo:contentView.trailingAnchor),
-            txtUsername.heightAnchor.constraint(equalToConstant:50),
-    
-            txtPassword.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
-            txtPassword.trailingAnchor.constraint(equalTo:contentView.trailingAnchor),
-            txtPassword.heightAnchor.constraint(equalToConstant:50),
             
-            btnAdvanced.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
+            lblInstructions.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            lblInstructions.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            lblInstructions.heightAnchor.constraint(equalToConstant: 80),
 
-            advancedContentView.leadingAnchor.constraint(equalTo:contentView.leadingAnchor),
-            advancedContentView.trailingAnchor.constraint(equalTo:contentView.trailingAnchor),
+            txtUsername.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            txtUsername.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            txtUsername.heightAnchor.constraint(equalToConstant: 50),
+    
+            txtPassword.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            txtPassword.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            txtPassword.heightAnchor.constraint(equalToConstant: 50)
+        
+        ])
+        
+        if advancedEnabled {
+            NSLayoutConstraint.activate([
+                btnAdvanced.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                btnAdvanced.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            ])
+        }
+        
+        NSLayoutConstraint.activate([
+            
+            txtProfileId.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            txtProfileId.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            txtProfileId.heightAnchor.constraint(equalToConstant: 50),
+            
+            txtNodeServer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            txtNodeServer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            txtNodeServer.heightAnchor.constraint(equalToConstant: 50),
+            
+            txtRemoteServer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            txtRemoteServer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            txtRemoteServer.heightAnchor.constraint(equalToConstant: 50),
+            
+            btnLogin.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            btnLogin.heightAnchor.constraint(equalToConstant: 50),
+            btnLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
         ])
         
@@ -153,17 +272,30 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         let selectedTitle = NSMutableAttributedString()
         selectedTitle.append(advancedSettings)
         selectedTitle.append(selectedIconString)
-        if (advancedContentView.isHidden) {
-            advancedContentView.isHidden = false
-            sender.setAttributedTitle(selectedTitle, for: .normal)
-        } else {
-            advancedContentView.isHidden = true
-            sender.setAttributedTitle(attributedTitle, for: .normal)
+        if advancedEnabled {
+            if advancedHidden {
+                contentView.make(viewsHidden: [], viewsVisible: [txtProfileId, txtNodeServer, txtRemoteServer], animated: true)
+                sender.setAttributedTitle(selectedTitle, for: .normal)
+                advancedHidden = false
+            } else {
+                contentView.make(viewsHidden: [txtRemoteServer, txtNodeServer, txtProfileId], viewsVisible: [], animated: true)
+                sender.setAttributedTitle(attributedTitle, for: .normal)
+                advancedHidden = true
+            }
         }
     }
     
     func prefill(with: ProfileServerItem) {
-        
+        advancedEnabled = true
+        advancedHidden = true
+        txtProfileId.isHidden = true
+        txtNodeServer.isHidden = true
+        txtRemoteServer.isHidden = true
+        txtProfileId.text = with.profileId
+        txtNodeServer.text = "http://\(with.host)\(with.port == 80 ? "" : ":\(with.port)")"
+        if let host = with.remoteHost, let port = with.remotePort {
+            txtRemoteServer.text = "https://\(host)\(port == 80 ? "" : ":\(port)")"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

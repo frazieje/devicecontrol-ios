@@ -1,4 +1,4 @@
 protocol ProfileLoginRouter : Router {
-    func routeToAddProfileLogin(from: View)
-    func routeToEditProfileLogin(from: View, _ item: ProfileServerItem?)
+    func routeToNearbyProfileLogin(from: View)
+    func routeToEditProfileLogin(from: View, item: ProfileServerItem?)
 }

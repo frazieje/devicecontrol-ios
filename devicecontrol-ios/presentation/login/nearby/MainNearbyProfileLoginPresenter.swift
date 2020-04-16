@@ -39,7 +39,7 @@ class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowState
     
     func serverItemClicked(_ item: ProfileServerItem) {
         if let strongView = view {
-            router.routeToEditProfileLogin(from: strongView, item)
+            router.routeToEditProfileLogin(from: strongView, item: item)
         }
     }
     

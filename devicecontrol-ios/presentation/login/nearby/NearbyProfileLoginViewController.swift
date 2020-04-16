@@ -21,7 +21,16 @@ class NearbyProfileLoginViewController : UIViewController, NearbyProfileLoginVie
     override func loadView() {
         super.loadView()
         
+        let gradient = CAGradientLayer()
+
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.init(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.0).cgColor, UIColor.init(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor]
+
+        view.layer.insertSublayer(gradient, at: 0)
+        
         let tableView = UITableView()
+        
+        tableView.backgroundColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -87,7 +96,7 @@ extension NearbyProfileLoginViewController : UITableViewDataSource {
         let server = serversData[indexPath.row]
         var cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell")
         if cell == nil {
-          cell = UITableViewCell(style: .value1, reuseIdentifier: "OrderTableViewCell")
+            cell = UITableViewCell(style: .value1, reuseIdentifier: "OrderTableViewCell")
         }
         cell?.textLabel?.text = server.profileId
         cell?.detailTextLabel?.text = server.host

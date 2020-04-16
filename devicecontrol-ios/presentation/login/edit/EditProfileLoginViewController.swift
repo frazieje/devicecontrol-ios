@@ -175,8 +175,6 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     }()
     
     var advancedContentHeightConstraint: NSLayoutConstraint?
-    
-    var keyboardHeightLayoutConstraint: NSLayoutConstraint?
 
     let presenter: EditProfileLoginPresenter
     
@@ -233,7 +231,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             lblInstructions.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            lblInstructions.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            lblInstructions.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 150),
             lblInstructions.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
             txtUsername.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
@@ -258,7 +256,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         
         let targetAnchor = advancedEnabled ? btnAdvanced.bottomAnchor : txtPassword.bottomAnchor
         
-        advancedContentHeightConstraint = advancedContentView.heightAnchor.constraint(equalToConstant: 0)
+        advancedContentHeightConstraint = advancedContentView.heightAnchor.constraint(equalToConstant: advancedEnabled ? 0 : 210)
         
         NSLayoutConstraint.activate([
             

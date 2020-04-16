@@ -2,6 +2,12 @@ import Foundation
 
 class ApplicationDelegateWindowStateManager : WindowStateManager, WindowStateObserver {
     
+    private let delegate: WindowStateController
+    
+    init(delegate: WindowStateController) {
+        self.delegate = delegate
+    }
+
     private let concurrentQueue =
     DispatchQueue(
       label: "com.spoohapps.devicecontrol.windowStateManager",
@@ -80,6 +86,25 @@ class ApplicationDelegateWindowStateManager : WindowStateManager, WindowStateObs
         }
     }
     
+    func lockOrientationPortrait() {
+        delegate.lockOrientationPortrait()
+    }
+    
+    func lockOrientationLandscape() {
+        delegate.lockOrientationLandscape()
+    }
+    
+    func lockOrientationAll() {
+        delegate.lockOrientationAll()
+    }
+    
+    func rotateToPortrait() {
+        delegate.rotateToPortrait()
+    }
+    
+    func rotateToLandscape() {
+        delegate.rotateToLandscape()
+    }
     
     
 }

@@ -3,7 +3,7 @@ import SideMenu
 import SQLite
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
 
     var window: UIWindow?
 
@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .documentDirectory, .userDomainMask, true
         ).first!
         
-        windowStateManager = ApplicationDelegateWindowStateManager()
+        windowStateManager = ApplicationDelegateWindowStateManager(delegate: self)
         
         do {
 
@@ -69,9 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let profileLoginRouter = MainProfileLoginRouter(presenterFactory: profileLoginPresenterFactory, viewFactory: profileLoginViewFactory)
             
-            let nearbyProfileLoginPresenter = profileLoginPresenterFactory.nearbyProfileLogin(router: profileLoginRouter)
+//            let nearbyProfileLoginPresenter = profileLoginPresenterFactory.nearbyProfileLogin(router: profileLoginRouter)
+//
+//            let initialView = profileLoginViewFactory.nearbyProfileLogin(presenter: nearbyProfileLoginPresenter)
             
-            let initialView = profileLoginViewFactory.nearbyProfileLogin(presenter: nearbyProfileLoginPresenter)
+            let getStartedPresenter = profileLoginPresenterFactory.getStartedPresenter(router: profileLoginRouter)
+            
+            let initialView = profileLoginViewFactory.getStarted(presenter: getStartedPresenter)
         
             window!.rootViewController = UINavigationController(rootViewController: initialView.viewController())
             window!.makeKeyAndVisible()
@@ -113,7 +117,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 //        print("applicationWillTerminate")
     }
-
+    
+    var orientationLock = UIInterfaceOrientationMask.all
+    
+    func lockOrientationPortrait() {
+        orientationLock = UIInterfaceOrientationMask.portrait
+    }
+    
+    func lockOrientationLandscape() {
+        orientationLock = UIInterfaceOrientationMask.landscapeLeft
+    }
+    
+    func lockOrientationAll() {
+        orientationLock = UIInterfaceOrientationMask.all
+    }
+    
+    func rotateToPortrait() {
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+    }
+    
+    func rotateToLandscape() {
+        UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return self.orientationLock
+    }
 
 }
 

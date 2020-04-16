@@ -1,5 +1,5 @@
 class MainProfileLoginRouter : ProfileLoginRouter {
-
+    
     private let presenterFactory: ProfileLoginPresenterFactory
     private let viewFactory: ProfileLoginViewFactory
     
@@ -8,7 +8,7 @@ class MainProfileLoginRouter : ProfileLoginRouter {
         self.viewFactory = viewFactory
     }
     
-    func routeToAddProfileLogin(from: View) {
+    func routeToNearbyProfileLogin(from: View) {
         
         let presenter = presenterFactory.nearbyProfileLogin(router: self)
         
@@ -17,7 +17,7 @@ class MainProfileLoginRouter : ProfileLoginRouter {
         from.viewController().show(view.viewController(), sender: from)
     }
     
-    func routeToEditProfileLogin(from: View, _ item: ProfileServerItem?) {
+    func routeToEditProfileLogin(from: View, item: ProfileServerItem?) {
         
         let presenter = presenterFactory.editProfileLogin(router: self)
         

@@ -1,3 +1,3 @@
-protocol AddProfileLoginView : View {
+protocol NearbyProfileLoginView : View {
     func showItems(_ items: [ProfileServerItem])
 }

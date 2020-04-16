@@ -8,13 +8,20 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-    private let contentView: UIStackView = {
-        let view = UIStackView()
+    
+    private let contentView: UIView = {
+        let view = UIView()
         view.backgroundColor = .white
+        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.axis = .vertical
-        view.spacing = 20
+        return view
+    }()
+    
+    private let advancedContentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -166,6 +173,10 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
+    
+    var advancedContentHeightConstraint: NSLayoutConstraint?
+    
+    var keyboardHeightLayoutConstraint: NSLayoutConstraint?
 
     let presenter: EditProfileLoginPresenter
     
@@ -183,81 +194,98 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         
         view.addSubview(scrollView)
         
-        scrollView.addSubview(contentView)
-        
         btnAdvanced.addTarget(self, action: #selector(self.advancedButtonTapped), for: .touchUpInside)
         
-        contentView.addArrangedSubview(lblInstructions)
+        scrollView.addSubview(contentView)
         
-        contentView.addArrangedSubview(txtUsername)
+        contentView.addSubview(lblInstructions)
         
-        contentView.addArrangedSubview(txtPassword)
+        contentView.addSubview(txtUsername)
+        
+        contentView.addSubview(txtPassword)
         
         if advancedEnabled {
-            contentView.addArrangedSubview(btnAdvanced)
+            contentView.addSubview(btnAdvanced)
         }
         
-        contentView.addArrangedSubview(txtProfileId)
+        contentView.addSubview(advancedContentView)
         
-        contentView.addArrangedSubview(txtNodeServer)
+        advancedContentView.addSubview(txtProfileId)
         
-        contentView.addArrangedSubview(txtRemoteServer)
+        advancedContentView.addSubview(txtNodeServer)
         
-        contentView.addArrangedSubview(btnLogin)
+        advancedContentView.addSubview(txtRemoteServer)
+        
+        contentView.addSubview(btnLogin)
         
         NSLayoutConstraint.activate([
             
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
             
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             lblInstructions.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            lblInstructions.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             lblInstructions.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            lblInstructions.heightAnchor.constraint(equalToConstant: 80),
 
-            txtUsername.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            txtUsername.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            txtUsername.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            txtUsername.topAnchor.constraint(equalTo: lblInstructions.bottomAnchor, constant: 20),
+            txtUsername.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             txtUsername.heightAnchor.constraint(equalToConstant: 50),
     
-            txtPassword.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            txtPassword.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            txtPassword.heightAnchor.constraint(equalToConstant: 50)
+            txtPassword.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            txtPassword.topAnchor.constraint(equalTo: txtUsername.bottomAnchor, constant: 20),
+            txtPassword.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            txtPassword.heightAnchor.constraint(equalToConstant: 50),
         
         ])
         
         if advancedEnabled {
             NSLayoutConstraint.activate([
-                btnAdvanced.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                btnAdvanced.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                btnAdvanced.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                btnAdvanced.topAnchor.constraint(equalTo: txtPassword.bottomAnchor, constant: 20),
+                btnAdvanced.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             ])
         }
         
+        let targetAnchor = advancedEnabled ? btnAdvanced.bottomAnchor : txtPassword.bottomAnchor
+        
+        advancedContentHeightConstraint = advancedContentView.heightAnchor.constraint(equalToConstant: 0)
+        
         NSLayoutConstraint.activate([
             
-            txtProfileId.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            txtProfileId.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            advancedContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            advancedContentView.topAnchor.constraint(equalTo: targetAnchor),
+            advancedContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            advancedContentHeightConstraint!,
+            
+            txtProfileId.leadingAnchor.constraint(equalTo: advancedContentView.leadingAnchor, constant: 12),
+            txtProfileId.topAnchor.constraint(equalTo: advancedContentView.topAnchor, constant: 20),
+            txtProfileId.trailingAnchor.constraint(equalTo: advancedContentView.trailingAnchor, constant: -12),
             txtProfileId.heightAnchor.constraint(equalToConstant: 50),
             
-            txtNodeServer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            txtNodeServer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            txtNodeServer.leadingAnchor.constraint(equalTo: advancedContentView.leadingAnchor, constant: 12),
+            txtNodeServer.topAnchor.constraint(equalTo: txtProfileId.bottomAnchor, constant: 20),
+            txtNodeServer.trailingAnchor.constraint(equalTo: advancedContentView.trailingAnchor, constant: -12),
             txtNodeServer.heightAnchor.constraint(equalToConstant: 50),
             
-            txtRemoteServer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            txtRemoteServer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            txtRemoteServer.leadingAnchor.constraint(equalTo: advancedContentView.leadingAnchor, constant: 12),
+            txtRemoteServer.topAnchor.constraint(equalTo: txtNodeServer.bottomAnchor, constant: 20),
+            txtRemoteServer.trailingAnchor.constraint(equalTo: advancedContentView.trailingAnchor, constant: -12),
             txtRemoteServer.heightAnchor.constraint(equalToConstant: 50),
             
             btnLogin.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            btnLogin.heightAnchor.constraint(equalToConstant: 50),
+            btnLogin.topAnchor.constraint(equalTo: advancedContentView.bottomAnchor, constant: 20),
             btnLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            
+            btnLogin.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
         ])
         
     }
@@ -274,11 +302,17 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         selectedTitle.append(selectedIconString)
         if advancedEnabled {
             if advancedHidden {
-                contentView.make(viewsHidden: [], viewsVisible: [txtProfileId, txtNodeServer, txtRemoteServer], animated: true)
+                advancedContentHeightConstraint!.constant = 210
+                UIView.animate(withDuration: 0.3) {
+                    self.scrollView.layoutIfNeeded()
+                }
                 sender.setAttributedTitle(selectedTitle, for: .normal)
                 advancedHidden = false
             } else {
-                contentView.make(viewsHidden: [txtRemoteServer, txtNodeServer, txtProfileId], viewsVisible: [], animated: true)
+                advancedContentHeightConstraint!.constant = 0
+                UIView.animate(withDuration: 0.3) {
+                    self.scrollView.layoutIfNeeded()
+                }
                 sender.setAttributedTitle(attributedTitle, for: .normal)
                 advancedHidden = true
             }
@@ -288,9 +322,6 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     func prefill(with: ProfileServerItem) {
         advancedEnabled = true
         advancedHidden = true
-        txtProfileId.isHidden = true
-        txtNodeServer.isHidden = true
-        txtRemoteServer.isHidden = true
         txtProfileId.text = with.profileId
         txtNodeServer.text = "http://\(with.host)\(with.port == 80 ? "" : ":\(with.port)")"
         if let host = with.remoteHost, let port = with.remotePort {
@@ -314,8 +345,37 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         
         view.backgroundColor = .white
         
-        title = "Edit a Profile"
-        
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(self.keyboardNotification(notification:)),
+            name: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            
+            let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            
+            let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: endFrame?.size.height ?? 0.0, right: 0.0)
+
+            scrollView.contentInset = insets
+            scrollView.scrollIndicatorInsets = insets
+
+            var aRect = self.view.frame;
+            aRect.size.height -= (endFrame?.size.height ?? 0.0);
+            
+            let activeField: UITextField? = [txtUsername, txtPassword, txtProfileId, txtNodeServer, txtRemoteServer].first { $0.isFirstResponder }
+            if let activeField = activeField {
+                if !aRect.contains(activeField.frame.origin) {
+                    let scrollPoint = CGPoint(x: 0, y: activeField.frame.origin.y-(endFrame?.size.height ?? 0.0))
+                    scrollView.setContentOffset(scrollPoint, animated: true)
+                }
+            }
+        }
     }
     
     func viewController() -> UIViewController {

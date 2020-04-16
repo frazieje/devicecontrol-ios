@@ -1,10 +1,10 @@
 import Foundation
 
-class MainAddProfileLoginPresenter : AddProfileLoginPresenter, WindowStateObserver {
+class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowStateObserver {
 
     private let nearbyProfileService: NearbyProfileService
     
-    private var view: AddProfileLoginView?
+    private var view: NearbyProfileLoginView?
     
     private let mapper: ServerItemMapper
     
@@ -23,7 +23,7 @@ class MainAddProfileLoginPresenter : AddProfileLoginPresenter, WindowStateObserv
         self.router = router
     }
     
-    func setView(view: AddProfileLoginView) {
+    func setView(view: NearbyProfileLoginView) {
         self.view = view
     }
     

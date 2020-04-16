@@ -1,7 +1,7 @@
 class MainProfileLoginViewFactory : ProfileLoginViewFactory {
     
-    func addProfileLogin(presenter: AddProfileLoginPresenter) -> AddProfileLoginView {
-        let view = AddProfileLoginViewController(presenter: presenter)
+    func nearbyProfileLogin(presenter: NearbyProfileLoginPresenter) -> NearbyProfileLoginView {
+        let view = NearbyProfileLoginViewController(presenter: presenter)
         presenter.setView(view: view)
         return view
     }

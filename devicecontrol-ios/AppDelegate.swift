@@ -69,9 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let profileLoginRouter = MainProfileLoginRouter(presenterFactory: profileLoginPresenterFactory, viewFactory: profileLoginViewFactory)
             
-            let addProfileLoginPresenter = profileLoginPresenterFactory.addProfileLogin(router: profileLoginRouter)
+            let nearbyProfileLoginPresenter = profileLoginPresenterFactory.nearbyProfileLogin(router: profileLoginRouter)
             
-            let initialView = profileLoginViewFactory.addProfileLogin(presenter: addProfileLoginPresenter)
+            let initialView = profileLoginViewFactory.nearbyProfileLogin(presenter: nearbyProfileLoginPresenter)
         
             window!.rootViewController = UINavigationController(rootViewController: initialView.viewController())
             window!.makeKeyAndVisible()

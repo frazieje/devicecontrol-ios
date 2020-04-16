@@ -9,11 +9,11 @@ class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
         self.nearbyProfileService = nearbyProfileService
     }
     
-    func addProfileLogin(router: ProfileLoginRouter) -> AddProfileLoginPresenter {
+    func nearbyProfileLogin(router: ProfileLoginRouter) -> NearbyProfileLoginPresenter {
         
         let serverItemMapper: ServerItemMapper = ProfileServerItemMapper()
         
-        return MainAddProfileLoginPresenter(windowStateManager: windowStateManager, nearbyProfileService: nearbyProfileService, mapper: serverItemMapper, router: router)
+        return MainNearbyProfileLoginPresenter(windowStateManager: windowStateManager, nearbyProfileService: nearbyProfileService, mapper: serverItemMapper, router: router)
     }
     
     func editProfileLogin(router: ProfileLoginRouter) -> EditProfileLoginPresenter {

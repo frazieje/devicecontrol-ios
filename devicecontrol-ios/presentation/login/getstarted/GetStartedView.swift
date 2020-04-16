@@ -1,0 +1,3 @@
+protocol GetStartedView : View {
+    
+}

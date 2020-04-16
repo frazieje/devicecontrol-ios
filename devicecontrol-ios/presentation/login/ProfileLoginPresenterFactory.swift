@@ -1,4 +1,4 @@
 protocol ProfileLoginPresenterFactory {
-    func addProfileLogin(router: ProfileLoginRouter) -> AddProfileLoginPresenter
+    func nearbyProfileLogin(router: ProfileLoginRouter) -> NearbyProfileLoginPresenter
     func editProfileLogin(router: ProfileLoginRouter) -> EditProfileLoginPresenter
 }

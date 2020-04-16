@@ -10,9 +10,9 @@ class MainProfileLoginRouter : ProfileLoginRouter {
     
     func routeToAddProfileLogin(from: View) {
         
-        let presenter = presenterFactory.addProfileLogin(router: self)
+        let presenter = presenterFactory.nearbyProfileLogin(router: self)
         
-        let view = viewFactory.addProfileLogin(presenter: presenter)
+        let view = viewFactory.nearbyProfileLogin(presenter: presenter)
         
         from.viewController().show(view.viewController(), sender: from)
     }

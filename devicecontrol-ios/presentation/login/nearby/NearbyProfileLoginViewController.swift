@@ -1,44 +1,15 @@
 
 import UIKit
 
-class AddProfileLoginViewController : UIViewController, AddProfileLoginView {
+class NearbyProfileLoginViewController : UIViewController, NearbyProfileLoginView {
 
     weak var tableView: UITableView!
     
     var serversData: [ProfileServerItem] = []
-    
-//    private let contentView: UIView = {
-//      let view = UIView()
-//      view.backgroundColor = .gray
-//      view.translatesAutoresizingMaskIntoConstraints = false
-//      return view
-//    }()
-    
-//    let btnManualEntry: UIButton = {
-//        let btn = UIButton(type:.system)
-//        btn.backgroundColor = .blue
-//        btn.setTitle("I know my login info", for: .normal)
-//        btn.tintColor = .white
-//        btn.layer.cornerRadius = 5
-//        btn.clipsToBounds = true
-//        btn.translatesAutoresizingMaskIntoConstraints = false
-//        return btn
-//    }()
-//
-//    let btnSearch: UIButton = {
-//        let btn = UIButton(type:.system)
-//        btn.backgroundColor = .blue
-//        btn.setTitle("Find My login", for: .normal)
-//        btn.tintColor = .white
-//        btn.layer.cornerRadius = 5
-//        btn.clipsToBounds = true
-//        btn.translatesAutoresizingMaskIntoConstraints = false
-//        return btn
-//    }()
 
-    let presenter: AddProfileLoginPresenter
+    let presenter: NearbyProfileLoginPresenter
     
-    init(presenter: AddProfileLoginPresenter) {
+    init(presenter: NearbyProfileLoginPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -82,7 +53,7 @@ class AddProfileLoginViewController : UIViewController, AddProfileLoginView {
         
         view.backgroundColor = .white
         
-        title = "Add a Profile"
+        title = "Nearby Profiles"
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -106,7 +77,7 @@ class AddProfileLoginViewController : UIViewController, AddProfileLoginView {
     
 }
 
-extension AddProfileLoginViewController : UITableViewDataSource {
+extension NearbyProfileLoginViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return serversData.count
@@ -125,7 +96,7 @@ extension AddProfileLoginViewController : UITableViewDataSource {
     
 }
 
-extension AddProfileLoginViewController : UITableViewDelegate {
+extension NearbyProfileLoginViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.serverItemClicked(serversData[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)

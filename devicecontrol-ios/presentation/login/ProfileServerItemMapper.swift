@@ -24,6 +24,7 @@ class ProfileServerItemMapper : ServerItemMapper {
 }
 
 private struct PendingProfileServerItem {
+    var name: String?
     var profileId: String
     var host: String?
     var port: Int?

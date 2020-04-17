@@ -4,7 +4,7 @@ class GetStartedViewController : UIViewController, GetStartedView {
     
     let iconViewHome: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .lightGray, size: CGSize(width: 200, height: 200))
+        view.image = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .blackCoral, size: CGSize(width: 200, height: 200))
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -12,7 +12,7 @@ class GetStartedViewController : UIViewController, GetStartedView {
     
     let maskView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .blackCoral
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -30,7 +30,7 @@ class GetStartedViewController : UIViewController, GetStartedView {
         let lbl = UILabel()
         lbl.text = "How do you want to log in?"
         lbl.textAlignment = .center
-        lbl.textColor = .some(UIColor.init(red: 0.32, green: 0.32, blue: 0.32, alpha: 1.0))
+        lbl.textColor = .darkDarkGray
         lbl.clipsToBounds = true
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -38,15 +38,15 @@ class GetStartedViewController : UIViewController, GetStartedView {
     
     let btnFindNearby: UIButton = {
         let btn = UIButton(type: .roundedRect)
-        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f1eb}", textColor: .white, size: CGFloat(18.0))
+        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f1eb}", textColor: .snow, size: CGFloat(18.0))
         let find = NSMutableAttributedString(string: "   Find a Nearby Profile", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18.0)])
         let attributedTitle = NSMutableAttributedString()
         attributedTitle.append(iconString)
         attributedTitle.append(find)
         btn.setAttributedTitle(attributedTitle, for: .normal)
-        btn.backgroundColor = .systemTeal
-        btn.tintColor = .white
-        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = .mayaBlue
+        btn.tintColor = .snow
+        btn.setTitleColor(.snow, for: .normal)
         btn.layer.cornerRadius = 20
         btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         btn.contentHorizontalAlignment = .center
@@ -57,7 +57,7 @@ class GetStartedViewController : UIViewController, GetStartedView {
     
     let btnEnter: UIButton = {
         let btn = UIButton(type: .roundedRect)
-        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f11c}", textColor: .white, size: CGFloat(18.0))
+        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f11c}", textColor: .snow, size: CGFloat(18.0))
         let enterDetails = NSMutableAttributedString(string: "   Enter Details", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18.0)])
         let attributedTitle = NSMutableAttributedString()
         attributedTitle.append(iconString)
@@ -65,9 +65,9 @@ class GetStartedViewController : UIViewController, GetStartedView {
         btn.setAttributedTitle(attributedTitle, for: .normal)
         btn.layer.cornerRadius = 20
         btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        btn.tintColor = .white
-        btn.backgroundColor = .systemTeal
-        btn.setTitleColor(.white, for: .normal)
+        btn.tintColor = .snow
+        btn.backgroundColor = .mayaBlue
+        btn.setTitleColor(.snow, for: .normal)
         btn.contentHorizontalAlignment = .center
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -89,10 +89,18 @@ class GetStartedViewController : UIViewController, GetStartedView {
         
         super.loadView()
         
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.clear]
+        
         let gradient = CAGradientLayer()
 
+//        gradient.frame = view.bounds
+//        gradient.colors = [UIColor.init(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.0).cgColor, UIColor.init(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor]
+
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.init(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.0).cgColor, UIColor.init(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor]
+        gradient.colors = [UIColor.paleTurquoise.cgColor, UIColor.snow.cgColor]
 
         view.layer.insertSublayer(gradient, at: 0)
 
@@ -171,6 +179,8 @@ class GetStartedViewController : UIViewController, GetStartedView {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        title = "Get Started"
         
         view.backgroundColor = .white
         

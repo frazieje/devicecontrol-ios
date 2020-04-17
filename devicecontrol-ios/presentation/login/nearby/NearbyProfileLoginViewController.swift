@@ -9,6 +9,37 @@ class NearbyProfileLoginViewController : UIViewController, NearbyProfileLoginVie
 
     let presenter: NearbyProfileLoginPresenter
     
+    let iconViewWifi: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage.fontAwesomeIcon(icon: "\u{f1eb}", textColor: UIColor.init(red: 0.60, green: 0.60, blue: 0.60, alpha: 0.6), size: CGSize(width: 180, height: 180))
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let lblAnnouncement: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Scanning for nearby profiles..."
+        lbl.font = .boldSystemFont(ofSize: 20)
+        lbl.textAlignment = .center
+        lbl.textColor = UIColor.init(red: 0.60, green: 0.60, blue: 0.60, alpha: 0.6)
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
+    private let lblInstructions: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Note: Make sure your gateway device is on the same WiFi network as this iPhone/iPad"
+        lbl.textAlignment = .center
+        lbl.numberOfLines = 0
+        lbl.lineBreakMode = .byWordWrapping
+        lbl.textColor = UIColor.init(red: 0.60, green: 0.60, blue: 0.60, alpha: 0.6)
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
     init(presenter: NearbyProfileLoginPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -21,26 +52,52 @@ class NearbyProfileLoginViewController : UIViewController, NearbyProfileLoginVie
     override func loadView() {
         super.loadView()
         
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
         let gradient = CAGradientLayer()
 
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.init(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.0).cgColor, UIColor.init(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0).cgColor]
+        gradient.colors = [UIColor.paleTurquoise.cgColor, UIColor.snow.cgColor]
 
         view.layer.insertSublayer(gradient, at: 0)
         
         let tableView = UITableView()
         
-        tableView.backgroundColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        tableView.backgroundColor = .clear
+        
+        tableView.separatorStyle = .none
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(lblAnnouncement)
+        
+        view.addSubview(iconViewWifi)
+        
+        view.addSubview(lblInstructions)
         
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: view.frame.height/3),
-            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            iconViewWifi.heightAnchor.constraint(equalToConstant: 150),
+            iconViewWifi.widthAnchor.constraint(equalToConstant: 150),
+            iconViewWifi.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            iconViewWifi.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            
+            lblAnnouncement.bottomAnchor.constraint(equalTo: iconViewWifi.topAnchor, constant: -20),
+            lblAnnouncement.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            lblAnnouncement.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            lblInstructions.topAnchor.constraint(equalTo: iconViewWifi.bottomAnchor, constant: 20),
+            lblInstructions.widthAnchor.constraint(equalToConstant: view.frame.width/1.5),
+            lblInstructions.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
         self.tableView = tableView
@@ -94,13 +151,16 @@ extension NearbyProfileLoginViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let server = serversData[indexPath.row]
-        var cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell")
+        var cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell") as? ProfileServerItemTableViewCell
         if cell == nil {
-            cell = UITableViewCell(style: .value1, reuseIdentifier: "OrderTableViewCell")
+            cell = ProfileServerItemTableViewCell()
         }
-        cell?.textLabel?.text = server.profileId
-        cell?.detailTextLabel?.text = server.host
+        cell?.item = server
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
 }

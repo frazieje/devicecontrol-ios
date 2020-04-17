@@ -4,14 +4,14 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -19,7 +19,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     
     private let advancedContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -39,8 +39,20 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     
     private var advancedHidden: Bool = false
     
+    let lblUsername: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Username"
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textAlignment = .left
+        lbl.textColor = .some(UIColor.init(red: 0.32, green: 0.32, blue: 0.32, alpha: 1.0))
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
     let txtUsername: UITextField = {
         let txt = UITextField()
+        txt.backgroundColor = .snow
         txt.layer.cornerRadius = 5
         txt.layer.borderWidth = 1.0
         txt.layer.borderColor = UIColor.lightGray.cgColor
@@ -52,15 +64,27 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         txt.keyboardType = .emailAddress
         txt.returnKeyType = .next
         txt.autocapitalizationType = .none
-        txt.placeholder = "Username"
+        txt.placeholder = "your@email.com"
         txt.clipsToBounds = true
         txt.textColor = .darkGray
         txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
     }()
+    
+    let lblPassword: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Password"
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textAlignment = .left
+        lbl.textColor = .some(UIColor.init(red: 0.32, green: 0.32, blue: 0.32, alpha: 1.0))
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
 
     let txtPassword: UITextField = {
         let txt = UITextField()
+        txt.backgroundColor = .snow
         txt.layer.cornerRadius = 5
         txt.layer.borderWidth = 1.0
         txt.layer.borderColor = UIColor.lightGray.cgColor
@@ -99,8 +123,20 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         return btn
     }()
     
+    let lblProfileId: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Profile ID"
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textAlignment = .left
+        lbl.textColor = .some(UIColor.init(red: 0.32, green: 0.32, blue: 0.32, alpha: 1.0))
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
     let txtProfileId: UITextField = {
         let txt = UITextField()
+        txt.backgroundColor = .snow
         txt.layer.cornerRadius = 5
         txt.layer.borderWidth = 1.0
         txt.layer.borderColor = UIColor.lightGray.cgColor
@@ -112,15 +148,27 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         txt.keyboardType = .emailAddress
         txt.returnKeyType = .next
         txt.autocapitalizationType = .none
-        txt.placeholder = "Profile ID"
+        txt.placeholder = "e.g. 1x3f24s9"
         txt.textColor = .darkGray
         txt.clipsToBounds = true
         txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
+    }()
+    
+    let lblNodeServer: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Server"
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textAlignment = .left
+        lbl.textColor = .some(UIColor.init(red: 0.32, green: 0.32, blue: 0.32, alpha: 1.0))
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
     }()
     
     let txtNodeServer: UITextField = {
         let txt = UITextField()
+        txt.backgroundColor = .snow
         txt.layer.cornerRadius = 5
         txt.layer.borderWidth = 1.0
         txt.layer.borderColor = UIColor.lightGray.cgColor
@@ -132,15 +180,27 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         txt.keyboardType = .emailAddress
         txt.returnKeyType = .next
         txt.autocapitalizationType = .none
-        txt.placeholder = "Server"
+        txt.placeholder = "e.g. http://192.168.1.200:8080"
         txt.textColor = .darkGray
         txt.clipsToBounds = true
         txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
     }()
     
+    let lblRemoteServer: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "RemoteServer"
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textAlignment = .left
+        lbl.textColor = .some(UIColor.init(red: 0.32, green: 0.32, blue: 0.32, alpha: 1.0))
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
     let txtRemoteServer: UITextField = {
         let txt = UITextField()
+        txt.backgroundColor = .snow
         txt.layer.cornerRadius = 5
         txt.layer.borderWidth = 1.0
         txt.layer.borderColor = UIColor.lightGray.cgColor
@@ -152,7 +212,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         txt.keyboardType = .emailAddress
         txt.returnKeyType = .next
         txt.autocapitalizationType = .none
-        txt.placeholder = "Remote Server"
+        txt.placeholder = "e.g. https://api.farsystem.net"
         txt.textColor = .darkGray
         txt.clipsToBounds = true
         txt.translatesAutoresizingMaskIntoConstraints = false
@@ -161,18 +221,38 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     
     let btnLogin: UIButton = {
         let btn = UIButton(type: .roundedRect)
-        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f105}", textColor: .systemBlue, size: CGFloat(18.0))
-        let login = NSMutableAttributedString(string: "Log in ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18.0)])
+        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f105}", textColor: .snow, size: CGFloat(18.0))
+        let login = NSMutableAttributedString(string: "Log in ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18.0)])
         let attributedTitle = NSMutableAttributedString()
         attributedTitle.append(login)
         attributedTitle.append(iconString)
         btn.setAttributedTitle(attributedTitle, for: .normal)
-        btn.layer.cornerRadius = 5
+        btn.layer.cornerRadius = 20
+        btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        btn.tintColor = .snow
+        btn.backgroundColor = .mayaBlue
+        btn.setTitleColor(.snow, for: .normal)
         btn.contentHorizontalAlignment = .trailing
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
+    
+    
+//    let btnLogin: UIButton = {
+//        let btn = UIButton(type: .roundedRect)
+//        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f105}", textColor: .systemBlue, size: CGFloat(18.0))
+//        let login = NSMutableAttributedString(string: "Log in ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18.0)])
+//        let attributedTitle = NSMutableAttributedString()
+//        attributedTitle.append(login)
+//        attributedTitle.append(iconString)
+//        btn.setAttributedTitle(attributedTitle, for: .normal)
+//        btn.layer.cornerRadius = 5
+//        btn.contentHorizontalAlignment = .trailing
+//        btn.clipsToBounds = true
+//        btn.translatesAutoresizingMaskIntoConstraints = false
+//        return btn
+//    }()
     
     var advancedContentHeightConstraint: NSLayoutConstraint?
 
@@ -190,6 +270,13 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     override func loadView() {
         super.loadView()
         
+        let gradient = CAGradientLayer()
+
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.paleTurquoise.cgColor, UIColor.snow.cgColor]
+        
+        view.layer.insertSublayer(gradient, at: 0)
+        
         view.addSubview(scrollView)
         
         btnAdvanced.addTarget(self, action: #selector(self.advancedButtonTapped), for: .touchUpInside)
@@ -198,7 +285,11 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         
         contentView.addSubview(lblInstructions)
         
+        contentView.addSubview(lblUsername)
+        
         contentView.addSubview(txtUsername)
+        
+        contentView.addSubview(lblPassword)
         
         contentView.addSubview(txtPassword)
         
@@ -209,10 +300,13 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         contentView.addSubview(advancedContentView)
         
         advancedContentView.addSubview(txtProfileId)
+        advancedContentView.addSubview(lblProfileId)
         
         advancedContentView.addSubview(txtNodeServer)
+        advancedContentView.addSubview(lblNodeServer)
         
         advancedContentView.addSubview(txtRemoteServer)
+        advancedContentView.addSubview(lblRemoteServer)
         
         contentView.addSubview(btnLogin)
         
@@ -224,26 +318,32 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
             
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 120),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             lblInstructions.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            lblInstructions.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 150),
+            lblInstructions.topAnchor.constraint(equalTo: contentView.topAnchor),
             lblInstructions.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
+            
             txtUsername.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            txtUsername.topAnchor.constraint(equalTo: lblInstructions.bottomAnchor, constant: 20),
+            txtUsername.topAnchor.constraint(equalTo: lblInstructions.bottomAnchor, constant: 40),
             txtUsername.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             txtUsername.heightAnchor.constraint(equalToConstant: 50),
+            
+            lblUsername.leadingAnchor.constraint(equalTo: txtUsername.leadingAnchor, constant: 3),
+            lblUsername.bottomAnchor.constraint(equalTo: txtUsername.topAnchor, constant: -3),
     
             txtPassword.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            txtPassword.topAnchor.constraint(equalTo: txtUsername.bottomAnchor, constant: 20),
+            txtPassword.topAnchor.constraint(equalTo: txtUsername.bottomAnchor, constant: 30),
             txtPassword.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             txtPassword.heightAnchor.constraint(equalToConstant: 50),
-        
+            
+            lblPassword.leadingAnchor.constraint(equalTo: txtPassword.leadingAnchor, constant: 3),
+            lblPassword.bottomAnchor.constraint(equalTo: txtPassword.topAnchor, constant: -3),
+            
         ])
         
         if advancedEnabled {
@@ -256,7 +356,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         
         let targetAnchor = advancedEnabled ? btnAdvanced.bottomAnchor : txtPassword.bottomAnchor
         
-        advancedContentHeightConstraint = advancedContentView.heightAnchor.constraint(equalToConstant: advancedEnabled ? 0 : 210)
+        advancedContentHeightConstraint = advancedContentView.heightAnchor.constraint(equalToConstant: advancedEnabled ? 0 : 240)
         
         NSLayoutConstraint.activate([
             
@@ -266,22 +366,30 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
             advancedContentHeightConstraint!,
             
             txtProfileId.leadingAnchor.constraint(equalTo: advancedContentView.leadingAnchor, constant: 12),
-            txtProfileId.topAnchor.constraint(equalTo: advancedContentView.topAnchor, constant: 20),
+            txtProfileId.topAnchor.constraint(equalTo: advancedContentView.topAnchor, constant: 30),
             txtProfileId.trailingAnchor.constraint(equalTo: advancedContentView.trailingAnchor, constant: -12),
             txtProfileId.heightAnchor.constraint(equalToConstant: 50),
             
+            lblProfileId.leadingAnchor.constraint(equalTo: txtProfileId.leadingAnchor, constant: 3),
+            lblProfileId.bottomAnchor.constraint(equalTo: txtProfileId.topAnchor, constant: -3),
+            
             txtNodeServer.leadingAnchor.constraint(equalTo: advancedContentView.leadingAnchor, constant: 12),
-            txtNodeServer.topAnchor.constraint(equalTo: txtProfileId.bottomAnchor, constant: 20),
+            txtNodeServer.topAnchor.constraint(equalTo: txtProfileId.bottomAnchor, constant: 30),
             txtNodeServer.trailingAnchor.constraint(equalTo: advancedContentView.trailingAnchor, constant: -12),
             txtNodeServer.heightAnchor.constraint(equalToConstant: 50),
             
+            lblNodeServer.leadingAnchor.constraint(equalTo: txtNodeServer.leadingAnchor, constant: 3),
+            lblNodeServer.bottomAnchor.constraint(equalTo: txtNodeServer.topAnchor, constant: -3),
+            
             txtRemoteServer.leadingAnchor.constraint(equalTo: advancedContentView.leadingAnchor, constant: 12),
-            txtRemoteServer.topAnchor.constraint(equalTo: txtNodeServer.bottomAnchor, constant: 20),
+            txtRemoteServer.topAnchor.constraint(equalTo: txtNodeServer.bottomAnchor, constant: 30),
             txtRemoteServer.trailingAnchor.constraint(equalTo: advancedContentView.trailingAnchor, constant: -12),
             txtRemoteServer.heightAnchor.constraint(equalToConstant: 50),
             
-            btnLogin.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            btnLogin.topAnchor.constraint(equalTo: advancedContentView.bottomAnchor, constant: 20),
+            lblRemoteServer.leadingAnchor.constraint(equalTo: txtRemoteServer.leadingAnchor, constant: 3),
+            lblRemoteServer.bottomAnchor.constraint(equalTo: txtRemoteServer.topAnchor, constant: -3),
+            
+            btnLogin.topAnchor.constraint(equalTo: advancedContentView.bottomAnchor, constant: 30),
             btnLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             btnLogin.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
         ])
@@ -300,7 +408,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         selectedTitle.append(selectedIconString)
         if advancedEnabled {
             if advancedHidden {
-                advancedContentHeightConstraint!.constant = 210
+                advancedContentHeightConstraint!.constant = 240
                 UIView.animate(withDuration: 0.3) {
                     self.scrollView.layoutIfNeeded()
                 }
@@ -340,8 +448,6 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
         
         NotificationCenter.default.addObserver(self,
             selector: #selector(self.keyboardNotification(notification:)),

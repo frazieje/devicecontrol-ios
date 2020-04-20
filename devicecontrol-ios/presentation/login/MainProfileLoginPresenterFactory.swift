@@ -4,9 +4,12 @@ class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
     
     private let nearbyProfileService: NearbyProfileService
     
-    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService) {
+    private let loginService: LoginService
+    
+    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, loginService: LoginService) {
         self.windowStateManager = windowStateManager
         self.nearbyProfileService = nearbyProfileService
+        self.loginService = loginService
     }
     
     func getStartedPresenter(router: ProfileLoginRouter) -> GetStartedPresenter {
@@ -15,13 +18,14 @@ class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
     
     func nearbyProfileLogin(router: ProfileLoginRouter) -> NearbyProfileLoginPresenter {
         
-        let serverItemMapper: ServerItemMapper = ProfileServerItemMapper()
+        let serverItemMapper: ProfileServerMapper = DefaultProfileServerMapper()
         
         return MainNearbyProfileLoginPresenter(windowStateManager: windowStateManager, nearbyProfileService: nearbyProfileService, mapper: serverItemMapper, router: router)
     }
     
-    func editProfileLogin(router: ProfileLoginRouter) -> EditProfileLoginPresenter {
-        return MainEditProfileLoginPresenter(router: router)
+    func editProfileLogin(router: ProfileLoginRouter, _ item: ProfileServerItem?) -> EditProfileLoginPresenter {
+        let serverItemMapper: ProfileServerMapper = DefaultProfileServerMapper()
+        return MainEditProfileLoginPresenter(loginService: loginService, mapper: serverItemMapper, router: router, item)
     }
     
     

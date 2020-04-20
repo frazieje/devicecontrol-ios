@@ -22,7 +22,7 @@ protocol LoginService {
     
     func clearLogins(_ completion: @escaping (Bool, LoginServiceError?) -> Void)
     
-    func login(_ servers: [ProfileServer], _ user: User, _ profileId: String, _ password: String, _ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void)
+    func login(_ username: String, _ password: String, _ profileId: String, _ servers: [ProfileServer], _ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void)
     
 }
 

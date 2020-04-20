@@ -19,7 +19,7 @@ class ProfileServerItemTableViewCell : UITableViewCell {
         return lbl
     }()
     
-    private let lblServer: UILabel = {
+    private let lblServers: UILabel = {
         let lbl = UILabel()
         lbl.textAlignment = .left
         lbl.font = .systemFont(ofSize: 13)
@@ -49,6 +49,25 @@ class ProfileServerItemTableViewCell : UITableViewCell {
         return lbl
     }()
     
+    let btnLogin: UIButton = {
+        let btn = UIButton(type: .roundedRect)
+        let iconString = NSAttributedString.fontAwesomeIcon(icon: "\u{f105}", textColor: .snow, size: CGFloat(18.0))
+        let login = NSMutableAttributedString(string: "Log in ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18.0)])
+        let attributedTitle = NSMutableAttributedString()
+        attributedTitle.append(login)
+        attributedTitle.append(iconString)
+        btn.setAttributedTitle(attributedTitle, for: .normal)
+        btn.layer.cornerRadius = 20
+        btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        btn.tintColor = .snow
+        btn.backgroundColor = .mayaBlue
+        btn.setTitleColor(.snow, for: .normal)
+        btn.contentHorizontalAlignment = .trailing
+        btn.clipsToBounds = true
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -56,7 +75,7 @@ class ProfileServerItemTableViewCell : UITableViewCell {
         
         addSubview(lblProfileId)
         
-        addSubview(lblServer)
+        addSubview(lblServers)
         
         addSubview(lblSecureRemote)
         
@@ -70,16 +89,14 @@ class ProfileServerItemTableViewCell : UITableViewCell {
             lblProfileId.leadingAnchor.constraint(equalTo: iconViewServer.trailingAnchor, constant: 10),
             lblProfileId.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             
-            lblServer.leadingAnchor.constraint(equalTo: iconViewServer.trailingAnchor, constant: 10),
-            lblServer.topAnchor.constraint(equalTo: lblProfileId.bottomAnchor, constant: 5),
+            lblServers.leadingAnchor.constraint(equalTo: iconViewServer.trailingAnchor, constant: 10),
+            lblServers.topAnchor.constraint(equalTo: lblProfileId.bottomAnchor, constant: 5),
             
             lblSecureRemote.leadingAnchor.constraint(equalTo: iconViewServer.trailingAnchor, constant: 10),
-            lblSecureRemote.topAnchor.constraint(equalTo: lblServer.bottomAnchor, constant: 5),
+            lblSecureRemote.topAnchor.constraint(equalTo: lblServers.bottomAnchor, constant: 5),
             
             lblSecureRemoteBool.leadingAnchor.constraint(equalTo: lblSecureRemote.trailingAnchor),
-            lblSecureRemoteBool.topAnchor.constraint(equalTo: lblServer.bottomAnchor, constant: 5),
-            
-
+            lblSecureRemoteBool.topAnchor.constraint(equalTo: lblServers.bottomAnchor, constant: 5),
             
         ])
         
@@ -91,10 +108,12 @@ class ProfileServerItemTableViewCell : UITableViewCell {
     
     var item : ProfileServerItem? {
         didSet {
+            let serversCount = item!.servers.count
+            let hasSecure = item!.servers.filter { $0.secure }.count > 0
             lblProfileId.text = item!.profileId
-            lblServer.text = "http://\(item!.host)\(item!.port == 80 ? "" : ":\(item!.port)")"
-            lblSecureRemoteBool.textColor = item!.remoteHost != nil && item!.remotePort != nil ? .systemGreen : .lightGray
-            lblSecureRemoteBool.text = item!.remoteHost != nil && item!.remotePort != nil ? "Yes" : "No"
+            lblServers.text = "\(serversCount) Server\(serversCount > 1 ? "s" : "")"
+            lblSecureRemoteBool.textColor = hasSecure ? .systemGreen : .lightGray
+            lblSecureRemoteBool.text = hasSecure ? "Yes" : "No"
         }
     }
     

@@ -6,7 +6,7 @@ class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowState
     
     private var view: NearbyProfileLoginView?
     
-    private let mapper: ServerItemMapper
+    private let mapper: ProfileServerMapper
     
     private let windowStateManager: WindowStateManager
     
@@ -16,7 +16,7 @@ class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowState
     
     private let router: ProfileLoginRouter
     
-    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, mapper: ServerItemMapper, router: ProfileLoginRouter) {
+    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, mapper: ProfileServerMapper, router: ProfileLoginRouter) {
         self.nearbyProfileService = nearbyProfileService
         self.mapper = mapper
         self.windowStateManager = windowStateManager

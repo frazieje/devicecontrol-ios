@@ -19,9 +19,9 @@ class MainProfileLoginRouter : ProfileLoginRouter {
     
     func routeToEditProfileLogin(from: View, item: ProfileServerItem?) {
         
-        let presenter = presenterFactory.editProfileLogin(router: self)
+        let presenter = presenterFactory.editProfileLogin(router: self, item)
         
-        let view = viewFactory.editProfileLogin(presenter: presenter, item)
+        let view = viewFactory.editProfileLogin(presenter: presenter)
         
         from.viewController().show(view.viewController(), sender: from)
     }

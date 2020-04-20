@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
             
             let settingsViewController = SettingsViewController()
         
-//        let loginService = ProfileLoginService(profileLogin: profileLogin)
+//            let loginService = ProfileLoginService(profileLogin: profileLogin)
         
 //        let initialViewController = MainViewController(devicesViewController: devicesViewController, homeViewController: homeViewController, settingsViewController: settingsViewController)
             
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
             
             let nearbyProfileService = ScanningNearbyProfileService(scanner: nearbyProfileScanner)
             
-            let profileLoginPresenterFactory = MainProfileLoginPresenterFactory(windowStateManager: windowStateManager!, nearbyProfileService: nearbyProfileService)
+            let profileLoginPresenterFactory = MainProfileLoginPresenterFactory(windowStateManager: windowStateManager!, nearbyProfileService: nearbyProfileService, loginService: loginService)
             
             let profileLoginViewFactory = MainProfileLoginViewFactory()
             

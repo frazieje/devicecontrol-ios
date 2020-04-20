@@ -1,5 +1,4 @@
-
-struct ProfileServer : Codable, Hashable {
+struct ServerItem {
     var host: String
     var port: Int
     var secure: Bool

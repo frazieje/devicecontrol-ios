@@ -271,6 +271,8 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         return btn
     }()
     
+    let serverViewsTagOffset = 31
+    
     var advancedContentHeightConstraint: NSLayoutConstraint?
 
     let presenter: EditProfileLoginPresenter
@@ -286,8 +288,6 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     
     override func loadView() {
         super.loadView()
-        
-        print("edit profile loadview")
         
         let gradient = CAGradientLayer()
         
@@ -404,7 +404,6 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     }
     
     func prefill(with: ProfileLoginViewModel?) {
-        print("edit profile prefill")
         let advancedEnabled = with != nil
         
         txtProfileId.text = with?.profileId ?? ""
@@ -412,6 +411,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         var serverUIItems = (with?.servers ?? []).map { item in
             (lblServer(), txtServer(item), lblErrorServer())
         }
+        
         if serverUIItems.isEmpty {
             serverUIItems.append((lblServer(), txtServer(""), lblErrorServer()))
         }
@@ -433,7 +433,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         
         let targetAnchor = advancedEnabled ? btnAdvanced.bottomAnchor : txtPassword.bottomAnchor
         
-        let advancedContentHeight = advancedEnabled ? 0 : (108 + (80 * serverUIItems.count))
+        let advancedContentHeight = advancedEnabled ? 0 : advancedContentHeightCalc()
         
         advancedContentHeightConstraint = advancedContentView.heightAnchor.constraint(equalToConstant: CGFloat(advancedContentHeight))
         
@@ -539,7 +539,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         let selectedTitle = NSMutableAttributedString()
         selectedTitle.append(advancedSettings)
         selectedTitle.append(selectedIconString)
-        advancedContentHeightConstraint!.constant = advancedContentHeight()
+        advancedContentHeightConstraint!.constant = advancedContentHeightCalc()
         UIView.animate(withDuration: 0.3) {
             self.scrollView.layoutIfNeeded()
         }
@@ -559,7 +559,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         btnAdvanced.setAttributedTitle(attributedTitle, for: .normal)
     }
     
-    private func advancedContentHeight() -> CGFloat {
+    private func advancedContentHeightCalc() -> CGFloat {
         return CGFloat((advancedContentView.subviews.filter { v in v is UITextField }.count) * 80) + 28
     }
     
@@ -587,7 +587,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
             errorLabel.bottomAnchor.constraint(equalTo: field.topAnchor, constant: -3),
         ])
         self.scrollView.layoutIfNeeded()
-        advancedContentHeightConstraint!.constant = advancedContentHeight()
+        advancedContentHeightConstraint!.constant = advancedContentHeightCalc()
         UIView.animate(withDuration: 0.2) {
             label.alpha = 1.0
             field.alpha = 1.0
@@ -602,7 +602,7 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         let lastLabel2 = labels[labels.count - 1]
         let lastTextField = advancedContentView.subviews.filter { v in v is UITextField }.last!
         let item = (lastLabel1, lastTextField, lastLabel2)
-        advancedContentHeightConstraint!.constant = advancedContentHeight() - 80
+        advancedContentHeightConstraint!.constant = advancedContentHeightCalc() - 80
         UIView.animate(withDuration: 0.2, animations: {
             item.0.alpha = 0.0
             item.1.alpha = 0.0
@@ -619,10 +619,9 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     func getCurrentItem() -> ProfileLoginViewModel {
         
         let servers = advancedContentView.subviews
-                            .filter { v in v is UITextField && v != txtProfileId }
-                            .map { v in v as! UITextField }
-                            .map { v in v.text ?? "" }
-        
+            .filter { v in v is UITextField && v != txtProfileId }
+            .map { v in (v as! UITextField).text ?? "" }
+            
         return ProfileLoginViewModel(username: txtUsername.text ?? "", password: txtPassword.text ?? "", profileId: txtProfileId.text ?? "", servers: servers)
         
     }
@@ -650,12 +649,12 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         lblErrorUsername.text = ""
         lblErrorPassword.text = ""
         lblErrorProfileId.text = ""
-        advancedContentView.subviews
-            .filter { v in v is UITextField && v != txtProfileId }
-            .map { v in v as! UITextField }
-            .forEach { tf in
-                tf.text = ""
-            }
+        let labels = advancedContentView.subviews
+            .filter { v in v is UILabel && v != lblProfileId && v != lblErrorProfileId }
+            .map { v in v as! UILabel }
+        for index in stride(from: labels.count - 1, to: 0, by: -2) {
+            labels[index].text = ""
+        }
     }
     
 

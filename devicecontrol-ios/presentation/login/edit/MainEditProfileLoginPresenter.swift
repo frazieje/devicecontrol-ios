@@ -128,7 +128,7 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
                     serverItems.append(ProfileServer(host: host, port: port, secure: secure))
                 } else {
                     hasError = true
-                    view?.showErrorServer(index: index, errorString: "Not a valid url")
+                    view?.showErrorServer(index: index, errorString: "Not a valid url 1")
                 }
             }
             

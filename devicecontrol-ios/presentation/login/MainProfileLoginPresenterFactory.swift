@@ -24,8 +24,12 @@ class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
     }
     
     func editProfileLogin(router: ProfileLoginRouter, _ item: ProfileServerItem?) -> EditProfileLoginPresenter {
+        
         let serverItemMapper: ProfileServerMapper = DefaultProfileServerMapper()
-        return MainEditProfileLoginPresenter(loginService: loginService, mapper: serverItemMapper, router: router, item)
+        
+        let serverItemValidator: ProfileLoginViewModelValidator = MainProfileLoginViewModelValidator()
+        
+        return MainEditProfileLoginPresenter(loginService: loginService, mapper: serverItemMapper, router: router, validator: serverItemValidator, item)
     }
     
     

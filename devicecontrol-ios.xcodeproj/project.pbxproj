@@ -10,6 +10,8 @@
 		2B02347E244CED76001550CC /* ServerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02347D244CED76001550CC /* ServerItem.swift */; };
 		2B023480244D094C001550CC /* ProfileLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02347F244D094C001550CC /* ProfileLoginViewModel.swift */; };
 		2B0D45B4244D3AA20051F8AB /* ValidationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B3244D3AA20051F8AB /* ValidationExtensions.swift */; };
+		2B0D45B6244FDE130051F8AB /* ProfileLoginViewModelValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B5244FDE130051F8AB /* ProfileLoginViewModelValidator.swift */; };
+		2B0D45B8244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B7244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift */; };
 		2B1117162449436600AA839B /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1117152449436600AA839B /* UIColorExtensions.swift */; };
 		2B1185C12448289900D28B68 /* ProfileServerItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1185C02448289900D28B68 /* ProfileServerItemTableViewCell.swift */; };
 		2B19B6082364F06B00F5E8D5 /* DoorLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B6072364F06B00F5E8D5 /* DoorLock.swift */; };
@@ -146,6 +148,8 @@
 		2B02347D244CED76001550CC /* ServerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerItem.swift; sourceTree = "<group>"; };
 		2B02347F244D094C001550CC /* ProfileLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewModel.swift; sourceTree = "<group>"; };
 		2B0D45B3244D3AA20051F8AB /* ValidationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationExtensions.swift; sourceTree = "<group>"; };
+		2B0D45B5244FDE130051F8AB /* ProfileLoginViewModelValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewModelValidator.swift; sourceTree = "<group>"; };
+		2B0D45B7244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileLoginViewModelValidator.swift; sourceTree = "<group>"; };
 		2B1117152449436600AA839B /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		2B1185C02448289900D28B68 /* ProfileServerItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServerItemTableViewCell.swift; sourceTree = "<group>"; };
 		2B19B6072364F06B00F5E8D5 /* DoorLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLock.swift; sourceTree = "<group>"; };
@@ -610,6 +614,8 @@
 				2BA8A699242B058000B16588 /* EditProfileLoginView.swift */,
 				2BA8A69B242B059700B16588 /* EditProfileLoginPresenter.swift */,
 				2BA8A69D242B05BA00B16588 /* MainEditProfileLoginPresenter.swift */,
+				2B0D45B5244FDE130051F8AB /* ProfileLoginViewModelValidator.swift */,
+				2B0D45B7244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift */,
 			);
 			path = edit;
 			sourceTree = "<group>";
@@ -779,9 +785,11 @@
 				2BA8C7E32445619000393475 /* UIStackViewExtensions.swift in Sources */,
 				2B7A75FF243A84B2007C01A2 /* RepositoryFactory.swift in Sources */,
 				2B1185C12448289900D28B68 /* ProfileServerItemTableViewCell.swift in Sources */,
+				2B0D45B8244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift in Sources */,
 				2B72E63E2352E80E00F85258 /* CacheFactory.swift in Sources */,
 				2BED067D2443C90300659CD4 /* ProfileLoginViewFactory.swift in Sources */,
 				2BED065E2442142B00659CD4 /* AnyEncodable.swift in Sources */,
+				2B0D45B6244FDE130051F8AB /* ProfileLoginViewModelValidator.swift in Sources */,
 				2B72E6362352497C00F85258 /* ProfileDevicesPresenter.swift in Sources */,
 				2BED067F2443C91A00659CD4 /* ViewFactory.swift in Sources */,
 				2BED0665244277A400659CD4 /* ProfileServerItem.swift in Sources */,

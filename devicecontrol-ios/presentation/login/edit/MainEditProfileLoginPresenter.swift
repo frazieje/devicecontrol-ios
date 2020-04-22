@@ -14,12 +14,15 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
     private let mapper: ProfileServerMapper
     
+    private let validator: ProfileLoginViewModelValidator
+    
     private var loginInProgress: Bool = false
     
-    init(loginService: LoginService, mapper: ProfileServerMapper, router: ProfileLoginRouter, _ item: ProfileServerItem?) {
+    init(loginService: LoginService, mapper: ProfileServerMapper, router: ProfileLoginRouter, validator: ProfileLoginViewModelValidator, _ item: ProfileServerItem? = nil) {
         self.loginService = loginService
         self.router = router
         self.mapper = mapper
+        self.validator = validator
         self.prefillServerItem = item
         if item != nil {
             advancedEnabled = true
@@ -70,71 +73,33 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     func tryLogin() {
         
         view?.clearErrors()
-        
-        var hasError: Bool = false
-        
+
         if let item = view?.getCurrentItem() {
             
-            let username = item.username
-            let password = item.password
-            let profileId = item.profileId
+            let validationResult = validator.validate(viewModel: item)
             
-            if username.isEmpty {
-                hasError = true
-                view?.showErrorUsername(errorString: "Required field")
-            } else if !username.isEmail() {
-                hasError = true
-                view?.showErrorUsername(errorString: "Not a valid email address")
-            }
-            
-            if password.isEmpty {
-                hasError = true
-                view?.showErrorPassword(errorString: "Required field")
-            }
-            
-            if profileId.isEmpty {
-                hasError = true
-                view?.showErrorProfileId(errorString: "Required field")
-            } else if !profileId.isProfileId() {
-                hasError = true
-                view?.showErrorProfileId(errorString: "Not a vald Profile ID")
-            }
-            
-            var serverItems: [ProfileServer] = []
-            
-            for (index, serverStr) in item.servers.enumerated() {
+            if validationResult.isValid {
                 
-                if serverStr.isEmpty && index == 0 {
-                    hasError = true
-                    view?.showErrorServer(index: index, errorString: "Required field")
-                    return
+                login(item.username, item.password, item.profileId, mapper.from(serverUrls: item.servers))
+                
+            } else {
+                
+                if let usernameError = validationResult.errorMessageUsername {
+                    view?.showErrorUsername(errorString: usernameError)
                 }
                 
-                if let components = URLComponents(string: serverStr) {
-                    let scheme = components.scheme?.lowercased() ?? "http"
-                    let secure = scheme == "https"
-                    let host = components.host ?? ""
-                    let port = components.port ?? (secure ? 443 : 80)
-                    
-                    if scheme != "http" && scheme != "https" {
-                        hasError = true
-                        view?.showErrorServer(index: index, errorString: "Must be http or https")
-                    }
-                    
-                    if host.isEmpty {
-                        hasError = true
-                        view?.showErrorServer(index: index, errorString: "Not a valid url")
-                    }
-                    
-                    serverItems.append(ProfileServer(host: host, port: port, secure: secure))
-                } else {
-                    hasError = true
-                    view?.showErrorServer(index: index, errorString: "Not a valid url")
+                if let passwordError = validationResult.errorMessagePassword {
+                    view?.showErrorPassword(errorString: passwordError)
                 }
-            }
-            
-            if !hasError {
-                login(username, password, profileId, serverItems)
+                
+                if let profileIdError = validationResult.errorMessageProfileId {
+                    view?.showErrorProfileId(errorString: profileIdError)
+                }
+                
+                for (index, serverError) in validationResult.errorMessageServers.enumerated() {
+                    view?.showErrorServer(index: index, errorString: serverError)
+                }
+                
             }
         }
     }

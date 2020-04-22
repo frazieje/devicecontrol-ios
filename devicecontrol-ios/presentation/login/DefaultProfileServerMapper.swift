@@ -1,5 +1,7 @@
+import Foundation
+
 class DefaultProfileServerMapper : ProfileServerMapper {
-    
+
     func from(servers: [String : [ProfileServer]]) -> [ProfileServerItem] {
         var items: [ProfileServerItem] = []
         for (key, value) in servers {
@@ -25,6 +27,22 @@ class DefaultProfileServerMapper : ProfileServerMapper {
         } else {
             return nil
         }
+    }
+    
+    func from(serverUrls: [String]) -> [ProfileServer] {
+        
+        return serverUrls.map { url in
+            
+            let components = URLComponents(string: url)!
+            let scheme = components.scheme?.lowercased() ?? "http"
+            let secure = scheme == "https"
+            let host = components.host ?? ""
+            let port = components.port ?? (secure ? 443 : 80)
+                
+            return ProfileServer(host: host, port: port, secure: secure)
+                
+        }
+        
     }
 }
 

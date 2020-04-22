@@ -12,6 +12,7 @@
 		2B0D45B4244D3AA20051F8AB /* ValidationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B3244D3AA20051F8AB /* ValidationExtensions.swift */; };
 		2B0D45B6244FDE130051F8AB /* ProfileLoginViewModelValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B5244FDE130051F8AB /* ProfileLoginViewModelValidator.swift */; };
 		2B0D45B8244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B7244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift */; };
+		2B0D45BA244FFB1F0051F8AB /* DefaultProfileServerMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B9244FFB1F0051F8AB /* DefaultProfileServerMapperTests.swift */; };
 		2B1117162449436600AA839B /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1117152449436600AA839B /* UIColorExtensions.swift */; };
 		2B1185C12448289900D28B68 /* ProfileServerItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1185C02448289900D28B68 /* ProfileServerItemTableViewCell.swift */; };
 		2B19B6082364F06B00F5E8D5 /* DoorLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B6072364F06B00F5E8D5 /* DoorLock.swift */; };
@@ -150,6 +151,7 @@
 		2B0D45B3244D3AA20051F8AB /* ValidationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationExtensions.swift; sourceTree = "<group>"; };
 		2B0D45B5244FDE130051F8AB /* ProfileLoginViewModelValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewModelValidator.swift; sourceTree = "<group>"; };
 		2B0D45B7244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileLoginViewModelValidator.swift; sourceTree = "<group>"; };
+		2B0D45B9244FFB1F0051F8AB /* DefaultProfileServerMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileServerMapperTests.swift; sourceTree = "<group>"; };
 		2B1117152449436600AA839B /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		2B1185C02448289900D28B68 /* ProfileServerItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServerItemTableViewCell.swift; sourceTree = "<group>"; };
 		2B19B6072364F06B00F5E8D5 /* DoorLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLock.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				2B45D01F24267DD7003DCD47 /* ProfileLoginServiceTests.swift */,
 				2B63D2FD243D85310072ECB3 /* MulticastNearbyProfileScannerTests.swift */,
 				2BED066224424EDE00659CD4 /* ScanningNearbyProfileServiceListenerTests.swift */,
+				2B0D45B9244FFB1F0051F8AB /* DefaultProfileServerMapperTests.swift */,
 			);
 			path = "devicecontrol-iosTests";
 			sourceTree = "<group>";
@@ -886,6 +889,7 @@
 			files = (
 				2B84698E234EC50800234153 /* SerializationTests.swift in Sources */,
 				2B63D2FE243D85310072ECB3 /* MulticastNearbyProfileScannerTests.swift in Sources */,
+				2B0D45BA244FFB1F0051F8AB /* DefaultProfileServerMapperTests.swift in Sources */,
 				2B19B61123664A5C00F5E8D5 /* EUI48AddressTests.swift in Sources */,
 				2BED066324424EDE00659CD4 /* ScanningNearbyProfileServiceListenerTests.swift in Sources */,
 				2B581AFC2314E7CB007D0D86 /* devicecontrol_iosTests.swift in Sources */,

@@ -97,7 +97,9 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
                 }
                 
                 for (index, serverError) in validationResult.errorMessageServers.enumerated() {
-                    view?.showErrorServer(index: index, errorString: serverError)
+                    if let strongError = serverError {
+                        view?.showErrorServer(index: index, errorString: strongError)
+                    }
                 }
                 
             }
@@ -112,12 +114,12 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
             loginService.login(username, password, profileId, servers) { result, error in
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    if error == nil {
-                        
-                    }
+                    self.loginInProgress = false
+                    print("login finished")
                 }
             }
         }
+        
     }
     
     func setView(view: EditProfileLoginView) {

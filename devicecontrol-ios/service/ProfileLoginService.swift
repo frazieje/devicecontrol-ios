@@ -44,7 +44,7 @@ class ProfileLoginService : LoginService {
     }
     
     func login(_ username: String, _ profileId: String, _ password: String, _ servers: [ProfileServer], _ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {
-        
+        completion(nil, nil)
     }
     
 //    func getActiveLogin(_ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {

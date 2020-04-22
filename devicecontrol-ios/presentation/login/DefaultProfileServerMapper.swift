@@ -31,12 +31,18 @@ class DefaultProfileServerMapper : ProfileServerMapper {
     
     func from(serverUrls: [String]) -> [ProfileServer] {
         
-        return serverUrls.map { url in
+        return serverUrls.map { serverUrl in
+            
+            var url = serverUrl.lowercased()
+            
+            if !url.starts(with: "http://") && !url.starts(with: "https://") {
+                url = "http://" + url
+            }
             
             let components = URLComponents(string: url)!
-            let scheme = components.scheme?.lowercased() ?? "http"
+            let scheme = components.scheme!.lowercased()
             let secure = scheme == "https"
-            let host = components.host ?? ""
+            let host = components.host!
             let port = components.port ?? (secure ? 443 : 80)
                 
             return ProfileServer(host: host, port: port, secure: secure)

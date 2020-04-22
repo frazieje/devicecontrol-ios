@@ -32,37 +32,43 @@ class MainProfileLoginViewModelValidator : ProfileLoginViewModelValidator {
             result.errorMessageProfileId = "Not a vald Profile ID"
         }
         
-        for (index, serverStr) in viewModel.servers.enumerated() {
+        viewModel.servers.forEach { serverStr in
             
-            if serverStr.isEmpty && index == 0 {
-                result.errorMessageServers[index] = "Required field"
+            var serverError: String? = nil
+            
+            if serverStr.isEmpty {
+                serverError = "Required field"
             } else {
             
                 if let components = URLComponents(string: serverStr) {
                     let scheme = components.scheme?.lowercased() ?? "http"
-                    let host = components.host ?? ""
+                    let host = components.host ?? components.path
                     
                     if scheme != "http" && scheme != "https" {
-                        result.errorMessageServers[index] = "Must be http or https"
+                        serverError = "Must be http or https"
                     }
                     
                     if host.isEmpty {
-                        result.errorMessageServers[index] = "Not a valid url"
+                        serverError = "Not a valid url"
                     }
                     
                 } else {
-                    result.errorMessageServers[index] = "Not a valid url"
+                    serverError = "Not a valid url"
                 }
                 
             }
             
+            result.errorMessageServers.append(serverError)
+            
         }
         
-        result.isValid = result.errorMessageUsername != nil
+        let hasError = result.errorMessageUsername != nil
                         || result.errorMessagePassword != nil
                         || result.errorMessageProfileId != nil
                         || result.errorMessagGeneric != nil
-                        || !result.errorMessageServers.isEmpty
+                        || result.errorMessageServers.filter { s in s != nil }.count > 0
+        
+        result.isValid = !hasError
         
         return result
         

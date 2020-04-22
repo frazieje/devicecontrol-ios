@@ -1,11 +1,3 @@
-//
-//  SerializationTests.swift
-//  devicecontrol-iosTests
-//
-//  Created by Joel Frazier on 10/9/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import XCTest
 
 @testable import devicecontrol_ios

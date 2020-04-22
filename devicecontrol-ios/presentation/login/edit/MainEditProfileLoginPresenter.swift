@@ -104,9 +104,10 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
             
             for (index, serverStr) in item.servers.enumerated() {
                 
-                if serverStr.isEmpty {
+                if serverStr.isEmpty && index == 0 {
                     hasError = true
                     view?.showErrorServer(index: index, errorString: "Required field")
+                    return
                 }
                 
                 if let components = URLComponents(string: serverStr) {
@@ -128,7 +129,7 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
                     serverItems.append(ProfileServer(host: host, port: port, secure: secure))
                 } else {
                     hasError = true
-                    view?.showErrorServer(index: index, errorString: "Not a valid url 1")
+                    view?.showErrorServer(index: index, errorString: "Not a valid url")
                 }
             }
             

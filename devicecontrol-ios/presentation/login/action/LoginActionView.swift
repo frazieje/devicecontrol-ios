@@ -1,0 +1,3 @@
+protocol LoginActionView : View {
+    
+}

@@ -1,7 +1,7 @@
 import Foundation
 
 class InMemoryCacheFactory : CacheFactory {
-    
+
     var values: [String : Any] = [:]
     
     private let concurrentQueue =
@@ -18,10 +18,14 @@ class InMemoryCacheFactory : CacheFactory {
             return savedValue
         }
         concurrentQueue.sync(flags: .barrier) {
-            result = (self.values[prefix] as! Cache<T>)
+            result = InMemoryCache()
+            self.values[prefix] = result
         }
         return result!
     }
     
+    func get<T>() -> Cache<T> where T : Decodable, T : Encodable {
+        return get(prefix: "devicecontrol")
+    }
     
 }

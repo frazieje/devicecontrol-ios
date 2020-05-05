@@ -5,19 +5,28 @@ class AlamofireOAuthApi : OAuthApi {
     
     private let urlPath = "/oauth2/token"
     
+    private let session: Session
+    
+    private let server: ProfileServer
+    
+    init(session: Session, server: ProfileServer) {
+        self.session = session
+        self.server = server
+    }
+    
     func login(_ request: OAuthResourceOwnerGrantRequest, _ completion: @escaping (LoginToken?, OAuthApiError?) -> Void) {
-        
-        let url = URL(string: (request.secure ? "https://" : "http://") + request.host)!.appendingPathComponent(urlPath)
-
-        var urlRequest = URLRequest(url: url)
-        
-        urlRequest.method = .post
         
         do {
             
+            let url =  try server.asURL().appendingPathComponent(urlPath)
+
+            var urlRequest = URLRequest(url: url)
+            
+            urlRequest.method = .post
+            
             urlRequest = try URLEncodedFormParameterEncoder().encode(request, into: urlRequest)
             
-            AF.request(urlRequest).responseDecodable(of: LoginToken.self) { response in
+            session.request(urlRequest).responseDecodable(of: LoginToken.self) { response in
                 do {
                     try completion(response.result.get(), nil)
                 } catch {
@@ -33,17 +42,17 @@ class AlamofireOAuthApi : OAuthApi {
     
     func refreshToken(_ request: OAuthRefreshTokenGrantRequest, _ completion: @escaping (LoginToken?, OAuthApiError?) -> Void) {
         
-        let url = URL(string: (request.secure ? "https://" : "http://") + request.host)!.appendingPathComponent(urlPath)
-
-        var urlRequest = URLRequest(url: url)
-        
-        urlRequest.method = .post
-        
         do {
+            
+            let url =  try server.asURL().appendingPathComponent(urlPath)
+
+            var urlRequest = URLRequest(url: url)
+            
+            urlRequest.method = .post
             
             urlRequest = try URLEncodedFormParameterEncoder().encode(request, into: urlRequest)
             
-            AF.request(urlRequest).responseDecodable(of: LoginToken.self) { response in
+            session.request(urlRequest).responseDecodable(of: LoginToken.self) { response in
                 do {
                     try completion(response.result.get(), nil)
                 } catch {

@@ -20,17 +20,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
         windowStateManager = ApplicationDelegateWindowStateManager(delegate: self)
         
         do {
-
-            let db = try Connection("\(documentsPath)/db.sqlite3")
             
-            let deviceApi = AlamofireDeviceApi()
+//            let repositoryFactory: RepositoryFactory = try SQLiteRepositoryFactory(dbPath: documentsPath)
             
-            let cacheFactory = UserDefaultsCacheFactory()
+            let repositoryFactory: RepositoryFactory = try SQLiteRepositoryFactory()
             
-            let oAuthApi = AlamofireOAuthApi()
+            let serverResolveer: ServerResolver = ProfileServerResolver()
             
-            let loginService = ProfileLoginService(cacheFactory: cacheFactory, oAuthApi: oAuthApi)
+            let cacheFactory: CacheFactory = UserDefaultsCacheFactory()
             
+            let apiFactory: ApiFactory = AlamofireApiFactory(serverResolver: serverResolveer, tokenRepository: repositoryFactory.getLoginTokenRepository())
+            
+            let loginService = ProfileLoginService(apiFactory: apiFactory, repositoryFactory: repositoryFactory, cacheFactory: cacheFactory)
+            
+            
+//
+//            let cacheFactory = UserDefaultsCacheFactory()
+//
+//
     //        let semaphore = DispatchSemaphore(value: 0)
     //
     //        var hasSavedLogin
@@ -41,19 +48,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
     //
     //        semaphore.wait()
             
-            let deviceService = ProfileDeviceService(deviceApi: deviceApi, cacheFactory: cacheFactory)
+//            let deviceService = ProfileDeviceService(profileApi: profileApi, cacheFactory: cacheFactory)
             
-            let deviceViewMapper = ProfileDeviceMapper()
+//            let deviceViewMapper = ProfileDeviceMapper()
             
-            let devicesPresenter = ProfileDevicesPresenter(deviceService: deviceService, deviceMapper: deviceViewMapper)
+//            let devicesPresenter = ProfileDevicesPresenter(deviceService: deviceService, deviceMapper: deviceViewMapper)
             
-            let devicesViewController = DevicesViewController(presenter: devicesPresenter)
+//            let devicesViewController = DevicesViewController(presenter: devicesPresenter)
             
-            devicesPresenter.setView(view: devicesViewController)
+//            devicesPresenter.setView(view: devicesViewController)
             
-            let homeViewController = HomeViewController()
+//            let homeViewController = HomeViewController()
             
-            let settingsViewController = SettingsViewController()
+//            let settingsViewController = SettingsViewController()
         
 //            let loginService = ProfileLoginService(profileLogin: profileLogin)
         

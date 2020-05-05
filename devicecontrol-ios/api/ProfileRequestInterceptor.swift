@@ -15,7 +15,7 @@ class ProfileRequestInterceptor : RetryPolicy {
     
     private let concurrentQueue =
     DispatchQueue(
-      label: "com.spoohapps.devicecontrol.requestInterceptor",
+      label: "net.spoohapps.devicecontrol.requestInterceptor",
       attributes: .concurrent)
     
     init(loginToken: LoginToken, oAuthApi: OAuthApi, tokenRepository: LoginTokenRepository) {
@@ -56,8 +56,6 @@ class ProfileRequestInterceptor : RetryPolicy {
                 if !self.isRefreshing {
                     
                     let req = OAuthRefreshTokenGrantRequest(
-                                            secure: self.loginToken.server.secure,
-                                            host: self.loginToken.server.host,
                                             clientId: self.loginToken.clientId,
                                             refreshToken: self.loginToken.refreshToken)
                     

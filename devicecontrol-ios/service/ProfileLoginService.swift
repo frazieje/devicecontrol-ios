@@ -1,22 +1,22 @@
-//
-//  ProfileLoginService.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 2/14/20.
-//  Copyright © 2020 Spoohapps, Inc. All rights reserved.
-//
-
 import Foundation
 
 class ProfileLoginService : LoginService {
 
-    let loginCache: Cache<ProfileLogin>
+    private let apiFactory: ApiFactory
     
-    let oAuthApi: OAuthApi
+    private let loginRequestQueue = DispatchQueue(label: "net.farsystem.devicecontrol.loginRequestQueue")
+    private let loginResponseQueue = DispatchQueue(label: "net.farsystem.devicecontrol.loginResponseQueue")
     
-    init(cacheFactory: CacheFactory, oAuthApi: OAuthApi) {
-        loginCache = cacheFactory.get(prefix: "profileLoginService_logins")
-        self.oAuthApi = oAuthApi
+    private let loginRepository: ProfileLoginRepository
+    
+    private let currentProfileLoginIdCache: Cache<Int64>
+    
+    let currentProfileLoginCacheKey = "currentProfileLogin"
+    
+    init(apiFactory: ApiFactory, repositoryFactory: RepositoryFactory, cacheFactory: CacheFactory) {
+        self.apiFactory = apiFactory
+        self.loginRepository = repositoryFactory.getProfileLoginRepository()
+        self.currentProfileLoginIdCache = cacheFactory.get()
     }
     
     func setActiveLogin(_ login: ProfileLogin, _ completion: @escaping (Bool, LoginServiceError?) -> Void) {
@@ -43,8 +43,64 @@ class ProfileLoginService : LoginService {
         
     }
     
-    func login(_ username: String, _ profileId: String, _ password: String, _ servers: [ProfileServer], _ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {
-        completion(nil, nil)
+    func login(_ loginRequest: LoginRequest, _ result: ((LoginResult) -> Void)?, _ completion: @escaping ([LoginResult]) -> Void) {
+                
+        loginRequestQueue.async { [weak self] in
+            
+            guard let self = self else { return }
+            
+            let loginRequests = DispatchGroup()
+            
+            var loginResults: [LoginResult] = []
+
+            loginRequest.servers.forEach { server in
+                let request = OAuthResourceOwnerGrantRequest(clientId: loginRequest.profileId, username: loginRequest.username, password: loginRequest.password)
+                loginRequests.enter()
+                self.apiFactory.oAuthApi(server: server).login(request) { [weak self] token, apiError in
+                    defer { loginRequests.leave() }
+                    guard let self = self else { return }
+                    let loginResult = LoginResult(error: apiError == nil ? nil : .errorCompletingLogin(apiError!.message), server: server, token: token)
+                    result?(loginResult)
+                    self.loginResponseQueue.sync {
+                        loginResults.append(loginResult)
+                    }
+                }
+            }
+            
+            loginRequests.wait()
+            
+            var loginTokens: [ProfileServer : LoginToken] = [:]
+            
+            loginResults.filter { $0.error == nil && $0.token != nil }.forEach { result in
+                loginTokens[result.server] = result.token!
+            }
+            
+            let profileLogin = ProfileLogin(profileId: loginRequest.profileId, name: nil, description: nil, username: loginRequest.username, loginTokens: loginTokens)
+            
+            let semaphore = DispatchSemaphore(value: 0)
+            
+            self.loginRepository.put(profileLogin) { [weak self] result in
+                defer { semaphore.signal() }
+                guard let self = self else { return }
+                if let newLogin = result {
+                    _ = self.saveCurrentProfileLoginId(newLogin.id)
+                }
+            }
+            
+            semaphore.wait()
+            
+            completion(loginResults)
+
+        }
+
+    }
+    
+    private func saveCurrentProfileLoginId(_ id: Int64) -> Bool {
+        return currentProfileLoginIdCache.put(key: currentProfileLoginCacheKey, value: id)
+    }
+    
+    private func getCurrentProfileLoginId() -> Int64? {
+        return currentProfileLoginIdCache.get(key: currentProfileLoginCacheKey)
     }
     
 //    func getActiveLogin(_ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {

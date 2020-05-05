@@ -20,8 +20,9 @@ class DefaultProfileServerMapper : ProfileServerMapper {
     
     func from(serverItem: ProfileServerItem?) -> ProfileLoginViewModel? {
         if let item = serverItem {
-            let servers = item.servers.map { server in
-                "http\(server.secure ? "s" : "")://\(server.host)\(server.port == 80 ? "" : ":\(server.port)")"
+            let servers = item.servers.map { server -> String in
+                let port = server.secure ? (server.port == 443 ? "" : ":\(server.port)") : (server.port == 80 ? "" : ":\(server.port)")
+                return "http\(server.secure ? "s" : "")://\(server.host)\(port)"
             }
             return ProfileLoginViewModel(username: "", password: "", profileId: item.profileId, servers: servers)
         } else {
@@ -38,7 +39,6 @@ class DefaultProfileServerMapper : ProfileServerMapper {
             if !url.starts(with: "http://") && !url.starts(with: "https://") {
                 url = "http://" + url
             }
-            
             let components = URLComponents(string: url)!
             let scheme = components.scheme!.lowercased()
             let secure = scheme == "https"

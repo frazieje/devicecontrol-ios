@@ -10,13 +10,13 @@ import Foundation
 
 class ProfileDeviceService : DeviceService {
     
-    let deviceApi: DeviceApi
+    let profileApi: ProfileApi
     let devicesCache: Cache<[CachedDevice]>
     
     let cacheKey = "cachedDevicesList"
     
-    init(deviceApi: DeviceApi, cacheFactory: CacheFactory) {
-        self.deviceApi = deviceApi
+    init(profileApi: ProfileApi, cacheFactory: CacheFactory) {
+        self.profileApi = profileApi
         self.devicesCache = cacheFactory.get(prefix: "profileDeviceService_cache")
     }
     
@@ -24,7 +24,7 @@ class ProfileDeviceService : DeviceService {
         if let cachedDevices = devicesCache.get(key: cacheKey) {
             completion(cachedDevices, nil)
         } else {
-            deviceApi.getDevices { (devices, error) -> Void in
+            profileApi.getDevices { (devices, error) -> Void in
                 if (error == nil) {
                     _ = self.devicesCache.put(key: self.cacheKey, value: devices)
                     completion(devices, nil)

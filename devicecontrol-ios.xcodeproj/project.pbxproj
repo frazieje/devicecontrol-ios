@@ -27,6 +27,19 @@
 		2B45D02624271C2A003DCD47 /* AlamofireOAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D02524271C2A003DCD47 /* AlamofireOAuthApi.swift */; };
 		2B45D02A242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D029242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift */; };
 		2B45D02C2428628C003DCD47 /* OAuthRefreshTokenGrantRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D02B2428628C003DCD47 /* OAuthRefreshTokenGrantRequest.swift */; };
+		2B5430F7245D152600D598F2 /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5430F6245D152600D598F2 /* AlamofireExtensions.swift */; };
+		2B5430F9245D182E00D598F2 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5430F8245D182E00D598F2 /* LoginRequest.swift */; };
+		2B5430FB245E0E0600D598F2 /* RequestProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5430FA245E0E0600D598F2 /* RequestProcessor.swift */; };
+		2B5430FF245F2BF600D598F2 /* ApiFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5430FE245F2BF600D598F2 /* ApiFactory.swift */; };
+		2B543101245F2C4F00D598F2 /* AlamofireApiFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B543100245F2C4F00D598F2 /* AlamofireApiFactory.swift */; };
+		2B543103245F598200D598F2 /* ServerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B543102245F598200D598F2 /* ServerResolver.swift */; };
+		2B543105245F6F2D00D598F2 /* ProfileServerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B543104245F6F2D00D598F2 /* ProfileServerResolver.swift */; };
+		2B543108246107E600D598F2 /* LoginActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B543107246107E600D598F2 /* LoginActionViewController.swift */; };
+		2B54310A246108B400D598F2 /* LoginActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B543109246108B400D598F2 /* LoginActionView.swift */; };
+		2B54310C2461099D00D598F2 /* ProfileLoginRequestItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54310B2461099D00D598F2 /* ProfileLoginRequestItem.swift */; };
+		2B54310E24610AF600D598F2 /* LoginActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54310D24610AF600D598F2 /* LoginActionPresenter.swift */; };
+		2B54311024610B0200D598F2 /* MainLoginActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54310F24610B0200D598F2 /* MainLoginActionPresenter.swift */; };
+		2B54311224610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54311124610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift */; };
 		2B581AE52314E7CA007D0D86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B581AE42314E7CA007D0D86 /* AppDelegate.swift */; };
 		2B581AEE2314E7CB007D0D86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B581AED2314E7CB007D0D86 /* Assets.xcassets */; };
 		2B581AF12314E7CB007D0D86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B581AEF2314E7CB007D0D86 /* LaunchScreen.storyboard */; };
@@ -47,7 +60,7 @@
 		2B72E6292352375000F85258 /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72E6282352375000F85258 /* DeviceType.swift */; };
 		2B72E62B23523B5E00F85258 /* EUI48Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72E62A23523B5E00F85258 /* EUI48Address.swift */; };
 		2B72E62D23523EF800F85258 /* CachedDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72E62C23523EF800F85258 /* CachedDevice.swift */; };
-		2B72E630235245AF00F85258 /* DeviceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72E62F235245AF00F85258 /* DeviceApi.swift */; };
+		2B72E630235245AF00F85258 /* ProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72E62F235245AF00F85258 /* ProfileApi.swift */; };
 		2B72E6362352497C00F85258 /* ProfileDevicesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72E6352352497C00F85258 /* ProfileDevicesPresenter.swift */; };
 		2B72E63823524BF300F85258 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72E63723524BF300F85258 /* DevicesView.swift */; };
 		2B72E63A2352DD3C00F85258 /* ProfileDeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72E6392352DD3C00F85258 /* ProfileDeviceService.swift */; };
@@ -101,7 +114,7 @@
 		2BA8A69E242B05BA00B16588 /* MainEditProfileLoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8A69D242B05BA00B16588 /* MainEditProfileLoginPresenter.swift */; };
 		2BA8C7E32445619000393475 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8C7E22445619000393475 /* UIStackViewExtensions.swift */; };
 		2BBC941923712C8A004D507D /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC941823712C8A004D507D /* Presenter.swift */; };
-		2BD09BFF235EA9C90044116C /* AlamofireDeviceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */; };
+		2BD09BFF235EA9C90044116C /* AlamofireProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD09BFE235EA9C90044116C /* AlamofireProfileApi.swift */; };
 		2BE46DEE2447F1700002EFEA /* GetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE46DED2447F1700002EFEA /* GetStartedViewController.swift */; };
 		2BE46DF52447F5200002EFEA /* GetStartedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE46DF42447F5200002EFEA /* GetStartedPresenter.swift */; };
 		2BE46DF72447F52C0002EFEA /* GetStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE46DF62447F52C0002EFEA /* GetStartedView.swift */; };
@@ -166,6 +179,19 @@
 		2B45D02524271C2A003DCD47 /* AlamofireOAuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireOAuthApi.swift; sourceTree = "<group>"; };
 		2B45D029242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResourceOwnerGrantRequest.swift; sourceTree = "<group>"; };
 		2B45D02B2428628C003DCD47 /* OAuthRefreshTokenGrantRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRefreshTokenGrantRequest.swift; sourceTree = "<group>"; };
+		2B5430F6245D152600D598F2 /* AlamofireExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireExtensions.swift; sourceTree = "<group>"; };
+		2B5430F8245D182E00D598F2 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		2B5430FA245E0E0600D598F2 /* RequestProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProcessor.swift; sourceTree = "<group>"; };
+		2B5430FE245F2BF600D598F2 /* ApiFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiFactory.swift; sourceTree = "<group>"; };
+		2B543100245F2C4F00D598F2 /* AlamofireApiFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApiFactory.swift; sourceTree = "<group>"; };
+		2B543102245F598200D598F2 /* ServerResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResolver.swift; sourceTree = "<group>"; };
+		2B543104245F6F2D00D598F2 /* ProfileServerResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServerResolver.swift; sourceTree = "<group>"; };
+		2B543107246107E600D598F2 /* LoginActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActionViewController.swift; sourceTree = "<group>"; };
+		2B543109246108B400D598F2 /* LoginActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActionView.swift; sourceTree = "<group>"; };
+		2B54310B2461099D00D598F2 /* ProfileLoginRequestItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginRequestItem.swift; sourceTree = "<group>"; };
+		2B54310D24610AF600D598F2 /* LoginActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActionPresenter.swift; sourceTree = "<group>"; };
+		2B54310F24610B0200D598F2 /* MainLoginActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginActionPresenter.swift; sourceTree = "<group>"; };
+		2B54311124610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginRequestItemTableViewCell.swift; sourceTree = "<group>"; };
 		2B581AE12314E7CA007D0D86 /* devicecontrol-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "devicecontrol-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B581AE42314E7CA007D0D86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B581AED2314E7CB007D0D86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -188,7 +214,7 @@
 		2B72E6282352375000F85258 /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		2B72E62A23523B5E00F85258 /* EUI48Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUI48Address.swift; sourceTree = "<group>"; };
 		2B72E62C23523EF800F85258 /* CachedDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedDevice.swift; sourceTree = "<group>"; };
-		2B72E62F235245AF00F85258 /* DeviceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceApi.swift; sourceTree = "<group>"; };
+		2B72E62F235245AF00F85258 /* ProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileApi.swift; sourceTree = "<group>"; };
 		2B72E6352352497C00F85258 /* ProfileDevicesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDevicesPresenter.swift; sourceTree = "<group>"; };
 		2B72E63723524BF300F85258 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
 		2B72E6392352DD3C00F85258 /* ProfileDeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeviceService.swift; sourceTree = "<group>"; };
@@ -196,6 +222,8 @@
 		2B72E63F2352E98500F85258 /* UserDefaultsCacheFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsCacheFactory.swift; sourceTree = "<group>"; };
 		2B7343AB23220B930096DED4 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		2B7343AD23229DEE0096DED4 /* fa-solid-900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.ttf"; sourceTree = "<group>"; };
+		2B74109D24550F5E00D5FC42 /* kcommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = kcommon.framework; path = ../kfarcommon/build/bin/ios/releaseFramework/kcommon.framework; sourceTree = "<group>"; };
+		2B7410A5245510F300D5FC42 /* kcommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = kcommon.framework; path = kcommon/kcommon.framework; sourceTree = "<group>"; };
 		2B758696234BCC45006B2E56 /* DeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceService.swift; sourceTree = "<group>"; };
 		2B758698234BD057006B2E56 /* DevicesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesPresenter.swift; sourceTree = "<group>"; };
 		2B75869C234BD444006B2E56 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -242,7 +270,7 @@
 		2BA8A69D242B05BA00B16588 /* MainEditProfileLoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEditProfileLoginPresenter.swift; sourceTree = "<group>"; };
 		2BA8C7E22445619000393475 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
 		2BBC941823712C8A004D507D /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
-		2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireDeviceApi.swift; sourceTree = "<group>"; };
+		2BD09BFE235EA9C90044116C /* AlamofireProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireProfileApi.swift; sourceTree = "<group>"; };
 		2BE46DED2447F1700002EFEA /* GetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
 		2BE46DF42447F5200002EFEA /* GetStartedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedPresenter.swift; sourceTree = "<group>"; };
 		2BE46DF62447F52C0002EFEA /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
@@ -298,6 +326,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B543106246107AB00D598F2 /* action */ = {
+			isa = PBXGroup;
+			children = (
+				2B543107246107E600D598F2 /* LoginActionViewController.swift */,
+				2B54310D24610AF600D598F2 /* LoginActionPresenter.swift */,
+				2B543109246108B400D598F2 /* LoginActionView.swift */,
+				2B54310F24610B0200D598F2 /* MainLoginActionPresenter.swift */,
+				2B54311124610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift */,
+			);
+			path = action;
+			sourceTree = "<group>";
+		};
 		2B581AD82314E7CA007D0D86 = {
 			isa = PBXGroup;
 			children = (
@@ -389,10 +429,16 @@
 				2B45D029242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift */,
 				2B45D02B2428628C003DCD47 /* OAuthRefreshTokenGrantRequest.swift */,
 				2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */,
-				2B72E62F235245AF00F85258 /* DeviceApi.swift */,
-				2BD09BFE235EA9C90044116C /* AlamofireDeviceApi.swift */,
+				2B72E62F235245AF00F85258 /* ProfileApi.swift */,
+				2BD09BFE235EA9C90044116C /* AlamofireProfileApi.swift */,
 				2BA05C582406590D0033F91F /* OAuthApi.swift */,
 				2B45D02524271C2A003DCD47 /* AlamofireOAuthApi.swift */,
+				2B5430F6245D152600D598F2 /* AlamofireExtensions.swift */,
+				2B5430FA245E0E0600D598F2 /* RequestProcessor.swift */,
+				2B5430FE245F2BF600D598F2 /* ApiFactory.swift */,
+				2B543100245F2C4F00D598F2 /* AlamofireApiFactory.swift */,
+				2B543102245F598200D598F2 /* ServerResolver.swift */,
+				2B543104245F6F2D00D598F2 /* ProfileServerResolver.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -437,6 +483,7 @@
 				2BED0664244277A400659CD4 /* ProfileServerItem.swift */,
 				2B02347D244CED76001550CC /* ServerItem.swift */,
 				2B02347F244D094C001550CC /* ProfileLoginViewModel.swift */,
+				2B54310B2461099D00D598F2 /* ProfileLoginRequestItem.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -499,6 +546,8 @@
 		2B8CFBBA2341808B000B7628 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B7410A5245510F300D5FC42 /* kcommon.framework */,
+				2B74109D24550F5E00D5FC42 /* kcommon.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -519,6 +568,7 @@
 				2B7A75E924395753007C01A2 /* PermissionType.swift */,
 				2B7A75EB24396596007C01A2 /* ProfileServer.swift */,
 				2B7A7606243ABAFC007C01A2 /* ServiceBeaconMessage.swift */,
+				2B5430F8245D182E00D598F2 /* LoginRequest.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -572,6 +622,7 @@
 		2BA8A68E242AFDDD00B16588 /* login */ = {
 			isa = PBXGroup;
 			children = (
+				2B543106246107AB00D598F2 /* action */,
 				2BE46DF32447F1B00002EFEA /* edit */,
 				2BE46DF22447F1960002EFEA /* nearby */,
 				2BE46DEF2447F1770002EFEA /* getstarted */,
@@ -778,6 +829,7 @@
 			files = (
 				2BED0687244414B700659CD4 /* NSAttributedString.swift in Sources */,
 				2BE46DF72447F52C0002EFEA /* GetStartedView.swift in Sources */,
+				2B54310A246108B400D598F2 /* LoginActionView.swift in Sources */,
 				2B72E63823524BF300F85258 /* DevicesView.swift in Sources */,
 				2B7A7605243AB7FF007C01A2 /* NearbyProfileService.swift in Sources */,
 				2BA8A69C242B059700B16588 /* EditProfileLoginPresenter.swift in Sources */,
@@ -808,7 +860,9 @@
 				2B7A7603243A8B2A007C01A2 /* SQLiteLoginTokenRepsitory.swift in Sources */,
 				2BA8A690242AFEF800B16588 /* NearbyProfileLoginViewController.swift in Sources */,
 				2B6D7E3D2320C7FE00081579 /* HomeViewController.swift in Sources */,
+				2B543108246107E600D598F2 /* LoginActionViewController.swift in Sources */,
 				2B86C56F23F6677A00D502A2 /* View.swift in Sources */,
+				2B5430FF245F2BF600D598F2 /* ApiFactory.swift in Sources */,
 				2B6D7E3F2320C81000081579 /* DevicesViewController.swift in Sources */,
 				2BA237C524343BB2000B1F14 /* InMemoryCache.swift in Sources */,
 				2BED06732443A18000659CD4 /* MainProfileLoginRouter.swift in Sources */,
@@ -821,9 +875,10 @@
 				2B7A75EC24396596007C01A2 /* ProfileServer.swift in Sources */,
 				2BED065F2442142B00659CD4 /* AnyCodable.swift in Sources */,
 				2B8EA933231DB1D300B404AF /* Cache.swift in Sources */,
-				2BD09BFF235EA9C90044116C /* AlamofireDeviceApi.swift in Sources */,
+				2BD09BFF235EA9C90044116C /* AlamofireProfileApi.swift in Sources */,
 				2B7343AC23220B930096DED4 /* UIImageExtensions.swift in Sources */,
-				2B72E630235245AF00F85258 /* DeviceApi.swift in Sources */,
+				2B72E630235245AF00F85258 /* ProfileApi.swift in Sources */,
+				2B5430F7245D152600D598F2 /* AlamofireExtensions.swift in Sources */,
 				2B63D2EF243C488B0072ECB3 /* MulticastNearbyProfileScanner.swift in Sources */,
 				2B63D2ED243C42BC0072ECB3 /* ScanningNearbyProfileService.swift in Sources */,
 				2BED0669244282B000659CD4 /* DefaultProfileServerMapper.swift in Sources */,
@@ -836,6 +891,7 @@
 				2BED066D2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift in Sources */,
 				2B72E6292352375000F85258 /* DeviceType.swift in Sources */,
 				2B7A75EA24395753007C01A2 /* PermissionType.swift in Sources */,
+				2B543105245F6F2D00D598F2 /* ProfileServerResolver.swift in Sources */,
 				2B72E62B23523B5E00F85258 /* EUI48Address.swift in Sources */,
 				2B86C57423F6741300D502A2 /* ProfileLoginService.swift in Sources */,
 				2BA237BF242FBFA6000B1F14 /* SQLiteProfileLoginRepository.swift in Sources */,
@@ -843,21 +899,27 @@
 				2B7A760C243AF385007C01A2 /* NearbyProfileScanner.swift in Sources */,
 				2B19B60F23662C4600F5E8D5 /* ProfileDevice.swift in Sources */,
 				2BED066F2443A01700659CD4 /* Router.swift in Sources */,
+				2B54310E24610AF600D598F2 /* LoginActionPresenter.swift in Sources */,
 				2B72E6402352E98500F85258 /* UserDefaultsCacheFactory.swift in Sources */,
 				2BA8A69E242B05BA00B16588 /* MainEditProfileLoginPresenter.swift in Sources */,
 				2B86C57823F6754700D502A2 /* ProfileMenuPresenter.swift in Sources */,
+				2B543101245F2C4F00D598F2 /* AlamofireApiFactory.swift in Sources */,
 				2B84698C234EBC8E00234153 /* CachedMessage.swift in Sources */,
+				2B543103245F598200D598F2 /* ServerResolver.swift in Sources */,
 				2B7A75F62439A37F007C01A2 /* SQLiteTable.swift in Sources */,
 				2BED06712443A0F300659CD4 /* ProfileLoginRouter.swift in Sources */,
 				2BA05C572405ED190033F91F /* LoginToken.swift in Sources */,
 				2BA8A694242B008200B16588 /* NearbyProfileLoginPresenter.swift in Sources */,
+				2B54311224610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift in Sources */,
 				2B45D02C2428628C003DCD47 /* OAuthRefreshTokenGrantRequest.swift in Sources */,
 				2B1117162449436600AA839B /* UIColorExtensions.swift in Sources */,
+				2B54311024610B0200D598F2 /* MainLoginActionPresenter.swift in Sources */,
 				2B86C57623F6753500D502A2 /* MenuPresenter.swift in Sources */,
 				2B6D7E412320C82000081579 /* SettingsViewController.swift in Sources */,
 				2B7A75F024396E17007C01A2 /* LoginTokenRepository.swift in Sources */,
 				2BA4B0CC23FA2C1A00A3FC6A /* ProfileLoginitem.swift in Sources */,
 				2B19B6082364F06B00F5E8D5 /* DoorLock.swift in Sources */,
+				2B5430FB245E0E0600D598F2 /* RequestProcessor.swift in Sources */,
 				2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */,
 				2B8CFBC72341A6F7000B7628 /* Permission.swift in Sources */,
 				2B45D02624271C2A003DCD47 /* AlamofireOAuthApi.swift in Sources */,
@@ -872,6 +934,7 @@
 				2BBC941923712C8A004D507D /* Presenter.swift in Sources */,
 				2B023480244D094C001550CC /* ProfileLoginViewModel.swift in Sources */,
 				2BF57B1C23431CA600B617B1 /* ProfileMenuViewController.swift in Sources */,
+				2B54310C2461099D00D598F2 /* ProfileLoginRequestItem.swift in Sources */,
 				2B86C57223F6737D00D502A2 /* LoginService.swift in Sources */,
 				2BED06602442142B00659CD4 /* AnyDecodable.swift in Sources */,
 				2BED06812443C93600659CD4 /* MainProfileLoginViewFactory.swift in Sources */,
@@ -880,6 +943,7 @@
 				2B19B60A2364FAA500F5E8D5 /* GasCylinder.swift in Sources */,
 				2B7A75EE243966EB007C01A2 /* SQLiteProfileServer.swift in Sources */,
 				2B6D7E3B2320C5EF00081579 /* MainViewController.swift in Sources */,
+				2B5430F9245D182E00D598F2 /* LoginRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,6 +1121,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/kcommon",
 				);
 				INFOPLIST_FILE = "devicecontrol-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1079,6 +1144,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/kcommon",
 				);
 				INFOPLIST_FILE = "devicecontrol-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

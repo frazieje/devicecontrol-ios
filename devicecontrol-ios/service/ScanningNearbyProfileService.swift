@@ -51,7 +51,7 @@ class ScanningNearbyProfileService : NearbyProfileService, ScanResultHandler {
                 var serverArray: [ProfileServer] = []
                 serverArray.append(ProfileServer(host: key, port: value.apiPort, secure: false))
                 if let remoteHost = value.replicationRemoteHost {
-                    serverArray.append(ProfileServer(host: remoteHost, port: 80, secure: true))
+                    serverArray.append(ProfileServer(host: remoteHost, port: 443, secure: true))
                 }
                 servers[value.profileId] = serverArray
             }

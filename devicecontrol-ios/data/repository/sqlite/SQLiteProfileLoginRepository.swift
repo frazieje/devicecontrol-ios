@@ -20,11 +20,11 @@ class SQLiteProfileLoginRepository : ProfileLoginRepository {
         
     }
     
-    func put(_ item: ProfileLogin, _ completion: @escaping (Bool) -> Void) {
-        
+    func put(_ item: ProfileLogin, _ completion: @escaping (ProfileLogin?) -> Void) {
+        completion(nil)
     }
     
-    func remove(_ item: ProfileLogin, _ completion: @escaping (Bool) -> Void) {
+    func remove(_ item: ProfileLogin, _ completion: @escaping (ProfileLogin?) -> Void) {
         
     }
     

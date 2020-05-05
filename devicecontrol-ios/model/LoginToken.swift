@@ -1,6 +1,5 @@
 struct LoginToken : Codable {
     var clientId: String
-    var server: ProfileServer
     var tokenKey: String
     var tokenType: String
     var refreshToken: String

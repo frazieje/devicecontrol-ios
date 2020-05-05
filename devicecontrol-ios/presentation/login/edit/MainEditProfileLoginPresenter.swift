@@ -111,7 +111,10 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
         if !loginInProgress {
             print("login starting")
             loginInProgress = true
-            loginService.login(username, password, profileId, servers) { result, error in
+            let request = LoginRequest(username: username, password: password, profileId: profileId, servers: servers)
+            loginService.login(request, { result in
+                print("login result")
+            }) { results in
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.loginInProgress = false

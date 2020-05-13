@@ -1,5 +1,5 @@
 class MainProfileLoginViewFactory : ProfileLoginViewFactory {
-    
+
     func getStarted(presenter: GetStartedPresenter) -> GetStartedView {
         let view = GetStartedViewController(presenter: presenter)
         presenter.setView(view: view)
@@ -14,6 +14,12 @@ class MainProfileLoginViewFactory : ProfileLoginViewFactory {
     
     func editProfileLogin(presenter: EditProfileLoginPresenter) -> EditProfileLoginView {
         let view = EditProfileLoginViewController(presenter: presenter)
+        presenter.setView(view: view)
+        return view
+    }
+    
+    func loginAction(presenter: LoginActionPresenter) -> LoginActionView {
+        let view = LoginActionViewController(presenter: presenter)
         presenter.setView(view: view)
         return view
     }

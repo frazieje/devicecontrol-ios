@@ -70,7 +70,11 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         txt.keyboardType = .emailAddress
         txt.returnKeyType = .next
         txt.autocapitalizationType = .none
-        txt.placeholder = "your@email.com"
+        let textColor: UIColor = .lightGray
+        let advancedSettings = NSAttributedString(string: "your@email.com", attributes: [
+            NSAttributedString.Key.foregroundColor: textColor,
+        ])
+        txt.attributedPlaceholder = advancedSettings
         txt.clipsToBounds = true
         txt.textColor = .darkGray
         txt.translatesAutoresizingMaskIntoConstraints = false
@@ -113,7 +117,11 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         txt.keyboardType = .default
         txt.returnKeyType = .done
         txt.autocapitalizationType = .none
-        txt.placeholder = "Password"
+        let textColor: UIColor = .lightGray
+        let advancedSettings = NSAttributedString(string: "e.g. a-zA-Z0-9!@#$%^&*_+-=", attributes: [
+            NSAttributedString.Key.foregroundColor: textColor,
+        ])
+        txt.attributedPlaceholder = advancedSettings
         txt.textColor = .darkGray
         txt.isSecureTextEntry = true
         txt.clipsToBounds = true
@@ -488,9 +496,16 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
         presenter.onViewDisappear()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let gradLayers = view.layer.sublayers?.compactMap { $0 as? CAGradientLayer }
+        gradLayers?.first?.frame = view.bounds
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        presenter.onViewLoad()
         
         NotificationCenter.default.addObserver(self,
             selector: #selector(self.keyboardNotification(notification:)),

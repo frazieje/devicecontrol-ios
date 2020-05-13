@@ -1,5 +1,5 @@
 class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
-    
+
     private let windowStateManager: WindowStateManager
     
     private let nearbyProfileService: NearbyProfileService
@@ -18,18 +18,26 @@ class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
     
     func nearbyProfileLogin(router: ProfileLoginRouter) -> NearbyProfileLoginPresenter {
         
-        let serverItemMapper: ProfileServerMapper = DefaultProfileServerMapper()
+        let serverItemMapper: ProfileLoginMapper = DefaultProfileLoginMapper()
         
         return MainNearbyProfileLoginPresenter(windowStateManager: windowStateManager, nearbyProfileService: nearbyProfileService, mapper: serverItemMapper, router: router)
+        
     }
     
     func editProfileLogin(router: ProfileLoginRouter, _ item: ProfileServerItem?) -> EditProfileLoginPresenter {
         
-        let serverItemMapper: ProfileServerMapper = DefaultProfileServerMapper()
+        let serverItemMapper: ProfileLoginMapper = DefaultProfileLoginMapper()
         
         let serverItemValidator: ProfileLoginViewModelValidator = MainProfileLoginViewModelValidator()
         
-        return MainEditProfileLoginPresenter(loginService: loginService, mapper: serverItemMapper, router: router, validator: serverItemValidator, item)
+        return MainEditProfileLoginPresenter(mapper: serverItemMapper, router: router, validator: serverItemValidator, item)
+    }
+    
+    func loginAction(router: ProfileLoginRouter, item: ProfileLoginViewModel) -> LoginActionPresenter {
+        
+        let loginItemMapper: ProfileLoginMapper = DefaultProfileLoginMapper()
+        
+        return MainLoginActionPresenter(loginService: loginService, router: router, mapper: loginItemMapper, item: item)
     }
     
     

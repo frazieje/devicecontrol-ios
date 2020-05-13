@@ -2,8 +2,6 @@ import Foundation
 
 class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
-    private let loginService: LoginService
-
     private let router: ProfileLoginRouter
     
     private var view: EditProfileLoginView?
@@ -12,14 +10,13 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
     private var advancedEnabled: Bool = false
     
-    private let mapper: ProfileServerMapper
+    private let mapper: ProfileLoginMapper
     
     private let validator: ProfileLoginViewModelValidator
     
     private var loginInProgress: Bool = false
     
-    init(loginService: LoginService, mapper: ProfileServerMapper, router: ProfileLoginRouter, validator: ProfileLoginViewModelValidator, _ item: ProfileServerItem? = nil) {
-        self.loginService = loginService
+    init(mapper: ProfileLoginMapper, router: ProfileLoginRouter, validator: ProfileLoginViewModelValidator, _ item: ProfileServerItem? = nil) {
         self.router = router
         self.mapper = mapper
         self.validator = validator
@@ -29,12 +26,17 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
         }
     }
     
-    func onViewAppear() {
+    func onViewLoad() {
+        print("presenter view load")
         view?.prefill(with: mapper.from(serverItem: prefillServerItem))
     }
     
+    func onViewAppear() {
+        print("presenter view appear")
+    }
+    
     func onViewDisappear() {
-        
+        loginInProgress = false
     }
     
     func advancedTapped() {
@@ -49,7 +51,7 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
     func plusTapped() {
         if let item = view?.getCurrentItem() {
-            if item.servers.count < 10 {
+            if item.servers.count <= 4 {
                 view?.addServerField()
             }
         }
@@ -80,7 +82,7 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
             
             if validationResult.isValid {
                 
-                login(item.username, item.password, item.profileId, mapper.from(serverUrls: item.servers))
+                login(viewModel: item)
                 
             } else {
                 
@@ -106,20 +108,13 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
         }
     }
     
-    func login(_ username: String, _ password: String,  _ profileId: String, _ servers: [ProfileServer]) {
+    func login(viewModel: ProfileLoginViewModel) {
 
         if !loginInProgress {
             print("login starting")
             loginInProgress = true
-            let request = LoginRequest(username: username, password: password, profileId: profileId, servers: servers)
-            loginService.login(request, { result in
-                print("login result")
-            }) { results in
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.loginInProgress = false
-                    print("login finished")
-                }
+            if let strongView = view {
+                router.routeToLoginAction(from: strongView, item: viewModel)
             }
         }
         

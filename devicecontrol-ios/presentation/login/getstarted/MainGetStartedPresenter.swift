@@ -11,6 +11,10 @@ class MainGetStartedPresenter : GetStartedPresenter {
         self.router = router
     }
     
+    func onViewLoad() {
+        
+    }
+    
     func onViewAppear() {
         windowStateManager.lockOrientationPortrait()
         windowStateManager.rotateToPortrait()

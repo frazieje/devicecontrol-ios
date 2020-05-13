@@ -40,6 +40,9 @@
 		2B54310E24610AF600D598F2 /* LoginActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54310D24610AF600D598F2 /* LoginActionPresenter.swift */; };
 		2B54311024610B0200D598F2 /* MainLoginActionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54310F24610B0200D598F2 /* MainLoginActionPresenter.swift */; };
 		2B54311224610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54311124610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift */; };
+		2B5431142461225F00D598F2 /* SQLiteRequestLogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5431132461225F00D598F2 /* SQLiteRequestLogItem.swift */; };
+		2B543116246122D600D598F2 /* RequestLogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B543115246122D600D598F2 /* RequestLogItem.swift */; };
+		2B5431182462695200D598F2 /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5431172462695200D598F2 /* LoginResult.swift */; };
 		2B581AE52314E7CA007D0D86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B581AE42314E7CA007D0D86 /* AppDelegate.swift */; };
 		2B581AEE2314E7CB007D0D86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B581AED2314E7CB007D0D86 /* Assets.xcassets */; };
 		2B581AF12314E7CB007D0D86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B581AEF2314E7CB007D0D86 /* LaunchScreen.storyboard */; };
@@ -124,7 +127,7 @@
 		2BED06602442142B00659CD4 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED065B2442142B00659CD4 /* AnyDecodable.swift */; };
 		2BED066324424EDE00659CD4 /* ScanningNearbyProfileServiceListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED066224424EDE00659CD4 /* ScanningNearbyProfileServiceListenerTests.swift */; };
 		2BED0665244277A400659CD4 /* ProfileServerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED0664244277A400659CD4 /* ProfileServerItem.swift */; };
-		2BED06672442826800659CD4 /* ProfileServerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06662442826800659CD4 /* ProfileServerMapper.swift */; };
+		2BED06672442826800659CD4 /* ProfileLoginMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06662442826800659CD4 /* ProfileLoginMapper.swift */; };
 		2BED0669244282B000659CD4 /* DefaultProfileServerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED0668244282B000659CD4 /* DefaultProfileServerMapper.swift */; };
 		2BED066B2442DC9900659CD4 /* WindowStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED066A2442DC9900659CD4 /* WindowStateManager.swift */; };
 		2BED066D2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED066C2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift */; };
@@ -192,6 +195,9 @@
 		2B54310D24610AF600D598F2 /* LoginActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActionPresenter.swift; sourceTree = "<group>"; };
 		2B54310F24610B0200D598F2 /* MainLoginActionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginActionPresenter.swift; sourceTree = "<group>"; };
 		2B54311124610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginRequestItemTableViewCell.swift; sourceTree = "<group>"; };
+		2B5431132461225F00D598F2 /* SQLiteRequestLogItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteRequestLogItem.swift; sourceTree = "<group>"; };
+		2B543115246122D600D598F2 /* RequestLogItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLogItem.swift; sourceTree = "<group>"; };
+		2B5431172462695200D598F2 /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		2B581AE12314E7CA007D0D86 /* devicecontrol-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "devicecontrol-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B581AE42314E7CA007D0D86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B581AED2314E7CB007D0D86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -280,7 +286,7 @@
 		2BED065B2442142B00659CD4 /* AnyDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 		2BED066224424EDE00659CD4 /* ScanningNearbyProfileServiceListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningNearbyProfileServiceListenerTests.swift; sourceTree = "<group>"; };
 		2BED0664244277A400659CD4 /* ProfileServerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServerItem.swift; sourceTree = "<group>"; };
-		2BED06662442826800659CD4 /* ProfileServerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServerMapper.swift; sourceTree = "<group>"; };
+		2BED06662442826800659CD4 /* ProfileLoginMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginMapper.swift; sourceTree = "<group>"; };
 		2BED0668244282B000659CD4 /* DefaultProfileServerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileServerMapper.swift; sourceTree = "<group>"; };
 		2BED066A2442DC9900659CD4 /* WindowStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowStateManager.swift; sourceTree = "<group>"; };
 		2BED066C2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDelegateWindowStateManager.swift; sourceTree = "<group>"; };
@@ -439,6 +445,7 @@
 				2B543100245F2C4F00D598F2 /* AlamofireApiFactory.swift */,
 				2B543102245F598200D598F2 /* ServerResolver.swift */,
 				2B543104245F6F2D00D598F2 /* ProfileServerResolver.swift */,
+				2B543115246122D600D598F2 /* RequestLogItem.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -528,6 +535,7 @@
 				2B7A75F52439A37F007C01A2 /* SQLiteTable.swift */,
 				2B7A7600243A8520007C01A2 /* SQLiteRepositoryFactory.swift */,
 				2B7A7602243A8B2A007C01A2 /* SQLiteLoginTokenRepsitory.swift */,
+				2B5431132461225F00D598F2 /* SQLiteRequestLogItem.swift */,
 			);
 			path = sqlite;
 			sourceTree = "<group>";
@@ -569,6 +577,7 @@
 				2B7A75EB24396596007C01A2 /* ProfileServer.swift */,
 				2B7A7606243ABAFC007C01A2 /* ServiceBeaconMessage.swift */,
 				2B5430F8245D182E00D598F2 /* LoginRequest.swift */,
+				2B5431172462695200D598F2 /* LoginResult.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -626,7 +635,7 @@
 				2BE46DF32447F1B00002EFEA /* edit */,
 				2BE46DF22447F1960002EFEA /* nearby */,
 				2BE46DEF2447F1770002EFEA /* getstarted */,
-				2BED06662442826800659CD4 /* ProfileServerMapper.swift */,
+				2BED06662442826800659CD4 /* ProfileLoginMapper.swift */,
 				2BED0668244282B000659CD4 /* DefaultProfileServerMapper.swift */,
 				2BED06702443A0F300659CD4 /* ProfileLoginRouter.swift */,
 				2BED06722443A18000659CD4 /* MainProfileLoginRouter.swift */,
@@ -837,7 +846,9 @@
 				2B758697234BCC45006B2E56 /* DeviceService.swift in Sources */,
 				2B72E62D23523EF800F85258 /* CachedDevice.swift in Sources */,
 				2B72E63A2352DD3C00F85258 /* ProfileDeviceService.swift in Sources */,
+				2B543116246122D600D598F2 /* RequestLogItem.swift in Sources */,
 				2BA8C7E32445619000393475 /* UIStackViewExtensions.swift in Sources */,
+				2B5431182462695200D598F2 /* LoginResult.swift in Sources */,
 				2B7A75FF243A84B2007C01A2 /* RepositoryFactory.swift in Sources */,
 				2B1185C12448289900D28B68 /* ProfileServerItemTableViewCell.swift in Sources */,
 				2B0D45B8244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift in Sources */,
@@ -856,6 +867,7 @@
 				2B02347E244CED76001550CC /* ServerItem.swift in Sources */,
 				2B7A75F4243995F0007C01A2 /* SQLiteProfileLogin.swift in Sources */,
 				2B72E627235235E400F85258 /* Device.swift in Sources */,
+				2B5431142461225F00D598F2 /* SQLiteRequestLogItem.swift in Sources */,
 				2B8EA92D231A378900B404AF /* User.swift in Sources */,
 				2B7A7603243A8B2A007C01A2 /* SQLiteLoginTokenRepsitory.swift in Sources */,
 				2BA8A690242AFEF800B16588 /* NearbyProfileLoginViewController.swift in Sources */,
@@ -886,7 +898,7 @@
 				2B581AE52314E7CA007D0D86 /* AppDelegate.swift in Sources */,
 				2B86C57A23F675D300D502A2 /* MenuView.swift in Sources */,
 				2B45D02A242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift in Sources */,
-				2BED06672442826800659CD4 /* ProfileServerMapper.swift in Sources */,
+				2BED06672442826800659CD4 /* ProfileLoginMapper.swift in Sources */,
 				2BE46DF52447F5200002EFEA /* GetStartedPresenter.swift in Sources */,
 				2BED066D2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift in Sources */,
 				2B72E6292352375000F85258 /* DeviceType.swift in Sources */,

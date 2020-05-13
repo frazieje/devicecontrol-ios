@@ -16,13 +16,6 @@ protocol LoginService {
     
 }
 
-struct LoginResult
-{
-    var error: LoginServiceError?
-    var server: ProfileServer
-    var token: LoginToken?
-}
-
 enum LoginServiceError: Equatable, Error
 {
     case errorFetchingLogins(String)

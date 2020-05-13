@@ -8,6 +8,10 @@ class ProfileMenuPresenter : MenuPresenter {
         self.loginService = loginService
     }
     
+    func onViewLoad() {
+        
+    }
+    
     func onViewAppear() {
         
     }

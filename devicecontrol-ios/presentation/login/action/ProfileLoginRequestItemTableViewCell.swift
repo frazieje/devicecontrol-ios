@@ -17,17 +17,7 @@ class ProfileLoginRequestItemTableViewCell : UITableViewCell {
         return view
     }()
     
-    private let lblServers: UILabel = {
-        let lbl = UILabel()
-        lbl.textAlignment = .left
-        lbl.font = .systemFont(ofSize: 13)
-        lbl.textColor = .lightGray
-        lbl.clipsToBounds = true
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
-    
-    private let lblSecureRemote: UILabel = {
+    private let lblServerUrl: UILabel = {
         let lbl = UILabel()
         lbl.textAlignment = .left
         lbl.font = .systemFont(ofSize: 13)
@@ -56,35 +46,52 @@ class ProfileLoginRequestItemTableViewCell : UITableViewCell {
         return btn
     }()
     
+    let mainContentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let iconViewCheck: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage.fontAwesomeIcon(icon: "\u{f233}", textColor: .blackCoral, size: CGSize(width: 45, height: 45))
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubview(iconViewServer)
+        backgroundColor = .clear
         
-        addSubview(lblProfileId)
+        addSubview(mainContentView)
         
-        addSubview(lblServers)
+        mainContentView.addSubview(iconViewServer)
         
-        addSubview(lblSecureRemote)
+        mainContentView.addSubview(lblServerUrl)
         
-        addSubview(lblSecureRemoteBool)
+        mainContentView.addSubview(activityIndicator)
         
         NSLayoutConstraint.activate([
+            
+            mainContentView.topAnchor.constraint(equalTo: topAnchor),
+            mainContentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mainContentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            mainContentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
         
-            iconViewServer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            iconViewServer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            iconViewServer.leadingAnchor.constraint(equalTo: mainContentView.leadingAnchor, constant: 10),
+            iconViewServer.centerYAnchor.constraint(equalTo: mainContentView.centerYAnchor),
             
-            lblProfileId.leadingAnchor.constraint(equalTo: iconViewServer.trailingAnchor, constant: 10),
-            lblProfileId.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            lblServerUrl.leadingAnchor.constraint(equalTo: iconViewServer.trailingAnchor, constant: 10),
+            lblServerUrl.centerYAnchor.constraint(equalTo: mainContentView.centerYAnchor),
             
-            lblServers.leadingAnchor.constraint(equalTo: iconViewServer.trailingAnchor, constant: 10),
-            lblServers.topAnchor.constraint(equalTo: lblProfileId.bottomAnchor, constant: 5),
-            
-            lblSecureRemote.leadingAnchor.constraint(equalTo: iconViewServer.trailingAnchor, constant: 10),
-            lblSecureRemote.topAnchor.constraint(equalTo: lblServers.bottomAnchor, constant: 5),
-            
-            lblSecureRemoteBool.leadingAnchor.constraint(equalTo: lblSecureRemote.trailingAnchor),
-            lblSecureRemoteBool.topAnchor.constraint(equalTo: lblServers.bottomAnchor, constant: 5),
+            activityIndicator.trailingAnchor.constraint(equalTo: mainContentView.trailingAnchor, constant: -15),
+            activityIndicator.centerYAnchor.constraint(equalTo: mainContentView.centerYAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 20),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 20),
             
         ])
         
@@ -96,12 +103,12 @@ class ProfileLoginRequestItemTableViewCell : UITableViewCell {
     
     var item : ProfileLoginRequestItem? {
         didSet {
-//            let serversCount = item!.servers.count
-//            let hasSecure = item!.servers.filter { $0.secure }.count > 0
-//            lblProfileId.text = item!.profileId
-//            lblServers.text = "\(serversCount) Server\(serversCount > 1 ? "s" : "")"
-//            lblSecureRemoteBool.textColor = hasSecure ? .systemGreen : .lightGray
-//            lblSecureRemoteBool.text = hasSecure ? "Yes" : "No"
+            lblServerUrl.text = item?.serverUrl
+            if item?.status == .inProgress {
+                activityIndicator.startAnimating()
+            } else {
+                activityIndicator.stopAnimating()
+            }
         }
     }
     

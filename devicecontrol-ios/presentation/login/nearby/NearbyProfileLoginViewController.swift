@@ -151,7 +151,7 @@ extension NearbyProfileLoginViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let server = serversData[indexPath.row]
-        var cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell") as? ProfileServerItemTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "ProfileServerItemTableViewCell") as? ProfileServerItemTableViewCell
         if cell == nil {
             cell = ProfileServerItemTableViewCell()
         }

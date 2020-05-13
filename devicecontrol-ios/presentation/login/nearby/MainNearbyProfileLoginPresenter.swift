@@ -6,7 +6,7 @@ class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowState
     
     private var view: NearbyProfileLoginView?
     
-    private let mapper: ProfileServerMapper
+    private let mapper: ProfileLoginMapper
     
     private let windowStateManager: WindowStateManager
     
@@ -16,7 +16,7 @@ class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowState
     
     private let router: ProfileLoginRouter
     
-    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, mapper: ProfileServerMapper, router: ProfileLoginRouter) {
+    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, mapper: ProfileLoginMapper, router: ProfileLoginRouter) {
         self.nearbyProfileService = nearbyProfileService
         self.mapper = mapper
         self.windowStateManager = windowStateManager
@@ -27,7 +27,13 @@ class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowState
         self.view = view
     }
     
+    func onViewLoad() {
+        
+    }
+    
     func onViewAppear() {
+        windowStateManager.lockOrientationPortrait()
+        windowStateManager.rotateToPortrait()
         subscribeWindowStateEvents()
         subscribeNearbyProfileEvents()
     }
@@ -35,6 +41,7 @@ class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowState
     func onViewDisappear() {
         unsubscribeNearbyProfileEvents()
         unsubscribeWindowStateEvents()
+        windowStateManager.lockOrientationAll()
     }
     
     func serverItemClicked(_ item: ProfileServerItem) {

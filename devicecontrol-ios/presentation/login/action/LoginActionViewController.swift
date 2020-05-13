@@ -10,13 +10,20 @@ class LoginActionViewController : UIViewController, LoginActionView {
     
     private let lblAnnouncement: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Logging you in..."
         lbl.font = .boldSystemFont(ofSize: 20)
         lbl.textAlignment = .center
         lbl.textColor = UIColor.init(red: 0.60, green: 0.60, blue: 0.60, alpha: 0.6)
         lbl.clipsToBounds = true
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
+    }()
+    
+    let iconViewCheck: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage.fontAwesomeIcon(icon: "\u{f00c}", textColor: .systemGreen, size: CGSize(width: 25, height: 25))
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     init(presenter: LoginActionPresenter) {
@@ -50,19 +57,21 @@ class LoginActionViewController : UIViewController, LoginActionView {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
+        tableView.alpha = 0.0
+        
         view.addSubview(lblAnnouncement)
         
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
             
-            lblAnnouncement.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            lblAnnouncement.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             lblAnnouncement.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             lblAnnouncement.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: lblAnnouncement.bottomAnchor, constant: 40),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            tableView.topAnchor.constraint(equalTo: lblAnnouncement.bottomAnchor, constant: 50),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
@@ -79,28 +88,53 @@ class LoginActionViewController : UIViewController, LoginActionView {
         presenter.onViewDisappear()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let gradLayers = view.layer.sublayers?.compactMap { $0 as? CAGradientLayer }
+        gradLayers?.first?.frame = view.bounds
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        title = "Nearby Profiles"
+        title = "Logging In"
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        print("AddProfile viewDidLoad")
+        print("Login Action viewDidLoad")
+        
+        presenter.onViewLoad()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+
     }
     
-    func showItems(_ items: [ProfileLoginRequestItem]) {
-        serversData = items
+    func showRequests() {
+        UIView.animate(withDuration: 0.2, delay: 0.3, options: .curveEaseOut, animations: {
+            self.tableView.alpha = 1.0
+        }, completion: { b in
+            self.presenter.onViewReady()
+        })
+    }
+    
+    func prefill(with: [ProfileLoginRequestItem]) {
+        serversData = with
+        updateLabelText(count: serversData.count)
+    }
+    
+    func update(with: [ProfileLoginRequestItem]) {
+        serversData = with
         tableView.reloadData()
+    }
+    
+    private func updateLabelText(count: Int) {
+        lblAnnouncement.text = "Logging you into \(count) server\(count > 1 ? "s" : "")..."
     }
     
     func viewController() -> UIViewController {
@@ -117,16 +151,17 @@ extension LoginActionViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let server = serversData[indexPath.row]
-        var cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell") as? ProfileLoginRequestItemTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "ProfileLoginRequestItemTableViewCell") as? ProfileLoginRequestItemTableViewCell
         if cell == nil {
             cell = ProfileLoginRequestItemTableViewCell()
         }
+        cell?.selectionStyle = .none
         cell?.item = server
         return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return 50
     }
     
 }

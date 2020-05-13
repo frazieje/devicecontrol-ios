@@ -1,7 +1,7 @@
 import Foundation
 
-class DefaultProfileServerMapper : ProfileServerMapper {
-
+class DefaultProfileLoginMapper : ProfileLoginMapper {
+    
     func from(servers: [String : [ProfileServer]]) -> [ProfileServerItem] {
         var items: [ProfileServerItem] = []
         for (key, value) in servers {
@@ -21,8 +21,7 @@ class DefaultProfileServerMapper : ProfileServerMapper {
     func from(serverItem: ProfileServerItem?) -> ProfileLoginViewModel? {
         if let item = serverItem {
             let servers = item.servers.map { server -> String in
-                let port = server.secure ? (server.port == 443 ? "" : ":\(server.port)") : (server.port == 80 ? "" : ":\(server.port)")
-                return "http\(server.secure ? "s" : "")://\(server.host)\(port)"
+                return from(host: server.host, port: server.port, secure: server.secure)
             }
             return ProfileLoginViewModel(username: "", password: "", profileId: item.profileId, servers: servers)
         } else {
@@ -30,7 +29,15 @@ class DefaultProfileServerMapper : ProfileServerMapper {
         }
     }
     
-    func from(serverUrls: [String]) -> [ProfileServer] {
+    private func from(host: String, port: Int, secure: Bool) -> String {
+        return ProfileServer(host: host, port: port, secure: secure).toString()
+    }
+    
+    func from(viewModel: ProfileLoginViewModel) -> LoginRequest {
+        return LoginRequest(username: viewModel.username, password: viewModel.password, profileId: viewModel.profileId, servers: from(serverUrls: viewModel.servers))
+    }
+    
+    private func from(serverUrls: [String]) -> [ProfileServer] {
         
         return serverUrls.map { serverUrl in
             
@@ -50,6 +57,13 @@ class DefaultProfileServerMapper : ProfileServerMapper {
         }
         
     }
+    
+    func from(viewModel: ProfileLoginViewModel) -> [String : ProfileLoginRequestItem] {
+        var requestItems: [String : ProfileLoginRequestItem] = [:]
+        viewModel.servers.forEach { requestItems[$0] = ProfileLoginRequestItem(serverUrl: $0, status: .ready) }
+        return requestItems
+    }
+    
 }
 
 private struct PendingProfileServerItem {

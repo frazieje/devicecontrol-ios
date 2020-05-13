@@ -11,6 +11,10 @@ class ProfileDevicesPresenter : DevicesPresenter {
         self.deviceMapper = deviceMapper
     }
     
+    func onViewLoad() {
+        
+    }
+    
     func onViewAppear() {
         
         print("devices presenter view will appear")

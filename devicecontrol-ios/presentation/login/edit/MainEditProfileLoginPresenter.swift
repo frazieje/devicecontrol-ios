@@ -2,7 +2,7 @@ import Foundation
 
 class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
-    private let router: ProfileLoginRouter
+    private let router: Router
     
     private var view: EditProfileLoginView?
     
@@ -16,7 +16,7 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
     private var loginInProgress: Bool = false
     
-    init(mapper: ProfileLoginMapper, router: ProfileLoginRouter, validator: ProfileLoginViewModelValidator, _ item: ProfileServerItem? = nil) {
+    init(mapper: ProfileLoginMapper, router: Router, validator: ProfileLoginViewModelValidator, _ item: ProfileServerItem? = nil) {
         self.router = router
         self.mapper = mapper
         self.validator = validator

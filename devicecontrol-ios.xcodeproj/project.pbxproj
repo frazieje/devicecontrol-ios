@@ -132,15 +132,22 @@
 		2BED066B2442DC9900659CD4 /* WindowStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED066A2442DC9900659CD4 /* WindowStateManager.swift */; };
 		2BED066D2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED066C2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift */; };
 		2BED066F2443A01700659CD4 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED066E2443A01700659CD4 /* Router.swift */; };
-		2BED06712443A0F300659CD4 /* ProfileLoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06702443A0F300659CD4 /* ProfileLoginRouter.swift */; };
-		2BED06732443A18000659CD4 /* MainProfileLoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06722443A18000659CD4 /* MainProfileLoginRouter.swift */; };
+		2BED06732443A18000659CD4 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06722443A18000659CD4 /* ProfileRouter.swift */; };
 		2BED06772443AE5700659CD4 /* PresenterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06762443AE5700659CD4 /* PresenterFactory.swift */; };
-		2BED06792443C66200659CD4 /* ProfileLoginPresenterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06782443C66100659CD4 /* ProfileLoginPresenterFactory.swift */; };
-		2BED067B2443C68600659CD4 /* MainProfileLoginPresenterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED067A2443C68600659CD4 /* MainProfileLoginPresenterFactory.swift */; };
-		2BED067D2443C90300659CD4 /* ProfileLoginViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED067C2443C90300659CD4 /* ProfileLoginViewFactory.swift */; };
+		2BED067B2443C68600659CD4 /* ProfilePresenterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED067A2443C68600659CD4 /* ProfilePresenterFactory.swift */; };
 		2BED067F2443C91A00659CD4 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED067E2443C91A00659CD4 /* ViewFactory.swift */; };
-		2BED06812443C93600659CD4 /* MainProfileLoginViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06802443C93600659CD4 /* MainProfileLoginViewFactory.swift */; };
+		2BED06812443C93600659CD4 /* ProfileViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED06802443C93600659CD4 /* ProfileViewFactory.swift */; };
 		2BED0687244414B700659CD4 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED0686244414B700659CD4 /* NSAttributedString.swift */; };
+		2BF5306A2470E03200C1FABC /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF530692470E03200C1FABC /* MainPresenter.swift */; };
+		2BF5306C2470E05100C1FABC /* ProfileMainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5306B2470E05100C1FABC /* ProfileMainPresenter.swift */; };
+		2BF5306E2470E06100C1FABC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5306D2470E06100C1FABC /* MainView.swift */; };
+		2BF530702471932C00C1FABC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5306F2471932C00C1FABC /* SettingsView.swift */; };
+		2BF530722471937900C1FABC /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF530712471937900C1FABC /* SettingsPresenter.swift */; };
+		2BF530742471938E00C1FABC /* MainSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF530732471938E00C1FABC /* MainSettingsPresenter.swift */; };
+		2BF5307624719AB000C1FABC /* RootViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5307524719AB000C1FABC /* RootViewManager.swift */; };
+		2BF5307824723DDA00C1FABC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5307724723DDA00C1FABC /* HomeView.swift */; };
+		2BF5307A24723E0900C1FABC /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5307924723E0900C1FABC /* HomePresenter.swift */; };
+		2BF5307C24723E1400C1FABC /* ProfileHomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5307B24723E1400C1FABC /* ProfileHomePresenter.swift */; };
 		2BF57B1C23431CA600B617B1 /* ProfileMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF57B1B23431CA600B617B1 /* ProfileMenuViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -291,15 +298,22 @@
 		2BED066A2442DC9900659CD4 /* WindowStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowStateManager.swift; sourceTree = "<group>"; };
 		2BED066C2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDelegateWindowStateManager.swift; sourceTree = "<group>"; };
 		2BED066E2443A01700659CD4 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		2BED06702443A0F300659CD4 /* ProfileLoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginRouter.swift; sourceTree = "<group>"; };
-		2BED06722443A18000659CD4 /* MainProfileLoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileLoginRouter.swift; sourceTree = "<group>"; };
+		2BED06722443A18000659CD4 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		2BED06762443AE5700659CD4 /* PresenterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterFactory.swift; sourceTree = "<group>"; };
-		2BED06782443C66100659CD4 /* ProfileLoginPresenterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginPresenterFactory.swift; sourceTree = "<group>"; };
-		2BED067A2443C68600659CD4 /* MainProfileLoginPresenterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileLoginPresenterFactory.swift; sourceTree = "<group>"; };
-		2BED067C2443C90300659CD4 /* ProfileLoginViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewFactory.swift; sourceTree = "<group>"; };
+		2BED067A2443C68600659CD4 /* ProfilePresenterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterFactory.swift; sourceTree = "<group>"; };
 		2BED067E2443C91A00659CD4 /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
-		2BED06802443C93600659CD4 /* MainProfileLoginViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileLoginViewFactory.swift; sourceTree = "<group>"; };
+		2BED06802443C93600659CD4 /* ProfileViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewFactory.swift; sourceTree = "<group>"; };
 		2BED0686244414B700659CD4 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
+		2BF530692470E03200C1FABC /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		2BF5306B2470E05100C1FABC /* ProfileMainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainPresenter.swift; sourceTree = "<group>"; };
+		2BF5306D2470E06100C1FABC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2BF5306F2471932C00C1FABC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2BF530712471937900C1FABC /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		2BF530732471938E00C1FABC /* MainSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsPresenter.swift; sourceTree = "<group>"; };
+		2BF5307524719AB000C1FABC /* RootViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewManager.swift; sourceTree = "<group>"; };
+		2BF5307724723DDA00C1FABC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2BF5307924723E0900C1FABC /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		2BF5307B24723E1400C1FABC /* ProfileHomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHomePresenter.swift; sourceTree = "<group>"; };
 		2BF57B1B23431CA600B617B1 /* ProfileMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -410,6 +424,7 @@
 		2B6D7E392320C5D800081579 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				2BF530682470DCE700C1FABC /* main */,
 				2B7343AA23220B640096DED4 /* extensions */,
 				2BA8A68E242AFDDD00B16588 /* login */,
 				2B86C57023F66D1B00D502A2 /* menu */,
@@ -417,14 +432,17 @@
 				2B72E6332352484200F85258 /* devices */,
 				2B72E6322352483C00F85258 /* settings */,
 				2B72E6312352483800F85258 /* home */,
-				2B6D7E3A2320C5EF00081579 /* MainViewController.swift */,
 				2BBC941823712C8A004D507D /* Presenter.swift */,
 				2B86C56E23F6677A00D502A2 /* View.swift */,
 				2BED066A2442DC9900659CD4 /* WindowStateManager.swift */,
 				2BED066C2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift */,
+				2BED067A2443C68600659CD4 /* ProfilePresenterFactory.swift */,
+				2BED06802443C93600659CD4 /* ProfileViewFactory.swift */,
+				2BED06722443A18000659CD4 /* ProfileRouter.swift */,
 				2BED066E2443A01700659CD4 /* Router.swift */,
 				2BED06762443AE5700659CD4 /* PresenterFactory.swift */,
 				2BED067E2443C91A00659CD4 /* ViewFactory.swift */,
+				2BF5307524719AB000C1FABC /* RootViewManager.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -454,6 +472,9 @@
 			isa = PBXGroup;
 			children = (
 				2B6D7E3C2320C7FE00081579 /* HomeViewController.swift */,
+				2BF5307724723DDA00C1FABC /* HomeView.swift */,
+				2BF5307924723E0900C1FABC /* HomePresenter.swift */,
+				2BF5307B24723E1400C1FABC /* ProfileHomePresenter.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -462,6 +483,9 @@
 			isa = PBXGroup;
 			children = (
 				2B6D7E402320C82000081579 /* SettingsViewController.swift */,
+				2BF5306F2471932C00C1FABC /* SettingsView.swift */,
+				2BF530712471937900C1FABC /* SettingsPresenter.swift */,
+				2BF530732471938E00C1FABC /* MainSettingsPresenter.swift */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -637,12 +661,6 @@
 				2BE46DEF2447F1770002EFEA /* getstarted */,
 				2BED06662442826800659CD4 /* ProfileLoginMapper.swift */,
 				2BED0668244282B000659CD4 /* DefaultProfileServerMapper.swift */,
-				2BED06702443A0F300659CD4 /* ProfileLoginRouter.swift */,
-				2BED06722443A18000659CD4 /* MainProfileLoginRouter.swift */,
-				2BED06782443C66100659CD4 /* ProfileLoginPresenterFactory.swift */,
-				2BED067A2443C68600659CD4 /* MainProfileLoginPresenterFactory.swift */,
-				2BED067C2443C90300659CD4 /* ProfileLoginViewFactory.swift */,
-				2BED06802443C93600659CD4 /* MainProfileLoginViewFactory.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -691,6 +709,17 @@
 				2BED06592442142B00659CD4 /* AnyEncodable.swift */,
 			);
 			path = util;
+			sourceTree = "<group>";
+		};
+		2BF530682470DCE700C1FABC /* main */ = {
+			isa = PBXGroup;
+			children = (
+				2B6D7E3A2320C5EF00081579 /* MainViewController.swift */,
+				2BF530692470E03200C1FABC /* MainPresenter.swift */,
+				2BF5306B2470E05100C1FABC /* ProfileMainPresenter.swift */,
+				2BF5306D2470E06100C1FABC /* MainView.swift */,
+			);
+			path = main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -853,7 +882,6 @@
 				2B1185C12448289900D28B68 /* ProfileServerItemTableViewCell.swift in Sources */,
 				2B0D45B8244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift in Sources */,
 				2B72E63E2352E80E00F85258 /* CacheFactory.swift in Sources */,
-				2BED067D2443C90300659CD4 /* ProfileLoginViewFactory.swift in Sources */,
 				2BED065E2442142B00659CD4 /* AnyEncodable.swift in Sources */,
 				2B0D45B6244FDE130051F8AB /* ProfileLoginViewModelValidator.swift in Sources */,
 				2B72E6362352497C00F85258 /* ProfileDevicesPresenter.swift in Sources */,
@@ -861,7 +889,7 @@
 				2BED0665244277A400659CD4 /* ProfileServerItem.swift in Sources */,
 				2BED066B2442DC9900659CD4 /* WindowStateManager.swift in Sources */,
 				2B2CB88B23F8A1F700F78A5B /* ProfileRequestInterceptor.swift in Sources */,
-				2BED067B2443C68600659CD4 /* MainProfileLoginPresenterFactory.swift in Sources */,
+				2BED067B2443C68600659CD4 /* ProfilePresenterFactory.swift in Sources */,
 				2BA8A692242AFF8300B16588 /* NearbyProfileLoginView.swift in Sources */,
 				2BA8A698242B057000B16588 /* EditProfileLoginViewController.swift in Sources */,
 				2B02347E244CED76001550CC /* ServerItem.swift in Sources */,
@@ -877,9 +905,9 @@
 				2B5430FF245F2BF600D598F2 /* ApiFactory.swift in Sources */,
 				2B6D7E3F2320C81000081579 /* DevicesViewController.swift in Sources */,
 				2BA237C524343BB2000B1F14 /* InMemoryCache.swift in Sources */,
-				2BED06732443A18000659CD4 /* MainProfileLoginRouter.swift in Sources */,
+				2BED06732443A18000659CD4 /* ProfileRouter.swift in Sources */,
+				2BF530742471938E00C1FABC /* MainSettingsPresenter.swift in Sources */,
 				2B7A7607243ABAFC007C01A2 /* ServiceBeaconMessage.swift in Sources */,
-				2BED06792443C66200659CD4 /* ProfileLoginPresenterFactory.swift in Sources */,
 				2B8EA935231DB2C800B404AF /* UserDefaultsCache.swift in Sources */,
 				2BA8A696242B02C000B16588 /* MainNearbyProfileLoginPresenter.swift in Sources */,
 				2B0D45B4244D3AA20051F8AB /* ValidationExtensions.swift in Sources */,
@@ -903,6 +931,8 @@
 				2BED066D2442E15C00659CD4 /* ApplicationDelegateWindowStateManager.swift in Sources */,
 				2B72E6292352375000F85258 /* DeviceType.swift in Sources */,
 				2B7A75EA24395753007C01A2 /* PermissionType.swift in Sources */,
+				2BF5307624719AB000C1FABC /* RootViewManager.swift in Sources */,
+				2BF530702471932C00C1FABC /* SettingsView.swift in Sources */,
 				2B543105245F6F2D00D598F2 /* ProfileServerResolver.swift in Sources */,
 				2B72E62B23523B5E00F85258 /* EUI48Address.swift in Sources */,
 				2B86C57423F6741300D502A2 /* ProfileLoginService.swift in Sources */,
@@ -911,7 +941,9 @@
 				2B7A760C243AF385007C01A2 /* NearbyProfileScanner.swift in Sources */,
 				2B19B60F23662C4600F5E8D5 /* ProfileDevice.swift in Sources */,
 				2BED066F2443A01700659CD4 /* Router.swift in Sources */,
+				2BF5306E2470E06100C1FABC /* MainView.swift in Sources */,
 				2B54310E24610AF600D598F2 /* LoginActionPresenter.swift in Sources */,
+				2BF5307824723DDA00C1FABC /* HomeView.swift in Sources */,
 				2B72E6402352E98500F85258 /* UserDefaultsCacheFactory.swift in Sources */,
 				2BA8A69E242B05BA00B16588 /* MainEditProfileLoginPresenter.swift in Sources */,
 				2B86C57823F6754700D502A2 /* ProfileMenuPresenter.swift in Sources */,
@@ -919,7 +951,6 @@
 				2B84698C234EBC8E00234153 /* CachedMessage.swift in Sources */,
 				2B543103245F598200D598F2 /* ServerResolver.swift in Sources */,
 				2B7A75F62439A37F007C01A2 /* SQLiteTable.swift in Sources */,
-				2BED06712443A0F300659CD4 /* ProfileLoginRouter.swift in Sources */,
 				2BA05C572405ED190033F91F /* LoginToken.swift in Sources */,
 				2BA8A694242B008200B16588 /* NearbyProfileLoginPresenter.swift in Sources */,
 				2B54311224610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift in Sources */,
@@ -932,6 +963,7 @@
 				2BA4B0CC23FA2C1A00A3FC6A /* ProfileLoginitem.swift in Sources */,
 				2B19B6082364F06B00F5E8D5 /* DoorLock.swift in Sources */,
 				2B5430FB245E0E0600D598F2 /* RequestProcessor.swift in Sources */,
+				2BF5307C24723E1400C1FABC /* ProfileHomePresenter.swift in Sources */,
 				2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */,
 				2B8CFBC72341A6F7000B7628 /* Permission.swift in Sources */,
 				2B45D02624271C2A003DCD47 /* AlamofireOAuthApi.swift in Sources */,
@@ -939,7 +971,9 @@
 				2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */,
 				2B758699234BD057006B2E56 /* DevicesPresenter.swift in Sources */,
 				2BED06772443AE5700659CD4 /* PresenterFactory.swift in Sources */,
+				2BF5307A24723E0900C1FABC /* HomePresenter.swift in Sources */,
 				2B75869D234BD444006B2E56 /* Message.swift in Sources */,
+				2BF530722471937900C1FABC /* SettingsPresenter.swift in Sources */,
 				2BE46DF92447F56F0002EFEA /* MainGetStartedPresenter.swift in Sources */,
 				2BA05C592406590D0033F91F /* OAuthApi.swift in Sources */,
 				2B7A75F224397B5D007C01A2 /* SQLiteLoginToken.swift in Sources */,
@@ -949,13 +983,15 @@
 				2B54310C2461099D00D598F2 /* ProfileLoginRequestItem.swift in Sources */,
 				2B86C57223F6737D00D502A2 /* LoginService.swift in Sources */,
 				2BED06602442142B00659CD4 /* AnyDecodable.swift in Sources */,
-				2BED06812443C93600659CD4 /* MainProfileLoginViewFactory.swift in Sources */,
+				2BED06812443C93600659CD4 /* ProfileViewFactory.swift in Sources */,
 				2BA8A69A242B058000B16588 /* EditProfileLoginView.swift in Sources */,
 				2BA237C724344181000B1F14 /* InMemoryCacheFactory.swift in Sources */,
 				2B19B60A2364FAA500F5E8D5 /* GasCylinder.swift in Sources */,
 				2B7A75EE243966EB007C01A2 /* SQLiteProfileServer.swift in Sources */,
+				2BF5306C2470E05100C1FABC /* ProfileMainPresenter.swift in Sources */,
 				2B6D7E3B2320C5EF00081579 /* MainViewController.swift in Sources */,
 				2B5430F9245D182E00D598F2 /* LoginRequest.swift in Sources */,
+				2BF5306A2470E03200C1FABC /* MainPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

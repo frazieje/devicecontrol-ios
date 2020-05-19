@@ -15,15 +15,20 @@ class LoginActionViewController : UIViewController, LoginActionView {
         lbl.textColor = UIColor.init(red: 0.60, green: 0.60, blue: 0.60, alpha: 0.6)
         lbl.clipsToBounds = true
         lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.alpha = 0.0
         return lbl
     }()
     
-    let iconViewCheck: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage.fontAwesomeIcon(icon: "\u{f00c}", textColor: .systemGreen, size: CGSize(width: 25, height: 25))
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let lblMessage: UILabel = {
+        let lbl = UILabel()
+        lbl.font = .boldSystemFont(ofSize: 20)
+        lbl.textAlignment = .center
+        lbl.textColor = UIColor.init(red: 0.60, green: 0.60, blue: 0.60, alpha: 0.9)
+        lbl.clipsToBounds = true
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.alpha = 0.0
+        lbl.lineBreakMode = .byWordWrapping
+        return lbl
     }()
     
     init(presenter: LoginActionPresenter) {
@@ -63,6 +68,8 @@ class LoginActionViewController : UIViewController, LoginActionView {
         
         view.addSubview(tableView)
         
+        view.addSubview(lblMessage)
+        
         NSLayoutConstraint.activate([
             
             lblAnnouncement.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
@@ -72,7 +79,11 @@ class LoginActionViewController : UIViewController, LoginActionView {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             tableView.topAnchor.constraint(equalTo: lblAnnouncement.bottomAnchor, constant: 50),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.heightAnchor.constraint(equalToConstant: view.bounds.height / 3),
+            
+            lblMessage.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
+            lblMessage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            lblMessage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
         
         self.tableView = tableView
@@ -111,12 +122,16 @@ class LoginActionViewController : UIViewController, LoginActionView {
         
     }
     
+    private var feedbackGenerator: UINotificationFeedbackGenerator? = nil
+    
     override func viewDidAppear(_ animated: Bool) {
-
+        
     }
     
     func showRequests() {
-        UIView.animate(withDuration: 0.2, delay: 0.3, options: .curveEaseOut, animations: {
+        feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator?.prepare()
+        UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
             self.tableView.alpha = 1.0
         }, completion: { b in
             self.presenter.onViewReady()
@@ -128,9 +143,33 @@ class LoginActionViewController : UIViewController, LoginActionView {
         updateLabelText(count: serversData.count)
     }
     
-    func update(with: [ProfileLoginRequestItem]) {
+    func updateItems(with: [ProfileLoginRequestItem]) {
         serversData = with
+        feedbackGenerator?.notificationOccurred(.success)
         tableView.reloadData()
+    }
+    
+    func showSuccess() {
+        lblMessage.text = "Success!"
+        UIView.animate(withDuration: 0.2, animations: {
+            self.lblMessage.alpha = 1.0
+        }, completion: { _ in
+            self.presenter.onViewFinished()
+        })
+    }
+    
+    func showPartialSuccess(errors: [String]) {
+        lblMessage.text = "Success! but one or more servers failed."
+        UIView.animate(withDuration: 0.2, animations: {
+            self.lblMessage.alpha = 1.0
+        })
+    }
+    
+    func showError(errors: [String]) {
+        lblMessage.text = "Login Failed!"
+        UIView.animate(withDuration: 0.2, animations: {
+            self.lblMessage.alpha = 1.0
+        })
     }
     
     private func updateLabelText(count: Int) {
@@ -168,7 +207,6 @@ extension LoginActionViewController : UITableViewDataSource {
 
 extension LoginActionViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        presenter.serverItemClicked(serversData[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -4,7 +4,8 @@ class ProfileLoginService : LoginService {
 
     private let apiFactory: ApiFactory
     
-    private let loginRequestQueue = DispatchQueue(label: "net.farsystem.devicecontrol.loginRequestQueue")
+    private let loginRequestQueue = DispatchQueue(label: "net.farsystem.devicecontrol.loginRequestQueue", attributes: .concurrent)
+    
     private let loginResponseQueue = DispatchQueue(label: "net.farsystem.devicecontrol.loginResponseQueue")
     
     private let loginRepository: ProfileLoginRepository
@@ -13,9 +14,9 @@ class ProfileLoginService : LoginService {
     
     let currentProfileLoginCacheKey = "currentProfileLogin"
     
-    init(apiFactory: ApiFactory, repositoryFactory: RepositoryFactory, cacheFactory: CacheFactory) {
+    init(apiFactory: ApiFactory, loginRepository: ProfileLoginRepository, cacheFactory: CacheFactory) {
         self.apiFactory = apiFactory
-        self.loginRepository = repositoryFactory.getProfileLoginRepository()
+        self.loginRepository = loginRepository
         self.currentProfileLoginIdCache = cacheFactory.get()
     }
     
@@ -24,6 +25,30 @@ class ProfileLoginService : LoginService {
     }
     
     func getActiveLogin(_ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {
+        
+        loginRequestQueue.async { [weak self] in
+            
+            guard let self = self else { return }
+            
+            if let currentActiveProfileId = self.getCurrentProfileLoginId() {
+                
+                do {
+                    
+                    completion(try self.loginRepository.getBy(id: currentActiveProfileId), nil)
+                
+                } catch {
+                    
+                    completion(nil, .errorFetchingActiveLogin("\(error)"))
+                    
+                }
+                
+            } else {
+                
+                completion(nil, .errorFetchingActiveLogin("Unable to find active login"))
+                
+            }
+            
+        }
         
     }
     
@@ -57,40 +82,36 @@ class ProfileLoginService : LoginService {
                 let request = OAuthResourceOwnerGrantRequest(clientId: loginRequest.profileId, username: loginRequest.username, password: loginRequest.password)
                 loginRequests.enter()
                 self.apiFactory.oAuthApi(server: server).login(request) { [weak self] token, apiError in
-                    defer { loginRequests.leave() }
                     guard let self = self else { return }
                     let loginResult = LoginResult(error: apiError == nil ? nil : .errorCompletingLogin(apiError!.message), server: server, token: token)
                     result?(loginResult)
-                    self.loginResponseQueue.sync {
+                    self.loginResponseQueue.async {
                         loginResults.append(loginResult)
+                        loginRequests.leave()
                     }
                 }
             }
             
             loginRequests.wait()
             
-            var loginTokens: [ProfileServer : LoginToken] = [:]
+            if (loginResults.count > 0) {
+                
+                var loginTokens: [ProfileServer : LoginToken] = [:]
+                
+                loginResults.filter { $0.error == nil && $0.token != nil }.forEach { result in
+                    loginTokens[result.server] = result.token!
+                }
             
-            loginResults.filter { $0.error == nil && $0.token != nil }.forEach { result in
-                loginTokens[result.server] = result.token!
-            }
-            
-            let profileLogin = ProfileLogin(profileId: loginRequest.profileId, name: nil, description: nil, username: loginRequest.username, loginTokens: loginTokens)
-            
-            let semaphore = DispatchSemaphore(value: 0)
-            
-            self.loginRepository.put(profileLogin) { [weak self] result in
-                defer { semaphore.signal() }
-                guard let self = self else { return }
-                if let newLogin = result {
+                let profileLogin = ProfileLogin(profileId: loginRequest.profileId, name: nil, description: nil, username: loginRequest.username, loginTokens: loginTokens)
+                
+                if let newLogin = try? self.loginRepository.put(profileLogin) {
                     _ = self.saveCurrentProfileLoginId(newLogin.id)
                 }
+                
             }
             
-            semaphore.wait()
-            
             completion(loginResults)
-
+                
         }
 
     }

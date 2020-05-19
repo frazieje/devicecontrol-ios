@@ -1,4 +1,4 @@
-class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
+class ProfilePresenterFactory : PresenterFactory {
 
     private let windowStateManager: WindowStateManager
     
@@ -12,11 +12,11 @@ class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
         self.loginService = loginService
     }
     
-    func getStartedPresenter(router: ProfileLoginRouter) -> GetStartedPresenter {
+    func getStartedPresenter(router: Router) -> GetStartedPresenter {
         return MainGetStartedPresenter(windowStateManager: windowStateManager, router: router)
     }
     
-    func nearbyProfileLogin(router: ProfileLoginRouter) -> NearbyProfileLoginPresenter {
+    func nearbyProfileLogin(router: Router) -> NearbyProfileLoginPresenter {
         
         let serverItemMapper: ProfileLoginMapper = DefaultProfileLoginMapper()
         
@@ -24,7 +24,7 @@ class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
         
     }
     
-    func editProfileLogin(router: ProfileLoginRouter, _ item: ProfileServerItem?) -> EditProfileLoginPresenter {
+    func editProfileLogin(router: Router, _ item: ProfileServerItem?) -> EditProfileLoginPresenter {
         
         let serverItemMapper: ProfileLoginMapper = DefaultProfileLoginMapper()
         
@@ -33,11 +33,21 @@ class MainProfileLoginPresenterFactory : ProfileLoginPresenterFactory {
         return MainEditProfileLoginPresenter(mapper: serverItemMapper, router: router, validator: serverItemValidator, item)
     }
     
-    func loginAction(router: ProfileLoginRouter, item: ProfileLoginViewModel) -> LoginActionPresenter {
+    func loginAction(router: Router, item: ProfileLoginViewModel) -> LoginActionPresenter {
         
         let loginItemMapper: ProfileLoginMapper = DefaultProfileLoginMapper()
         
-        return MainLoginActionPresenter(loginService: loginService, router: router, mapper: loginItemMapper, item: item)
+        return MainLoginActionPresenter(loginService: loginService, windowStateManager: windowStateManager, router: router, mapper: loginItemMapper, item: item)
+    }
+    
+    func main(router: Router) -> MainPresenter {
+        
+        return ProfileMainPresenter(router: router, loginService: loginService)
+        
+    }
+    
+    func menu(router: Router) -> MenuPresenter {
+        return ProfileMenuPresenter(loginService: loginService)
     }
     
     

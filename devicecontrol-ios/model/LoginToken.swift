@@ -1,5 +1,5 @@
 struct LoginToken : Codable {
-    var clientId: String
+    var clientId: String?
     var tokenKey: String
     var tokenType: String
     var refreshToken: String

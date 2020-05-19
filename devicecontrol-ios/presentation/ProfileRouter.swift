@@ -1,0 +1,97 @@
+import SideMenu
+import UIKit
+
+class ProfileRouter : Router {
+
+    private let rootViewManager: RootViewManager
+    private let presenterFactory: PresenterFactory
+    private let viewFactory: ViewFactory
+    
+    private var sideMenu: SideMenuNavigationController?
+    
+    init(rootViewManager: RootViewManager, presenterFactory: PresenterFactory, viewFactory: ViewFactory) {
+        self.rootViewManager = rootViewManager
+        self.presenterFactory = presenterFactory
+        self.viewFactory = viewFactory
+    }
+    
+    func routeToNearbyProfileLogin(from: View) {
+        
+        let presenter = presenterFactory.nearbyProfileLogin(router: self)
+        
+        let view = viewFactory.nearbyProfileLogin(presenter: presenter)
+        
+        from.viewController().show(view.viewController(), sender: from)
+    }
+    
+    func routeToEditProfileLogin(from: View, item: ProfileServerItem?) {
+        
+        let presenter = presenterFactory.editProfileLogin(router: self, item)
+        
+        let view = viewFactory.editProfileLogin(presenter: presenter)
+        
+        from.viewController().show(view.viewController(), sender: from)
+    }
+    
+    func routeToLoginAction(from: View, item: ProfileLoginViewModel) {
+        
+        let presenter = presenterFactory.loginAction(router: self, item: item)
+        
+        let view = viewFactory.loginAction(presenter: presenter)
+        
+        from.viewController().show(view.viewController(), sender: from)
+    }
+    
+    func routeToMain() {
+        
+        let mainPresenter = presenterFactory.main(router: self)
+        
+        let mainView = viewFactory.main(presenter: mainPresenter)
+        
+        
+        
+        let menuPresenter = presenterFactory.menu(router: self)
+        
+        let menuView = viewFactory.menu(presenter: menuPresenter)
+        
+        sideMenu = SideMenuNavigationController(rootViewController: menuView.viewController())
+        
+        SideMenuManager.default.rightMenuNavigationController = sideMenu
+
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: mainView.viewController().view)
+        
+        sideMenu?.statusBarEndAlpha = 0
+        
+        let style: SideMenuPresentationStyle = .menuSlideIn
+        
+        style.presentingEndAlpha = CGFloat(0.5)
+        
+        sideMenu?.presentationStyle = style
+        sideMenu?.blurEffectStyle = .extraLight
+
+        rootViewManager.setRoot(view: mainView, animated: true)
+        
+    }
+    
+    func routeToGetStarted() {
+        
+        let presenter = presenterFactory.getStartedPresenter(router: self)
+        
+        let view = viewFactory.getStarted(presenter: presenter)
+        
+        rootViewManager.setRoot(view: view, animated: false)
+        
+    }
+    
+    func showMenu() {
+        if let menu = sideMenu {
+            rootViewManager.getRootView().viewController().present(menu, animated: true, completion: nil)
+        }
+    }
+    
+    func hideMenu() {
+        
+    }
+    
+}
+

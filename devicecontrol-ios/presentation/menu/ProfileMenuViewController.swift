@@ -1,12 +1,15 @@
 import UIKit
 
 class ProfileMenuViewController : UIViewController, MenuView {
-
+    
     weak var tableView: UITableView!
+    
+    private let presenter: MenuPresenter
     
     var profilesData: [ProfileLoginItem] = []
     
-    init() {
+    init(presenter: MenuPresenter) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -51,14 +54,6 @@ class ProfileMenuViewController : UIViewController, MenuView {
     
     override func viewDidAppear(_ animated: Bool) {
         print("Menu viewDidAppear")
-    }
-    
-    func showMenu() {
-        
-    }
-    
-    func hideMeu() {
-        
     }
     
     func viewController() -> UIViewController {

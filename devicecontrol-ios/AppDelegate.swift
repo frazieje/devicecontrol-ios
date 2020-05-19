@@ -3,11 +3,13 @@ import SideMenu
 import SQLite
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
+class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, RootViewManager {
 
     var window: UIWindow?
 
     var windowStateManager: (WindowStateManager & WindowStateObserver)?
+    
+    var rootView: View?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -31,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
             
             let apiFactory: ApiFactory = AlamofireApiFactory(serverResolver: serverResolveer, tokenRepository: repositoryFactory.getLoginTokenRepository())
             
-            let loginService = ProfileLoginService(apiFactory: apiFactory, repositoryFactory: repositoryFactory, cacheFactory: cacheFactory)
+            let loginService = ProfileLoginService(apiFactory: apiFactory, loginRepository: repositoryFactory.getProfileLoginRepository(), cacheFactory: cacheFactory)
             
             
 //
@@ -70,22 +72,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
             
             let nearbyProfileService = ScanningNearbyProfileService(scanner: nearbyProfileScanner)
             
-            let profileLoginPresenterFactory = MainProfileLoginPresenterFactory(windowStateManager: windowStateManager!, nearbyProfileService: nearbyProfileService, loginService: loginService)
+            let profilePresenterFactory = ProfilePresenterFactory(windowStateManager: windowStateManager!, nearbyProfileService: nearbyProfileService, loginService: loginService)
             
-            let profileLoginViewFactory = MainProfileLoginViewFactory()
+            let profileViewFactory = ProfileViewFactory()
             
-            let profileLoginRouter = MainProfileLoginRouter(presenterFactory: profileLoginPresenterFactory, viewFactory: profileLoginViewFactory)
+            let profileRouter = ProfileRouter(rootViewManager: self, presenterFactory: profilePresenterFactory, viewFactory: profileViewFactory)
             
-//            let nearbyProfileLoginPresenter = profileLoginPresenterFactory.nearbyProfileLogin(router: profileLoginRouter)
-//
-//            let initialView = profileLoginViewFactory.nearbyProfileLogin(presenter: nearbyProfileLoginPresenter)
-            
-            let getStartedPresenter = profileLoginPresenterFactory.getStartedPresenter(router: profileLoginRouter)
-            
-            let initialView = profileLoginViewFactory.getStarted(presenter: getStartedPresenter)
-        
-            window!.rootViewController = UINavigationController(rootViewController: initialView.viewController())
-            window!.makeKeyAndVisible()
+            profileRouter.routeToGetStarted()
 
             return true
             
@@ -149,6 +142,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController {
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return self.orientationLock
+    }
+    
+    func setRoot(view: View, animated: Bool) {
+        
+        rootView = view
+        
+        guard animated, let window = self.window else {
+            self.window?.rootViewController = UINavigationController(rootViewController: view.viewController())
+            self.window?.makeKeyAndVisible()
+            return
+        }
+
+        window.rootViewController = UINavigationController(rootViewController: view.viewController())
+        window.makeKeyAndVisible()
+        UIView.transition(with: window,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: nil,
+                          completion: nil)
+        
+    }
+    
+    func getRootView() -> View {
+        return rootView!
     }
 
 }

@@ -12,10 +12,30 @@ class ProfileLoginRequestItemTableViewCell : UITableViewCell {
     
     private let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
+        view.color = .lightGray
         view.hidesWhenStopped = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    let iconViewCheck: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage.fontAwesomeIcon(icon: "\u{f00c}", textColor: .systemGreen, size: CGSize(width: 25, height: 25))
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alpha = 0.0
+        return view
+    }()
+    
+    let iconViewRetry: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage.fontAwesomeIcon(icon: "\u{f01e}", textColor: .blackCoral, size: CGSize(width: 25, height: 25))
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alpha = 0.0
+        return view
+    }()
+    
     
     private let lblServerUrl: UILabel = {
         let lbl = UILabel()
@@ -54,14 +74,6 @@ class ProfileLoginRequestItemTableViewCell : UITableViewCell {
         return view
     }()
     
-    let iconViewCheck: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage.fontAwesomeIcon(icon: "\u{f233}", textColor: .blackCoral, size: CGSize(width: 45, height: 45))
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -74,6 +86,10 @@ class ProfileLoginRequestItemTableViewCell : UITableViewCell {
         mainContentView.addSubview(lblServerUrl)
         
         mainContentView.addSubview(activityIndicator)
+        
+        mainContentView.addSubview(iconViewCheck)
+        
+        mainContentView.addSubview(iconViewRetry)
         
         NSLayoutConstraint.activate([
             
@@ -93,6 +109,16 @@ class ProfileLoginRequestItemTableViewCell : UITableViewCell {
             activityIndicator.widthAnchor.constraint(equalToConstant: 20),
             activityIndicator.heightAnchor.constraint(equalToConstant: 20),
             
+            iconViewCheck.trailingAnchor.constraint(equalTo: mainContentView.trailingAnchor, constant: -15),
+            iconViewCheck.centerYAnchor.constraint(equalTo: mainContentView.centerYAnchor),
+            iconViewCheck.widthAnchor.constraint(equalToConstant: 20),
+            iconViewCheck.heightAnchor.constraint(equalToConstant: 20),
+            
+            iconViewRetry.trailingAnchor.constraint(equalTo: mainContentView.trailingAnchor, constant: -15),
+            iconViewRetry.centerYAnchor.constraint(equalTo: mainContentView.centerYAnchor),
+            iconViewRetry.widthAnchor.constraint(equalToConstant: 20),
+            iconViewRetry.heightAnchor.constraint(equalToConstant: 20),
+            
         ])
         
     }
@@ -104,13 +130,27 @@ class ProfileLoginRequestItemTableViewCell : UITableViewCell {
     var item : ProfileLoginRequestItem? {
         didSet {
             lblServerUrl.text = item?.serverUrl
-            if item?.status == .inProgress {
-                activityIndicator.startAnimating()
-            } else {
-                activityIndicator.stopAnimating()
+            if let status = item?.status {
+                switch status {
+                    case .inProgress:
+                        activityIndicator.startAnimating()
+                        iconViewCheck.alpha = 0.0
+                        iconViewRetry.alpha = 0.0
+                    case .ready:
+                        activityIndicator.stopAnimating()
+                        iconViewCheck.alpha = 0.0
+                        iconViewRetry.alpha = 0.0
+                    case .succeeded:
+                        activityIndicator.stopAnimating()
+                        iconViewCheck.alpha = 1.0
+                        iconViewRetry.alpha = 0.0
+                    case .failed:
+                        activityIndicator.stopAnimating()
+                        iconViewCheck.alpha = 0.0
+                        iconViewRetry.alpha = 1.0
+                }
             }
         }
     }
-    
 }
 

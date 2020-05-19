@@ -10,9 +10,11 @@ class SQLiteLoginTokenRepository : LoginTokenRepository {
     
     func put(_ item: LoginToken, _ completion: @escaping (Bool) -> Void) {
         
-        let loginTokens = SQLiteLoginToken.table
-        
-        let existingToken = loginTokens.filter(SQLiteLoginToken.tokenKey == item.tokenKey)
+//        let loginTokens = SQLiteLoginToken.table
+//
+//        loginTokens.insert(or: .replace, )
+//        
+//
         
 //        try db.run(existingToken.update(
 //            SQLiteLoginToken.clientId <- item.clientId,

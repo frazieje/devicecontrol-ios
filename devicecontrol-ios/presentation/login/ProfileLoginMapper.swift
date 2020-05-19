@@ -3,4 +3,5 @@ protocol ProfileLoginMapper {
     func from(serverItem: ProfileServerItem?) -> ProfileLoginViewModel?
     func from(viewModel: ProfileLoginViewModel) -> [String : ProfileLoginRequestItem]
     func from(viewModel: ProfileLoginViewModel) -> LoginRequest
+    func from(serverUrls: [String]) -> [ProfileServer]
 }

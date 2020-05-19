@@ -56,7 +56,7 @@ class ProfileRequestInterceptor : RetryPolicy {
                 if !self.isRefreshing {
                     
                     let req = OAuthRefreshTokenGrantRequest(
-                                            clientId: self.loginToken.clientId,
+                                            clientId: self.loginToken.clientId!,
                                             refreshToken: self.loginToken.refreshToken)
                     
                     self.oAuthApi.refreshToken(req) { [weak self] result, error in

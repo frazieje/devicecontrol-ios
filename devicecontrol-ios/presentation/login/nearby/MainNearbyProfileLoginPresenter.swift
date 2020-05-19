@@ -14,9 +14,9 @@ class MainNearbyProfileLoginPresenter : NearbyProfileLoginPresenter, WindowState
     
     private var windowStateSubscription: WindowStateSubscription?
     
-    private let router: ProfileLoginRouter
+    private let router: Router
     
-    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, mapper: ProfileLoginMapper, router: ProfileLoginRouter) {
+    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, mapper: ProfileLoginMapper, router: Router) {
         self.nearbyProfileService = nearbyProfileService
         self.mapper = mapper
         self.windowStateManager = windowStateManager

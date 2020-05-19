@@ -37,7 +37,7 @@ class DefaultProfileLoginMapper : ProfileLoginMapper {
         return LoginRequest(username: viewModel.username, password: viewModel.password, profileId: viewModel.profileId, servers: from(serverUrls: viewModel.servers))
     }
     
-    private func from(serverUrls: [String]) -> [ProfileServer] {
+    func from(serverUrls: [String]) -> [ProfileServer] {
         
         return serverUrls.map { serverUrl in
             

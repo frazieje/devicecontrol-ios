@@ -1,8 +1,10 @@
+import Foundation
+
 class MainLoginActionPresenter : LoginActionPresenter {
-    
+
     private let loginService: LoginService
     
-    private let router: ProfileLoginRouter
+    private let router: Router
     
     private let mapper: ProfileLoginMapper
     
@@ -10,10 +12,13 @@ class MainLoginActionPresenter : LoginActionPresenter {
     
     private var view: LoginActionView?
     
+    private let windowStateManager: WindowStateManager
+    
     private var requestItems: [String : ProfileLoginRequestItem]
     
-    init(loginService: LoginService, router: ProfileLoginRouter, mapper: ProfileLoginMapper, item: ProfileLoginViewModel) {
+    init(loginService: LoginService, windowStateManager: WindowStateManager, router: Router, mapper: ProfileLoginMapper, item: ProfileLoginViewModel) {
         self.loginService = loginService
+        self.windowStateManager = windowStateManager
         self.router = router
         self.mapper = mapper
         self.item = item
@@ -25,33 +30,58 @@ class MainLoginActionPresenter : LoginActionPresenter {
     }
     
     func onViewLoad() {
+        requestItems.keys.forEach { url in
+            requestItems[url]?.status = .inProgress
+        }
         view?.prefill(with: requestItems.compactMap { $1 })
     }
     
     func onViewAppear() {
+        windowStateManager.lockOrientationPortrait()
+        windowStateManager.rotateToPortrait()
         view?.showRequests()
     }
     
     func onViewReady() {
-        requestItems.keys.forEach { url in
-            requestItems[url]?.status = .inProgress
+        loginService.login(mapper.from(viewModel: item), onResult(result:), onComplete(results:))
+    }
+    
+    private func onResult(result: LoginResult) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.requestItems[result.server.toString()]?.status = result.error == nil ? .succeeded : .failed
+            self.updateItems()
         }
-        updateItems()
-//        loginService.login(mapper.from(viewModel: item), { [weak self] result in
-//            guard let self = self else { return }
-//            self.requestItems[result.server.toString()]?.status = result.error == nil ? .succeeded : .failed
-//            self.updateItems()
-//        }) { results in
-//            print("presenter requests done")
-//        }
+    }
+    
+    func onViewFinished() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            print("done")
+        }
+    }
+    
+    private func onComplete(results: [LoginResult]) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let errors = results.filter { $0.error != nil }.map { $0.error!.message }
+            if errors.count < results.count {
+                if errors.isEmpty {
+                    self.view?.showSuccess()
+                } else {
+                    self.view?.showPartialSuccess(errors: errors)
+                }
+            } else {
+                self.view?.showError(errors: errors)
+            }
+        }
     }
     
     private func updateItems() {
-        view?.update(with: requestItems.compactMap { $1 })
+        view?.updateItems(with: requestItems.compactMap { $1 })
     }
     
     func onViewDisappear() {
-        print("login action view disappear")
+        windowStateManager.lockOrientationAll()
     }
     
     

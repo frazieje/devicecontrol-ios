@@ -1,15 +1,7 @@
-//
-//  SettingsViewController.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 9/5/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import UIKit
 
-class SettingsViewController : UIViewController {
-    
+class SettingsViewController : UIViewController, SettingsView {
+
     weak var testView: UIView!
     
     init() {
@@ -22,6 +14,16 @@ class SettingsViewController : UIViewController {
     
     override func loadView() {
         super.loadView()
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
+        let settingsIcon = UIImage.fontAwesomeIcon(icon: "\u{f013}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
+
+        let settingsSelectedIcon = UIImage.fontAwesomeIcon(icon: "\u{f013}", textColor: .blue, size: CGSize(width: 25.0, height: 25.0))
+        
+        tabBarItem = UITabBarItem(title: "Settings", image: settingsIcon, selectedImage: settingsSelectedIcon)
         
         let testView = UIView(frame: .zero)
         testView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +56,10 @@ class SettingsViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("Settings viewDidAppear")
+    }
+    
+    func viewController() -> UIViewController {
+        return self
     }
     
 }

@@ -4,7 +4,7 @@ import XCTest
 
 class DefaultProfileServerMapperTests : XCTestCase {
     
-    let mapper: ProfileServerMapper = DefaultProfileServerMapper()
+    let mapper: ProfileLoginMapper = DefaultProfileLoginMapper()
 
     override func setUp() {
 

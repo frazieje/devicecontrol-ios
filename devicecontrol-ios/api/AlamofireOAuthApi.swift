@@ -18,7 +18,7 @@ class AlamofireOAuthApi : OAuthApi {
         
         do {
             
-            let url =  try server.asURL().appendingPathComponent(urlPath)
+            let url = try server.asURL().appendingPathComponent(urlPath)
 
             var urlRequest = URLRequest(url: url)
             
@@ -28,7 +28,9 @@ class AlamofireOAuthApi : OAuthApi {
             
             session.request(urlRequest).responseDecodable(of: LoginToken.self) { response in
                 do {
-                    try completion(response.result.get(), nil)
+                    var token = try response.result.get()
+                    token.clientId = request.clientId
+                    completion(token, nil)
                 } catch {
                     completion(nil, .HttpError("\(error)"))
                 }

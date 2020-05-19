@@ -1,14 +1,6 @@
-//
-//  ControlGroupsViewController.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 9/5/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import UIKit
 
-class HomeViewController : UIViewController {
+class HomeViewController : UIViewController, HomeView {
 
     weak var testView: UIView!
     
@@ -22,6 +14,16 @@ class HomeViewController : UIViewController {
     
     override func loadView() {
         super.loadView()
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
+        let homeIcon = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
+        
+        let homeSelectedIcon = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .blue, size: CGSize(width: 25.0, height: 25.0))
+        
+        tabBarItem = UITabBarItem(title: "Home", image: homeIcon, selectedImage: homeSelectedIcon)
         
         let testView = UIView(frame: .zero)
         testView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +56,10 @@ class HomeViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("Home viewDidAppear")
+    }
+    
+    func viewController() -> UIViewController {
+        return self
     }
 
 }

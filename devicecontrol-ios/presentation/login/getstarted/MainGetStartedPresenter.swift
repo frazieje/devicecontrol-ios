@@ -1,12 +1,12 @@
 class MainGetStartedPresenter : GetStartedPresenter {
 
-    private let router: ProfileLoginRouter
+    private let router: Router
     
     private var view: GetStartedView?
     
     private let windowStateManager: WindowStateManager
     
-    init(windowStateManager: WindowStateManager, router: ProfileLoginRouter) {
+    init(windowStateManager: WindowStateManager, router: Router) {
         self.windowStateManager = windowStateManager
         self.router = router
     }

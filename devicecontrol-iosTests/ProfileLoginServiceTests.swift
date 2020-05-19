@@ -13,7 +13,7 @@ class ProfileLoginServiceTests : XCTestCase {
     private let apiFactory = TestApiFactory()
 
     override func setUp() {
-        loginService = ProfileLoginService(apiFactory: apiFactory, repositoryFactory: repositoryFactory, cacheFactory: cacheFactory)
+        loginService = ProfileLoginService(apiFactory: apiFactory, loginRepository: repositoryFactory.getProfileLoginRepository(), cacheFactory: cacheFactory)
         
     }
 
@@ -135,9 +135,9 @@ class TestProfileLoginRepository : ProfileLoginRepository {
         
     }
     
-    func put(_ item: ProfileLogin, _ completion: @escaping (ProfileLogin?) -> Void) {
+    func put(_ item: ProfileLogin) throws -> ProfileLogin {
         putCalledWith = item
-        completion(item)
+        return item
     }
     
     func remove(_ item: ProfileLogin, _ completion: @escaping (ProfileLogin?) -> Void) {

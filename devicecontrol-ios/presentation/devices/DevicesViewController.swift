@@ -32,6 +32,10 @@ class DevicesViewController : UIViewController, DevicesView {
         
         let tableView = UITableView()
         
+        tableView.backgroundColor = .clear
+        
+        tableView.separatorStyle = .none
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(tableView)

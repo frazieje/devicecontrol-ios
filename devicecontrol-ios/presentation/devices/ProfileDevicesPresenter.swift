@@ -1,3 +1,5 @@
+import Foundation
+
 class ProfileDevicesPresenter : DevicesPresenter {
 
     let deviceService: DeviceService
@@ -25,10 +27,10 @@ class ProfileDevicesPresenter : DevicesPresenter {
                 
                 let deviceTypes = devices.map { self.deviceMapper.from(cachedDevice: $0) }
                     
-                self.devicesView?.showDevices(devices: deviceTypes)
+                self.showDevices(devices: deviceTypes)
                 
             } else {
-                self.devicesView?.showError(message: error!.message)
+                self.showError(message: error!.message)
             }
         }
         
@@ -44,6 +46,20 @@ class ProfileDevicesPresenter : DevicesPresenter {
 
     func deviceGroupClicked(type: String) {
         
+    }
+    
+    func showDevices(devices: [ProfileDevice]) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.devicesView?.showDevices(devices: devices)
+        }
+    }
+    
+    func showError(message: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.devicesView?.showError(message: message)
+        }
     }
     
     func setView(view: DevicesView) {

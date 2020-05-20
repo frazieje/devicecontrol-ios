@@ -30,6 +30,7 @@ class AlamofireOAuthApi : OAuthApi {
                 do {
                     var token = try response.result.get()
                     token.clientId = request.clientId
+                    print("token for \(urlRequest.url?.absoluteString) = \(token.tokenKey)")
                     completion(token, nil)
                 } catch {
                     completion(nil, .HttpError("\(error)"))

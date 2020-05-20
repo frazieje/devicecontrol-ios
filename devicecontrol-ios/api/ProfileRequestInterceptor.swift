@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-class ProfileRequestInterceptor : RetryPolicy {
+class ProfileRequestInterceptor : RequestInterceptor {
 
     private var loginToken: LoginToken
     
@@ -33,6 +33,8 @@ class ProfileRequestInterceptor : RetryPolicy {
             var urlRequest = urlRequest
 
             urlRequest.headers.add(.authorization(bearerToken: self.loginToken.tokenKey))
+            
+            print("adapting request \(urlRequest.url?.absoluteString) with \(self.loginToken.tokenKey)")
 
             completion(.success(urlRequest))
             
@@ -41,15 +43,19 @@ class ProfileRequestInterceptor : RetryPolicy {
 
     }
     
-    override func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         
         concurrentQueue.async(flags: .barrier) { [weak self] in
             
             guard let self = self else { return }
-        
+            
+            print("retrying request \((request.task?.response as? HTTPURLResponse)?.statusCode) \(request.request?.url?.absoluteString)")
+
             if
                 let response = request.task?.response as? HTTPURLResponse,
                 response.statusCode == 401 {
+                
+                print("refreshing token due to 401")
                 
                 self.queuedRetries.append(completion)
                 

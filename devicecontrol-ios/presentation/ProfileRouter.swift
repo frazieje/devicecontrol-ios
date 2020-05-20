@@ -48,7 +48,19 @@ class ProfileRouter : Router {
         
         let mainView = viewFactory.main(presenter: mainPresenter)
         
+        let homePresenter = presenterFactory.home(router: self)
         
+        let homeView = viewFactory.home(presenter: homePresenter)
+        
+        let devicesPresenter = presenterFactory.devices(router: self)
+        
+        let devicesView = viewFactory.devices(presenter: devicesPresenter)
+        
+        let settingsPresenter = presenterFactory.settings(router: self)
+        
+        let settingsView = viewFactory.settings(presenter: settingsPresenter)
+        
+        mainView.setChildViews(homeView, devicesView, settingsView)
         
         let menuPresenter = presenterFactory.menu(router: self)
         
@@ -68,7 +80,7 @@ class ProfileRouter : Router {
         
         sideMenu?.presentationStyle = style
         sideMenu?.blurEffectStyle = .extraLight
-
+        
         rootViewManager.setRoot(view: mainView, animated: true)
         
     }
@@ -90,7 +102,9 @@ class ProfileRouter : Router {
     }
     
     func hideMenu() {
-        
+        if let menu = sideMenu {
+            menu.dismiss(animated: true, completion: nil)
+        }
     }
     
 }

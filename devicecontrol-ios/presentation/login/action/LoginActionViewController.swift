@@ -159,7 +159,7 @@ class LoginActionViewController : UIViewController, LoginActionView {
     }
     
     func showPartialSuccess(errors: [String]) {
-        lblMessage.text = "Success! but one or more servers failed."
+        lblMessage.text = "One or more servers failed."
         UIView.animate(withDuration: 0.2, animations: {
             self.lblMessage.alpha = 1.0
         })

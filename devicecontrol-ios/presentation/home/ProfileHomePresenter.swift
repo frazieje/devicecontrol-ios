@@ -1,4 +1,6 @@
 class ProfileHomePresenter : HomePresenter {
+
+    private var view: HomeView?
     
     func onViewLoad() {
         
@@ -10,6 +12,10 @@ class ProfileHomePresenter : HomePresenter {
     
     func onViewDisappear() {
         
+    }
+    
+    func setView(view: HomeView) {
+        self.view = view
     }
     
     

@@ -120,6 +120,10 @@ class TestApiFactory : ApiFactory {
 }
 
 class TestProfileLoginRepository : ProfileLoginRepository {
+    func getBy(id: Int64) throws -> ProfileLogin {
+        return ProfileLogin(profileId: "", name: "", description: "", username: "", loginTokens: [:])
+    }
+    
     
     var putCalledWith: ProfileLogin?
     

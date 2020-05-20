@@ -23,9 +23,15 @@ class MainViewController : UITabBarController, MainView {
 
     }
     
+    func setChildViews(_ views: View...) {
+        self.viewControllers = views.map {
+            return UINavigationController(rootViewController: $0.viewController())
+        }
+    }
+    
     func showProfileButton(profileName: String) {
         
-        self.viewControllers.forEach {
+        self.viewControllers?.forEach {
             
             let button  = UIButton(type: .custom)
             
@@ -47,6 +53,10 @@ class MainViewController : UITabBarController, MainView {
     
     @objc func onProfileButtonClicked() {
         presenter.onProfileButtonClicked()
+    }
+    
+    func viewController() -> UIViewController {
+        return self
     }
     
 }

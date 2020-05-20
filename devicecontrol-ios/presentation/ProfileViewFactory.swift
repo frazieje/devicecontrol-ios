@@ -32,11 +32,13 @@ class ProfileViewFactory : ViewFactory {
     
     func home(presenter: HomePresenter) -> HomeView {
         let view = HomeViewController()
+        presenter.setView(view: view)
         return view
     }
     
     func settings(presenter: SettingsPresenter) -> SettingsView {
         let view = SettingsViewController()
+        presenter.setView(view: view)
         return view
     }
     

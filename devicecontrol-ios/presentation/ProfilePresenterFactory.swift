@@ -6,10 +6,13 @@ class ProfilePresenterFactory : PresenterFactory {
     
     private let loginService: LoginService
     
-    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, loginService: LoginService) {
+    private let deviceService: DeviceService
+    
+    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, loginService: LoginService, deviceService: DeviceService) {
         self.windowStateManager = windowStateManager
         self.nearbyProfileService = nearbyProfileService
         self.loginService = loginService
+        self.deviceService = deviceService
     }
     
     func getStartedPresenter(router: Router) -> GetStartedPresenter {
@@ -48,6 +51,23 @@ class ProfilePresenterFactory : PresenterFactory {
     
     func menu(router: Router) -> MenuPresenter {
         return ProfileMenuPresenter(loginService: loginService)
+    }
+    
+    func home(router: Router) -> HomePresenter {
+        return ProfileHomePresenter()
+    }
+    
+    func devices(router: Router) -> DevicesPresenter {
+        
+        let deviceMapper = ProfileDeviceMapper()
+        
+        return ProfileDevicesPresenter(deviceService: deviceService, deviceMapper: deviceMapper)
+    }
+    
+    func settings(router: Router) -> SettingsPresenter {
+        
+        return MainSettingsPresenter()
+        
     }
     
     

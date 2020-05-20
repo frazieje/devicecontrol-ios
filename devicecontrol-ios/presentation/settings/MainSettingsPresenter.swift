@@ -1,5 +1,8 @@
 class MainSettingsPresenter : SettingsPresenter {
     
+    private var view: SettingsView?
+    
+    
     func onViewLoad() {
         
     }
@@ -12,5 +15,8 @@ class MainSettingsPresenter : SettingsPresenter {
         
     }
     
+    func setView(view: SettingsView) {
+        self.view = view
+    }
     
 }

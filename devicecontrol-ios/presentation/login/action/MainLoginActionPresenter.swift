@@ -55,8 +55,9 @@ class MainLoginActionPresenter : LoginActionPresenter {
     }
     
     func onViewFinished() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            print("done")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            self.router.routeToMain()
         }
     }
     

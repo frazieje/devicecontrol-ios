@@ -17,7 +17,7 @@ class ProfileMainPresenter : MainPresenter {
         loginService.getActiveLogin { [weak self] login, error in
             guard let self = self else { return }
             if error == nil {
-                self.showProfileButton(loginName: login!.name!)
+                self.showProfileButton(loginName: login!.name ?? "H")
             } else {
                 print("\(error!.message)")
             }

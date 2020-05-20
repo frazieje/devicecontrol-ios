@@ -35,44 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
             
             let loginService = ProfileLoginService(apiFactory: apiFactory, loginRepository: repositoryFactory.getProfileLoginRepository(), cacheFactory: cacheFactory)
             
-            
-//
-//            let cacheFactory = UserDefaultsCacheFactory()
-//
-//
-    //        let semaphore = DispatchSemaphore(value: 0)
-    //
-    //        var hasSavedLogin
-    //
-    //        loginService.getAllLogins { result, error in7
-    //            semaphore.signal()
-    //        }
-    //
-    //        semaphore.wait()
-            
-//            let deviceService = ProfileDeviceService(profileApi: profileApi, cacheFactory: cacheFactory)
-            
-//            let deviceViewMapper = ProfileDeviceMapper()
-            
-//            let devicesPresenter = ProfileDevicesPresenter(deviceService: deviceService, deviceMapper: deviceViewMapper)
-            
-//            let devicesViewController = DevicesViewController(presenter: devicesPresenter)
-            
-//            devicesPresenter.setView(view: devicesViewController)
-            
-//            let homeViewController = HomeViewController()
-            
-//            let settingsViewController = SettingsViewController()
-        
-//            let loginService = ProfileLoginService(profileLogin: profileLogin)
-        
-//        let initialViewController = MainViewController(devicesViewController: devicesViewController, homeViewController: homeViewController, settingsViewController: settingsViewController)
+            let deviceService = ProfileDeviceService(apiFactory: apiFactory, loginRepository: repositoryFactory.getProfileLoginRepository(), cacheFactory: cacheFactory)
             
             let nearbyProfileScanner = MulticastNearbyProfileScanner(groupAddress: "224.0.0.147", port: 9889)
             
             let nearbyProfileService = ScanningNearbyProfileService(scanner: nearbyProfileScanner)
             
-            let profilePresenterFactory = ProfilePresenterFactory(windowStateManager: windowStateManager!, nearbyProfileService: nearbyProfileService, loginService: loginService)
+            let profilePresenterFactory = ProfilePresenterFactory(windowStateManager: windowStateManager!, nearbyProfileService: nearbyProfileService, loginService: loginService, deviceService: deviceService)
             
             let profileViewFactory = ProfileViewFactory()
             

@@ -42,5 +42,11 @@ class SerializationTetsts: XCTestCase {
         XCTAssertEqual(decoded!.payload, message.payload)
         XCTAssertEqual(decoded!.headers, message.headers)
     }
+    
+    func testCachedDevicesDeserializeCorrectly() {
+        let jsonString = "\"door_lock\""
+        let decoded = try? decoder.decode(DeviceType.self, from: jsonString.data(using: .utf8)!)
+        XCTAssertEqual(decoded!, .door_lock)
+    }
 
 }

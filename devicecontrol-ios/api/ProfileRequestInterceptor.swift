@@ -62,7 +62,7 @@ class ProfileRequestInterceptor : RequestInterceptor {
                 if !self.isRefreshing {
                     
                     let req = OAuthRefreshTokenGrantRequest(
-                                            clientId: self.loginToken.clientId!,
+                                            clientId: self.loginToken.clientId,
                                             refreshToken: self.loginToken.refreshToken)
                     
                     self.oAuthApi.refreshToken(req) { [weak self] result, error in
@@ -77,16 +77,25 @@ class ProfileRequestInterceptor : RequestInterceptor {
                             
                             if error == nil, let newToken = result {
                                 
-                                let semaphore = DispatchSemaphore(value: 0)
+                                let storeToken = LoginToken(
+                                                        id: self.loginToken.id,
+                                                        clientId: self.loginToken.clientId,
+                                                        tokenKey: newToken.tokenKey,
+                                                        tokenType: newToken.tokenType,
+                                                        refreshToken: newToken.refreshToken,
+                                                        expiresIn: newToken.expiresIn,
+                                                        issuedAt: newToken.issuedAt)
                                 
-                                self.tokenRepository.put(newToken) { success in
-                                    succeeded = success
-                                    semaphore.signal()
+                                succeeded = true
+                                
+                                do {
+                                    self.loginToken = try self.tokenRepository.put(storeToken)
+                                } catch {
+                                    succeeded = false
                                 }
                                 
-                                semaphore.wait()
-                                
-                                self.loginToken = newToken
+                                print("refreshi token due to 401")
+                            
                             }
                             
                             self.queuedRetries.forEach {

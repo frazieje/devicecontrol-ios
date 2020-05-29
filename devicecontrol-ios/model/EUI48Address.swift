@@ -1,18 +1,14 @@
-//
-//  EUI48Address.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 10/12/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import Foundation
 
-struct EUI48Address : Codable {
+struct EUI48Address : Codable, Equatable {
     
     var data: Data
     var name: String?
     var address: String?
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.data == rhs.data
+    }
     
     public func asString() -> String {
         data.map {

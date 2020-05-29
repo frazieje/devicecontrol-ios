@@ -11,10 +11,13 @@ class AlamofireProfileApi : ProfileApi {
     private let serverUrl: URL
     private let profileId: String
     
+    private let decoder = JSONDecoder()
+    
     init(session: Session, server: ProfileServer, profileId: String) {
         self.session = session
         self.serverUrl = try! server.asURL()
         self.profileId = profileId
+        decoder.dateDecodingStrategy = .millisecondsSince1970
     }
     
     func getPing(_ completion: @escaping (String?, ProfileApiError?) -> Void) {
@@ -41,9 +44,10 @@ class AlamofireProfileApi : ProfileApi {
         var urlRequest = URLRequest(url: requestUrl)
         urlRequest.method = .get
         
-        session.request(urlRequest).responseDecodable(of: [CachedDevice].self) { response in
+        session.request(urlRequest).responseDecodable(of: [CachedDevice].self, decoder: decoder) { response in
             do {
                 let result = try response.result.get()
+                print("\(result.count) devices from \(urlRequest.url?.absoluteString)")
                 completion(result, nil)
             } catch {
                 completion([], .HttpError("\(error)"))

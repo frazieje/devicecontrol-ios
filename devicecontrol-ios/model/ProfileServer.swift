@@ -1,4 +1,6 @@
 struct ProfileServer : Codable, Hashable, Equatable {
+    
+    var id: Int64 = -1
     var host: String
     var port: Int
     var secure: Bool

@@ -9,12 +9,15 @@ class AlamofireOAuthApi : OAuthApi {
     
     private let server: ProfileServer
     
+    private let decoder = JSONDecoder()
+    
     init(session: Session, server: ProfileServer) {
         self.session = session
         self.server = server
+        decoder.dateDecodingStrategy = .millisecondsSince1970
     }
     
-    func login(_ request: OAuthResourceOwnerGrantRequest, _ completion: @escaping (LoginToken?, OAuthApiError?) -> Void) {
+    func login(_ request: OAuthResourceOwnerGrantRequest, _ completion: @escaping (OAuthToken?, OAuthApiError?) -> Void) {
         
         do {
             
@@ -26,10 +29,9 @@ class AlamofireOAuthApi : OAuthApi {
             
             urlRequest = try URLEncodedFormParameterEncoder().encode(request, into: urlRequest)
             
-            session.request(urlRequest).responseDecodable(of: LoginToken.self) { response in
+            session.request(urlRequest).responseDecodable(of: OAuthToken.self, decoder: decoder) { response in
                 do {
-                    var token = try response.result.get()
-                    token.clientId = request.clientId
+                    let token = try response.result.get()
                     print("token for \(urlRequest.url?.absoluteString) = \(token.tokenKey)")
                     completion(token, nil)
                 } catch {
@@ -43,7 +45,7 @@ class AlamofireOAuthApi : OAuthApi {
         
     }
     
-    func refreshToken(_ request: OAuthRefreshTokenGrantRequest, _ completion: @escaping (LoginToken?, OAuthApiError?) -> Void) {
+    func refreshToken(_ request: OAuthRefreshTokenGrantRequest, _ completion: @escaping (OAuthToken?, OAuthApiError?) -> Void) {
         
         do {
             
@@ -55,9 +57,11 @@ class AlamofireOAuthApi : OAuthApi {
             
             urlRequest = try URLEncodedFormParameterEncoder().encode(request, into: urlRequest)
             
-            session.request(urlRequest).responseDecodable(of: LoginToken.self) { response in
+            session.request(urlRequest).responseDecodable(of: OAuthToken.self, decoder: decoder) { response in
                 do {
-                    try completion(response.result.get(), nil)
+                    let token = try response.result.get()
+                    print("refreshed token for \(urlRequest.url?.absoluteString) = \(token.tokenKey)")
+                    completion(token, nil)
                 } catch {
                     completion(nil, .HttpError("\(error)"))
                 }

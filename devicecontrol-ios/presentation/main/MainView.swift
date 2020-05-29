@@ -1,4 +1,4 @@
 protocol MainView : View {
-    func showProfileButton(profileName: String)
+    func loadChildViews(profileName: String, selectedIndex: Int)
     func setChildViews(_ views: View...)
 }

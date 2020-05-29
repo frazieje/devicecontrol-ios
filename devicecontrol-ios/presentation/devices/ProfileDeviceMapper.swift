@@ -1,18 +1,10 @@
-//
-//  ProfileDeviceMapper.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 10/27/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import Foundation
 
 class ProfileDeviceMapper : DeviceMapper {
     
     func from(cachedDevice: CachedDevice) -> ProfileDevice {
         
-            let deviceId = cachedDevice.type.asString() + cachedDevice.address.asString()
+        let deviceId = cachedDevice.type.toHexString() + cachedDevice.address.asString()
         
             let name = cachedDevice.address.name ?? ""
             
@@ -20,19 +12,49 @@ class ProfileDeviceMapper : DeviceMapper {
                 
             case .door_lock:
 
-                let lastMessage = cachedDevice.cachedMessageList.first {
-                    $0.cachedMessage.topic.hasSuffix(".o.lock.state")
-                }
+                let lastStateMessages = cachedDevice.cachedMessageList
+                    .filter { item in
+                        return item.cachedMessage.topic.hasSuffix(".o.lock.state")
+                    }
                 
-                let stateString = String(bytes: lastMessage?.cachedMessage.payload ?? Data(), encoding: .utf8) ?? "5"
+                let lastStateMesssage = lastStateMessages.first
+                
+                let stateString = String(bytes: lastStateMesssage?.cachedMessage.payload ?? Data(), encoding: .utf8) ?? "5"
                 
                 let stateInt = Int(stateString) ?? 5
                 
                 let lockState = DoorLock.State(rawValue: stateInt) ?? DoorLock.State.unknown
                 
-                let updatedDate = lastMessage?.cachedDate ?? cachedDevice.cachedDate
+                var prevLockStateIndex: Int?
                 
-                return DoorLock(deviceId: deviceId, name: name, lastUpdated: updatedDate, state: lockState)
+                for (index, message) in lastStateMessages.enumerated() {
+                    
+                    let prevStateString = String(bytes: message.cachedMessage.payload ?? Data(), encoding: .utf8) ?? "5"
+                    
+                    let prevStateInt = Int(prevStateString) ?? 5
+                    
+                    let prevLockState = DoorLock.State(rawValue: prevStateInt) ?? DoorLock.State.unknown
+                    
+                    if prevLockState != lockState {
+                        prevLockStateIndex = index
+                        break
+                    }
+                    
+                }
+                
+                let updatedDate = lastStateMesssage?.cachedDate ?? cachedDevice.cachedDate
+                
+                var lastStateChange: Date?
+                
+                if let prevIdx = prevLockStateIndex {
+                    
+                    if (prevIdx - 1) >= 0 && (prevIdx - 1) < lastStateMessages.count {
+                        lastStateChange = lastStateMessages[prevIdx - 1].cachedDate
+                    }
+                    
+                }
+                
+                return DoorLock(deviceId: deviceId, name: name, lastUpdated: updatedDate, lastStateChange: lastStateChange, state: lockState)
                 
             case .window_shade:
                 

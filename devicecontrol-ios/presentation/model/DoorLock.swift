@@ -1,11 +1,3 @@
-//
-//  ProfileDevices.swift
-//  devicecontrol-ios
-//
-//  Created by Joel Frazier on 10/26/19.
-//  Copyright © 2019 Spoohapps, Inc. All rights reserved.
-//
-
 import Foundation
 
 struct DoorLock : ProfileDevice {
@@ -25,6 +17,8 @@ struct DoorLock : ProfileDevice {
     var description: String?
     
     var lastUpdated: Date
+    
+    var lastStateChange: Date?
     
     var state: State
     

@@ -29,7 +29,7 @@ class ProfileLoginServiceTests : XCTestCase {
         
         let request = LoginRequest(username: "name", password: "password", profileId: "47wfh47h", servers: servers)
         
-        apiFactory.loginToken = LoginToken(clientId: "", tokenKey: "", tokenType: "", refreshToken: "", expiresIn: 0, issuedAt: 0)
+        apiFactory.loginToken = LoginToken(clientId: "", tokenKey: "", tokenType: "", refreshToken: "", expiresIn: 0, issuedAt: Date())
 
         loginService?.login(request, nil) { results in
             completionExpectation.fulfill()

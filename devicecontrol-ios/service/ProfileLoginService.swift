@@ -83,10 +83,22 @@ class ProfileLoginService : LoginService {
                 loginRequests.enter()
                 self.apiFactory.oAuthApi(server: server).login(request) { [weak self] token, apiError in
                     guard let self = self else { return }
-                    let loginResult = LoginResult(error: apiError == nil ? nil : .errorCompletingLogin(apiError!.message), server: server, token: token)
-                    result?(loginResult)
+                    var loginResult: LoginResult?
+                    if let token = token {
+                        let loginToken = LoginToken(
+                            clientId: loginRequest.profileId,
+                            tokenKey: token.tokenKey,
+                            tokenType: token.tokenType,
+                            refreshToken: token.refreshToken,
+                            expiresIn: token.expiresIn,
+                            issuedAt: token.issuedAt)
+                        loginResult = LoginResult(error: apiError == nil ? nil : .errorCompletingLogin(apiError!.message), server: server, token: loginToken)
+                    } else {
+                        loginResult = LoginResult(error: apiError == nil ? nil : .errorCompletingLogin(apiError!.message), server: server, token: nil)
+                    }
+                    result?(loginResult!)
                     self.loginResponseQueue.async {
-                        loginResults.append(loginResult)
+                        loginResults.append(loginResult!)
                         loginRequests.leave()
                     }
                 }

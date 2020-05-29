@@ -2,10 +2,16 @@ import UIKit
 
 class HomeViewController : UIViewController, HomeView {
 
-    weak var testView: UIView!
-    
     init() {
+        
+        let homeIcon = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
+        
+        let homeSelectedIcon = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .blue, size: CGSize(width: 25.0, height: 25.0))
+        
         super.init(nibName: nil, bundle: nil)
+        
+        tabBarItem = UITabBarItem(title: "Home", image: homeIcon, selectedImage: homeSelectedIcon)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -15,29 +21,13 @@ class HomeViewController : UIViewController, HomeView {
     override func loadView() {
         super.loadView()
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+        let gradient = CAGradientLayer()
+
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.paleTurquoise.cgColor, UIColor.snow.cgColor]
+
+        view.layer.insertSublayer(gradient, at: 0)
         
-        let homeIcon = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
-        
-        let homeSelectedIcon = UIImage.fontAwesomeIcon(icon: "\u{f015}", textColor: .blue, size: CGSize(width: 25.0, height: 25.0))
-        
-        tabBarItem = UITabBarItem(title: "Home", image: homeIcon, selectedImage: homeSelectedIcon)
-        
-        let testView = UIView(frame: .zero)
-        testView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(testView)
-        
-        NSLayoutConstraint.activate([
-            testView.widthAnchor.constraint(equalToConstant: 64),
-            testView.widthAnchor.constraint(equalTo: testView.heightAnchor),
-            testView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            testView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            ])
-        
-        self.testView = testView
     }
     
     override func viewDidLoad() {
@@ -45,10 +35,6 @@ class HomeViewController : UIViewController, HomeView {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
-        testView.backgroundColor = .red
-        
-        title = "Home"
         
         print("Home viewDidLoad")
         

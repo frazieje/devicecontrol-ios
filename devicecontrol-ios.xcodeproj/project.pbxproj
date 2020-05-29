@@ -23,6 +23,9 @@
 		2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */; };
 		2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */; };
 		2B2CB88B23F8A1F700F78A5B /* ProfileRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */; };
+		2B2F5AE52478B2220042EA8E /* DoorLockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F5AE42478B2220042EA8E /* DoorLockTableViewCell.swift */; };
+		2B2F5AE72478CAFE0042EA8E /* CachedDevicesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F5AE62478CAFE0042EA8E /* CachedDevicesResponse.swift */; };
+		2B2F5AE9247A18170042EA8E /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F5AE8247A18170042EA8E /* OAuthToken.swift */; };
 		2B45D02024267DD7003DCD47 /* ProfileLoginServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D01F24267DD7003DCD47 /* ProfileLoginServiceTests.swift */; };
 		2B45D02624271C2A003DCD47 /* AlamofireOAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D02524271C2A003DCD47 /* AlamofireOAuthApi.swift */; };
 		2B45D02A242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D029242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift */; };
@@ -185,6 +188,9 @@
 		2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMapper.swift; sourceTree = "<group>"; };
 		2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeviceMapper.swift; sourceTree = "<group>"; };
 		2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequestInterceptor.swift; sourceTree = "<group>"; };
+		2B2F5AE42478B2220042EA8E /* DoorLockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockTableViewCell.swift; sourceTree = "<group>"; };
+		2B2F5AE62478CAFE0042EA8E /* CachedDevicesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedDevicesResponse.swift; sourceTree = "<group>"; };
+		2B2F5AE8247A18170042EA8E /* OAuthToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthToken.swift; sourceTree = "<group>"; };
 		2B45D01F24267DD7003DCD47 /* ProfileLoginServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginServiceTests.swift; sourceTree = "<group>"; };
 		2B45D02524271C2A003DCD47 /* AlamofireOAuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireOAuthApi.swift; sourceTree = "<group>"; };
 		2B45D029242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResourceOwnerGrantRequest.swift; sourceTree = "<group>"; };
@@ -346,6 +352,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B2F5AE22478B1970042EA8E /* types */ = {
+			isa = PBXGroup;
+			children = (
+				2B2F5AE42478B2220042EA8E /* DoorLockTableViewCell.swift */,
+			);
+			path = types;
+			sourceTree = "<group>";
+		};
 		2B543106246107AB00D598F2 /* action */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +466,7 @@
 			children = (
 				2B45D029242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift */,
 				2B45D02B2428628C003DCD47 /* OAuthRefreshTokenGrantRequest.swift */,
+				2B2F5AE8247A18170042EA8E /* OAuthToken.swift */,
 				2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */,
 				2B72E62F235245AF00F85258 /* ProfileApi.swift */,
 				2BD09BFE235EA9C90044116C /* AlamofireProfileApi.swift */,
@@ -493,6 +508,7 @@
 		2B72E6332352484200F85258 /* devices */ = {
 			isa = PBXGroup;
 			children = (
+				2B2F5AE22478B1970042EA8E /* types */,
 				2B72E6352352497C00F85258 /* ProfileDevicesPresenter.swift */,
 				2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */,
 				2B758698234BD057006B2E56 /* DevicesPresenter.swift */,
@@ -602,6 +618,7 @@
 				2B7A7606243ABAFC007C01A2 /* ServiceBeaconMessage.swift */,
 				2B5430F8245D182E00D598F2 /* LoginRequest.swift */,
 				2B5431172462695200D598F2 /* LoginResult.swift */,
+				2B2F5AE62478CAFE0042EA8E /* CachedDevicesResponse.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -871,6 +888,7 @@
 				2B72E63823524BF300F85258 /* DevicesView.swift in Sources */,
 				2B7A7605243AB7FF007C01A2 /* NearbyProfileService.swift in Sources */,
 				2BA8A69C242B059700B16588 /* EditProfileLoginPresenter.swift in Sources */,
+				2B2F5AE9247A18170042EA8E /* OAuthToken.swift in Sources */,
 				2B19B60C2364FAEE00F5E8D5 /* WindowShade.swift in Sources */,
 				2B758697234BCC45006B2E56 /* DeviceService.swift in Sources */,
 				2B72E62D23523EF800F85258 /* CachedDevice.swift in Sources */,
@@ -887,6 +905,7 @@
 				2B72E6362352497C00F85258 /* ProfileDevicesPresenter.swift in Sources */,
 				2BED067F2443C91A00659CD4 /* ViewFactory.swift in Sources */,
 				2BED0665244277A400659CD4 /* ProfileServerItem.swift in Sources */,
+				2B2F5AE52478B2220042EA8E /* DoorLockTableViewCell.swift in Sources */,
 				2BED066B2442DC9900659CD4 /* WindowStateManager.swift in Sources */,
 				2B2CB88B23F8A1F700F78A5B /* ProfileRequestInterceptor.swift in Sources */,
 				2BED067B2443C68600659CD4 /* ProfilePresenterFactory.swift in Sources */,
@@ -967,6 +986,7 @@
 				2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */,
 				2B8CFBC72341A6F7000B7628 /* Permission.swift in Sources */,
 				2B45D02624271C2A003DCD47 /* AlamofireOAuthApi.swift in Sources */,
+				2B2F5AE72478CAFE0042EA8E /* CachedDevicesResponse.swift in Sources */,
 				2BE46DEE2447F1700002EFEA /* GetStartedViewController.swift in Sources */,
 				2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */,
 				2B758699234BD057006B2E56 /* DevicesPresenter.swift in Sources */,

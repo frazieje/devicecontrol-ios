@@ -81,7 +81,7 @@ class ProfileRouter : Router {
         sideMenu?.presentationStyle = style
         sideMenu?.blurEffectStyle = .extraLight
         
-        rootViewManager.setRoot(view: mainView, animated: true)
+        rootViewManager.setRoot(view: mainView, animated: true, wrapWithNavController: false)
         
     }
     
@@ -91,7 +91,7 @@ class ProfileRouter : Router {
         
         let view = viewFactory.getStarted(presenter: presenter)
         
-        rootViewManager.setRoot(view: view, animated: false)
+        rootViewManager.setRoot(view: view, animated: false, wrapWithNavController: true)
         
     }
     

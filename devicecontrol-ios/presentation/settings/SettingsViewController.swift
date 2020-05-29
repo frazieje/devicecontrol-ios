@@ -5,7 +5,15 @@ class SettingsViewController : UIViewController, SettingsView {
     weak var testView: UIView!
     
     init() {
+        
+        let settingsIcon = UIImage.fontAwesomeIcon(icon: "\u{f013}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
+
+        let settingsSelectedIcon = UIImage.fontAwesomeIcon(icon: "\u{f013}", textColor: .blue, size: CGSize(width: 25.0, height: 25.0))
+        
         super.init(nibName: nil, bundle: nil)
+        
+        tabBarItem = UITabBarItem(title: "Settings", image: settingsIcon, selectedImage: settingsSelectedIcon)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -13,17 +21,15 @@ class SettingsViewController : UIViewController, SettingsView {
     }
     
     override func loadView() {
+        
         super.loadView()
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        
-        let settingsIcon = UIImage.fontAwesomeIcon(icon: "\u{f013}", textColor: .gray, size: CGSize(width: 25.0, height: 25.0))
+        let gradient = CAGradientLayer()
 
-        let settingsSelectedIcon = UIImage.fontAwesomeIcon(icon: "\u{f013}", textColor: .blue, size: CGSize(width: 25.0, height: 25.0))
-        
-        tabBarItem = UITabBarItem(title: "Settings", image: settingsIcon, selectedImage: settingsSelectedIcon)
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.paleTurquoise.cgColor, UIColor.snow.cgColor]
+
+        view.layer.insertSublayer(gradient, at: 0)
         
         let testView = UIView(frame: .zero)
         testView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +54,6 @@ class SettingsViewController : UIViewController, SettingsView {
         testView.backgroundColor = .blue
         
         title = "Settings"
-        
         
         print("Settings viewDidLoad")
         

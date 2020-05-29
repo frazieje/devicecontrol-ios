@@ -1,8 +1,6 @@
 import Foundation
 
-struct LoginToken : Codable {
-    var id: Int64 = -1
-    var clientId: String
+struct OAuthToken : Codable {
     var tokenKey: String
     var tokenType: String
     var refreshToken: String

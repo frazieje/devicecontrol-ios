@@ -23,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
         
         do {
             
-//            let repositoryFactory: RepositoryFactory = try SQLiteRepositoryFactory(dbPath: documentsPath)
+//            let repositoryFactory: RepositoryFactory = try SQLiteRepositoryFactory() //no dbPath creates an in-memory only database
             
-            let repositoryFactory: RepositoryFactory = try SQLiteRepositoryFactory()
+            let repositoryFactory: RepositoryFactory = try SQLiteRepositoryFactory(dbPath: documentsPath)
             
             let serverResolveer: ServerResolver = ProfileServerResolver()
             
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
             
             let apiFactory: ApiFactory = AlamofireApiFactory(serverResolver: serverResolveer, tokenRepository: repositoryFactory.getLoginTokenRepository())
             
-            let loginService = ProfileLoginService(apiFactory: apiFactory, loginRepository: repositoryFactory.getProfileLoginRepository(), cacheFactory: cacheFactory)
+            let loginService: LoginService = ProfileLoginService(apiFactory: apiFactory, loginRepository: repositoryFactory.getProfileLoginRepository(), cacheFactory: cacheFactory)
             
             let deviceService = ProfileDeviceService(apiFactory: apiFactory, loginRepository: repositoryFactory.getProfileLoginRepository(), cacheFactory: cacheFactory)
             
@@ -47,7 +47,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
             
             let profileRouter = ProfileRouter(rootViewManager: self, presenterFactory: profilePresenterFactory, viewFactory: profileViewFactory)
             
-            profileRouter.routeToGetStarted()
+            let semaphore = DispatchSemaphore(value: 0)
+            var existingLogin: ProfileLogin?
+            loginService.getActiveLogin { result, error in
+                existingLogin = result
+                semaphore.signal()
+            }
+            
+            semaphore.wait()
+            
+            if existingLogin != nil {
+                profileRouter.routeToMain()
+            } else {
+                profileRouter.routeToGetStarted()
+            }
 
             return true
             
@@ -113,17 +126,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
         return self.orientationLock
     }
     
-    func setRoot(view: View, animated: Bool) {
+    func setRoot(view: View, animated: Bool, wrapWithNavController: Bool) {
         
         rootView = view
         
         guard animated, let window = self.window else {
-            self.window?.rootViewController = UINavigationController(rootViewController: view.viewController())
+            let rootView = wrapWithNavController ? UINavigationController(rootViewController: view.viewController()) : view.viewController()
+            self.window?.rootViewController = rootView
             self.window?.makeKeyAndVisible()
             return
         }
 
-        window.rootViewController = UINavigationController(rootViewController: view.viewController())
+        window.rootViewController = view.viewController()
         window.makeKeyAndVisible()
         UIView.transition(with: window,
                           duration: 0.3,

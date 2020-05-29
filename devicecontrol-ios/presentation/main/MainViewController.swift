@@ -1,8 +1,10 @@
 import UIKit
 
 class MainViewController : UITabBarController, MainView {
-
+    
     private let presenter: MainPresenter
+    
+    private var childViews: [View] = []
     
     init(presenter: MainPresenter) {
         self.presenter = presenter
@@ -24,18 +26,22 @@ class MainViewController : UITabBarController, MainView {
     }
     
     func setChildViews(_ views: View...) {
-        self.viewControllers = views.map {
-            return UINavigationController(rootViewController: $0.viewController())
-        }
+        self.childViews = views
     }
     
-    func showProfileButton(profileName: String) {
+    func loadChildViews(profileName: String, selectedIndex: Int) {
         
-        self.viewControllers?.forEach {
+        self.viewControllers = childViews.map {
+            
+            let navController = UINavigationController(rootViewController: $0.viewController())
+            
+            navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navController.navigationBar.shadowImage = UIImage()
+            navController.navigationBar.isTranslucent = true
             
             let button  = UIButton(type: .custom)
             
-            let profileIcon = UIImage.profileIcon(profileName: profileName, size: CGSize(width: 30.0, height: 30.0), color: .orange, textColor: .white)
+            let profileIcon = UIImage.profileIcon(profileName: profileName, size: CGSize(width: 35.0, height: 35.0), color: .mayaBlue, textColor: .white)
                 .withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
             
             button.setImage(profileIcon, for: .normal)
@@ -46,10 +52,14 @@ class MainViewController : UITabBarController, MainView {
             
             let barButton = UIBarButtonItem(customView: button)
             
-            $0.navigationItem.setRightBarButtonItems([barButton], animated: true)
-
+            $0.viewController().navigationItem.setRightBarButtonItems([barButton], animated: true)
+            
+            return navController
         }
+        
+        self.selectedIndex = selectedIndex
     }
+    
     
     @objc func onProfileButtonClicked() {
         presenter.onProfileButtonClicked()

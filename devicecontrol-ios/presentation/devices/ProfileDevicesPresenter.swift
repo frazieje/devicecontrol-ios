@@ -21,6 +21,12 @@ class ProfileDevicesPresenter : DevicesPresenter {
         
         print("devices presenter view will appear")
         
+        getDevices()
+        
+    }
+    
+    private func getDevices() {
+        
         deviceService.getDevices { devices, error in
             
             if (error == nil) {
@@ -33,11 +39,11 @@ class ProfileDevicesPresenter : DevicesPresenter {
                 self.showError(message: error!.message)
             }
         }
-        
+
     }
     
     func onViewDisappear() {
-        
+
     }
 
     func deviceClicked(id: String) {

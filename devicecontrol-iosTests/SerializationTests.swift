@@ -8,7 +8,8 @@ class SerializationTetsts: XCTestCase {
     let decoder: JSONDecoder = JSONDecoder()
     
     override func setUp() {
-
+        encoder.dateEncodingStrategy = .millisecondsSince1970
+        decoder.dateDecodingStrategy = .millisecondsSince1970
     }
 
     override func tearDown() {
@@ -44,9 +45,21 @@ class SerializationTetsts: XCTestCase {
     }
     
     func testCachedDevicesDeserializeCorrectly() {
-        let jsonString = "\"door_lock\""
-        let decoded = try? decoder.decode(DeviceType.self, from: jsonString.data(using: .utf8)!)
-        XCTAssertEqual(decoded!, .door_lock)
+        let date = Date()
+        let jsonString = "{\"cachedDate\":\(date.timeIntervalSince1970 * 1000),\"cachedMessageList\":[],\"type\":\"door_lock\",\"address\":{\"data\":\"AKpUj\\/2p\"}}"
+        let decoded = try? decoder.decode(CachedDevice.self, from: jsonString.data(using: .utf8)!)
+        XCTAssertEqual(decoded!.cachedDate.timeIntervalSince1970, date.timeIntervalSince1970)
+        XCTAssertEqual(decoded!.cachedMessageList.count, 0)
+        XCTAssertEqual(decoded!.type, .door_lock)
+        XCTAssertEqual(decoded!.address, EUI48Address(data: Data(base64Encoded: "AKpUj/2p")!))
+    }
+    
+    func testDeviceTypeSerialization() {
+        let date = Date()
+        let cachedDevice = CachedDevice(type: .door_lock, address: EUI48Address(data: Data(base64Encoded: "AKpUj/2p")!), cachedDate: date, cachedMessageList: [])
+        let result = try? encoder.encode(cachedDevice)
+        let resultString = String(data: result!, encoding: .utf8)
+        XCTAssertEqual(resultString, "{\"cachedDate\":\(date.timeIntervalSince1970 * 1000),\"cachedMessageList\":[],\"type\":\"door_lock\",\"address\":{\"data\":\"AKpUj\\/2p\"}}")
     }
 
 }

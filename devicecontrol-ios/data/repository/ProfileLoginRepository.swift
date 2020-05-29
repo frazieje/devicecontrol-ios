@@ -6,3 +6,7 @@ protocol ProfileLoginRepository {
     func put(_ item: ProfileLogin) throws -> ProfileLogin
     func remove(_ item: ProfileLogin, _ completion: @escaping (ProfileLogin?) -> Void)
 }
+
+enum RepositoryError : Error {
+    case recordNotFound
+}

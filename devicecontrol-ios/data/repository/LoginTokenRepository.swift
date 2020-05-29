@@ -1,3 +1,3 @@
 protocol LoginTokenRepository {
-    func put(_ item: LoginToken, _ completion: @escaping (Bool) -> Void)
+    func put(_ item: LoginToken) throws -> LoginToken
 }

@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		2B02347E244CED76001550CC /* ServerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02347D244CED76001550CC /* ServerItem.swift */; };
 		2B023480244D094C001550CC /* ProfileLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02347F244D094C001550CC /* ProfileLoginViewModel.swift */; };
+		2B04EC3C2481F16700A942C7 /* DoorLockPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC3B2481F16700A942C7 /* DoorLockPresenter.swift */; };
+		2B04EC3E2481F17300A942C7 /* DoorLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC3D2481F17300A942C7 /* DoorLockView.swift */; };
+		2B04EC402481F3D600A942C7 /* ProfileDoorLockPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC3F2481F3D600A942C7 /* ProfileDoorLockPresenter.swift */; };
+		2B04EC42248206AB00A942C7 /* DeviceViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC41248206AB00A942C7 /* DeviceViewFactory.swift */; };
+		2B04EC442482070200A942C7 /* ProfileDeviceViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC432482070200A942C7 /* ProfileDeviceViewFactory.swift */; };
+		2B04EC482482232700A942C7 /* DeviceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC472482232700A942C7 /* DeviceMessage.swift */; };
+		2B04EC4A2482CD9700A942C7 /* ProfileDoorLockPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC492482CD9700A942C7 /* ProfileDoorLockPresenterTests.swift */; };
+		2B04EC4C2482CE3800A942C7 /* FakeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC4B2482CE3800A942C7 /* FakeRouter.swift */; };
+		2B04EC4E2482CEA900A942C7 /* MockDeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC4D2482CEA900A942C7 /* MockDeviceService.swift */; };
+		2B04EC502495D83800A942C7 /* DeeplinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC4F2495D83800A942C7 /* DeeplinkManager.swift */; };
+		2B04EC542496F8CC00A942C7 /* DoorLockDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC532496F8CC00A942C7 /* DoorLockDetailsViewController.swift */; };
+		2B04EC562497035600A942C7 /* DoorLockHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B04EC552497035600A942C7 /* DoorLockHistoryTableViewCell.swift */; };
 		2B0D45B4244D3AA20051F8AB /* ValidationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B3244D3AA20051F8AB /* ValidationExtensions.swift */; };
 		2B0D45B6244FDE130051F8AB /* ProfileLoginViewModelValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B5244FDE130051F8AB /* ProfileLoginViewModelValidator.swift */; };
 		2B0D45B8244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D45B7244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift */; };
@@ -22,10 +34,17 @@
 		2B19B61123664A5C00F5E8D5 /* EUI48AddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61023664A5C00F5E8D5 /* EUI48AddressTests.swift */; };
 		2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */; };
 		2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */; };
+		2B27CD82249C6322005A7B93 /* DoorLockDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27CD81249C6322005A7B93 /* DoorLockDetailsView.swift */; };
+		2B27CD84249C69DD005A7B93 /* DoorLockMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27CD83249C69DD005A7B93 /* DoorLockMapper.swift */; };
+		2B27CD86249C6A2C005A7B93 /* ProfileDoorLockMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27CD85249C6A2C005A7B93 /* ProfileDoorLockMapper.swift */; };
+		2B27CD88249C71F9005A7B93 /* ForceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27CD87249C71F9005A7B93 /* ForceButton.swift */; };
 		2B2CB88B23F8A1F700F78A5B /* ProfileRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */; };
 		2B2F5AE52478B2220042EA8E /* DoorLockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F5AE42478B2220042EA8E /* DoorLockTableViewCell.swift */; };
 		2B2F5AE72478CAFE0042EA8E /* CachedDevicesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F5AE62478CAFE0042EA8E /* CachedDevicesResponse.swift */; };
 		2B2F5AE9247A18170042EA8E /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F5AE8247A18170042EA8E /* OAuthToken.swift */; };
+		2B446B3C249B033A0028DDE6 /* ProfileDoofLockDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B446B3B249B033A0028DDE6 /* ProfileDoofLockDetailsPresenter.swift */; };
+		2B446B3E249B29D30028DDE6 /* MoreHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B446B3D249B29D30028DDE6 /* MoreHistoryTableViewCell.swift */; };
+		2B446B40249B2F220028DDE6 /* DoorLockDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B446B3F249B2F220028DDE6 /* DoorLockDetailsPresenter.swift */; };
 		2B45D02024267DD7003DCD47 /* ProfileLoginServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D01F24267DD7003DCD47 /* ProfileLoginServiceTests.swift */; };
 		2B45D02624271C2A003DCD47 /* AlamofireOAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D02524271C2A003DCD47 /* AlamofireOAuthApi.swift */; };
 		2B45D02A242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D029242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift */; };
@@ -174,6 +193,18 @@
 /* Begin PBXFileReference section */
 		2B02347D244CED76001550CC /* ServerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerItem.swift; sourceTree = "<group>"; };
 		2B02347F244D094C001550CC /* ProfileLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewModel.swift; sourceTree = "<group>"; };
+		2B04EC3B2481F16700A942C7 /* DoorLockPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockPresenter.swift; sourceTree = "<group>"; };
+		2B04EC3D2481F17300A942C7 /* DoorLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockView.swift; sourceTree = "<group>"; };
+		2B04EC3F2481F3D600A942C7 /* ProfileDoorLockPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDoorLockPresenter.swift; sourceTree = "<group>"; };
+		2B04EC41248206AB00A942C7 /* DeviceViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewFactory.swift; sourceTree = "<group>"; };
+		2B04EC432482070200A942C7 /* ProfileDeviceViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeviceViewFactory.swift; sourceTree = "<group>"; };
+		2B04EC472482232700A942C7 /* DeviceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMessage.swift; sourceTree = "<group>"; };
+		2B04EC492482CD9700A942C7 /* ProfileDoorLockPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDoorLockPresenterTests.swift; sourceTree = "<group>"; };
+		2B04EC4B2482CE3800A942C7 /* FakeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRouter.swift; sourceTree = "<group>"; };
+		2B04EC4D2482CEA900A942C7 /* MockDeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeviceService.swift; sourceTree = "<group>"; };
+		2B04EC4F2495D83800A942C7 /* DeeplinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkManager.swift; sourceTree = "<group>"; };
+		2B04EC532496F8CC00A942C7 /* DoorLockDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockDetailsViewController.swift; sourceTree = "<group>"; };
+		2B04EC552497035600A942C7 /* DoorLockHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		2B0D45B3244D3AA20051F8AB /* ValidationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationExtensions.swift; sourceTree = "<group>"; };
 		2B0D45B5244FDE130051F8AB /* ProfileLoginViewModelValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewModelValidator.swift; sourceTree = "<group>"; };
 		2B0D45B7244FDE910051F8AB /* MainProfileLoginViewModelValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileLoginViewModelValidator.swift; sourceTree = "<group>"; };
@@ -187,10 +218,17 @@
 		2B19B61023664A5C00F5E8D5 /* EUI48AddressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUI48AddressTests.swift; sourceTree = "<group>"; };
 		2B19B61223667E7100F5E8D5 /* DeviceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMapper.swift; sourceTree = "<group>"; };
 		2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeviceMapper.swift; sourceTree = "<group>"; };
+		2B27CD81249C6322005A7B93 /* DoorLockDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockDetailsView.swift; sourceTree = "<group>"; };
+		2B27CD83249C69DD005A7B93 /* DoorLockMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockMapper.swift; sourceTree = "<group>"; };
+		2B27CD85249C6A2C005A7B93 /* ProfileDoorLockMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDoorLockMapper.swift; sourceTree = "<group>"; };
+		2B27CD87249C71F9005A7B93 /* ForceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceButton.swift; sourceTree = "<group>"; };
 		2B2CB88A23F8A1F700F78A5B /* ProfileRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequestInterceptor.swift; sourceTree = "<group>"; };
 		2B2F5AE42478B2220042EA8E /* DoorLockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockTableViewCell.swift; sourceTree = "<group>"; };
 		2B2F5AE62478CAFE0042EA8E /* CachedDevicesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedDevicesResponse.swift; sourceTree = "<group>"; };
 		2B2F5AE8247A18170042EA8E /* OAuthToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthToken.swift; sourceTree = "<group>"; };
+		2B446B3B249B033A0028DDE6 /* ProfileDoofLockDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDoofLockDetailsPresenter.swift; sourceTree = "<group>"; };
+		2B446B3D249B29D30028DDE6 /* MoreHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		2B446B3F249B2F220028DDE6 /* DoorLockDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorLockDetailsPresenter.swift; sourceTree = "<group>"; };
 		2B45D01F24267DD7003DCD47 /* ProfileLoginServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginServiceTests.swift; sourceTree = "<group>"; };
 		2B45D02524271C2A003DCD47 /* AlamofireOAuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireOAuthApi.swift; sourceTree = "<group>"; };
 		2B45D029242861C4003DCD47 /* OAuthResourceOwnerGrantRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResourceOwnerGrantRequest.swift; sourceTree = "<group>"; };
@@ -356,6 +394,17 @@
 			isa = PBXGroup;
 			children = (
 				2B2F5AE42478B2220042EA8E /* DoorLockTableViewCell.swift */,
+				2B04EC3B2481F16700A942C7 /* DoorLockPresenter.swift */,
+				2B04EC3D2481F17300A942C7 /* DoorLockView.swift */,
+				2B04EC3F2481F3D600A942C7 /* ProfileDoorLockPresenter.swift */,
+				2B04EC532496F8CC00A942C7 /* DoorLockDetailsViewController.swift */,
+				2B04EC552497035600A942C7 /* DoorLockHistoryTableViewCell.swift */,
+				2B446B3B249B033A0028DDE6 /* ProfileDoofLockDetailsPresenter.swift */,
+				2B446B3D249B29D30028DDE6 /* MoreHistoryTableViewCell.swift */,
+				2B446B3F249B2F220028DDE6 /* DoorLockDetailsPresenter.swift */,
+				2B27CD81249C6322005A7B93 /* DoorLockDetailsView.swift */,
+				2B27CD83249C69DD005A7B93 /* DoorLockMapper.swift */,
+				2B27CD85249C6A2C005A7B93 /* ProfileDoorLockMapper.swift */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -422,6 +471,9 @@
 				2B63D2FD243D85310072ECB3 /* MulticastNearbyProfileScannerTests.swift */,
 				2BED066224424EDE00659CD4 /* ScanningNearbyProfileServiceListenerTests.swift */,
 				2B0D45B9244FFB1F0051F8AB /* DefaultProfileServerMapperTests.swift */,
+				2B04EC492482CD9700A942C7 /* ProfileDoorLockPresenterTests.swift */,
+				2B04EC4B2482CE3800A942C7 /* FakeRouter.swift */,
+				2B04EC4D2482CEA900A942C7 /* MockDeviceService.swift */,
 			);
 			path = "devicecontrol-iosTests";
 			sourceTree = "<group>";
@@ -457,6 +509,7 @@
 				2BED06762443AE5700659CD4 /* PresenterFactory.swift */,
 				2BED067E2443C91A00659CD4 /* ViewFactory.swift */,
 				2BF5307524719AB000C1FABC /* RootViewManager.swift */,
+				2B04EC4F2495D83800A942C7 /* DeeplinkManager.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -515,6 +568,8 @@
 				2B6D7E3E2320C81000081579 /* DevicesViewController.swift */,
 				2B72E63723524BF300F85258 /* DevicesView.swift */,
 				2B19B61423667F0300F5E8D5 /* ProfileDeviceMapper.swift */,
+				2B04EC41248206AB00A942C7 /* DeviceViewFactory.swift */,
+				2B04EC432482070200A942C7 /* ProfileDeviceViewFactory.swift */,
 			);
 			path = devices;
 			sourceTree = "<group>";
@@ -543,6 +598,7 @@
 				2BA8C7E22445619000393475 /* UIStackViewExtensions.swift */,
 				2B1117152449436600AA839B /* UIColorExtensions.swift */,
 				2B0D45B3244D3AA20051F8AB /* ValidationExtensions.swift */,
+				2B27CD87249C71F9005A7B93 /* ForceButton.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -619,6 +675,7 @@
 				2B5430F8245D182E00D598F2 /* LoginRequest.swift */,
 				2B5431172462695200D598F2 /* LoginResult.swift */,
 				2B2F5AE62478CAFE0042EA8E /* CachedDevicesResponse.swift */,
+				2B04EC472482232700A942C7 /* DeviceMessage.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -890,6 +947,7 @@
 				2BA8A69C242B059700B16588 /* EditProfileLoginPresenter.swift in Sources */,
 				2B2F5AE9247A18170042EA8E /* OAuthToken.swift in Sources */,
 				2B19B60C2364FAEE00F5E8D5 /* WindowShade.swift in Sources */,
+				2B04EC502495D83800A942C7 /* DeeplinkManager.swift in Sources */,
 				2B758697234BCC45006B2E56 /* DeviceService.swift in Sources */,
 				2B72E62D23523EF800F85258 /* CachedDevice.swift in Sources */,
 				2B72E63A2352DD3C00F85258 /* ProfileDeviceService.swift in Sources */,
@@ -917,11 +975,14 @@
 				2B5431142461225F00D598F2 /* SQLiteRequestLogItem.swift in Sources */,
 				2B8EA92D231A378900B404AF /* User.swift in Sources */,
 				2B7A7603243A8B2A007C01A2 /* SQLiteLoginTokenRepsitory.swift in Sources */,
+				2B04EC442482070200A942C7 /* ProfileDeviceViewFactory.swift in Sources */,
+				2B04EC42248206AB00A942C7 /* DeviceViewFactory.swift in Sources */,
 				2BA8A690242AFEF800B16588 /* NearbyProfileLoginViewController.swift in Sources */,
 				2B6D7E3D2320C7FE00081579 /* HomeViewController.swift in Sources */,
 				2B543108246107E600D598F2 /* LoginActionViewController.swift in Sources */,
 				2B86C56F23F6677A00D502A2 /* View.swift in Sources */,
 				2B5430FF245F2BF600D598F2 /* ApiFactory.swift in Sources */,
+				2B04EC3C2481F16700A942C7 /* DoorLockPresenter.swift in Sources */,
 				2B6D7E3F2320C81000081579 /* DevicesViewController.swift in Sources */,
 				2BA237C524343BB2000B1F14 /* InMemoryCache.swift in Sources */,
 				2BED06732443A18000659CD4 /* ProfileRouter.swift in Sources */,
@@ -934,13 +995,17 @@
 				2B7A75EC24396596007C01A2 /* ProfileServer.swift in Sources */,
 				2BED065F2442142B00659CD4 /* AnyCodable.swift in Sources */,
 				2B8EA933231DB1D300B404AF /* Cache.swift in Sources */,
+				2B446B3C249B033A0028DDE6 /* ProfileDoofLockDetailsPresenter.swift in Sources */,
 				2BD09BFF235EA9C90044116C /* AlamofireProfileApi.swift in Sources */,
 				2B7343AC23220B930096DED4 /* UIImageExtensions.swift in Sources */,
 				2B72E630235245AF00F85258 /* ProfileApi.swift in Sources */,
 				2B5430F7245D152600D598F2 /* AlamofireExtensions.swift in Sources */,
+				2B04EC562497035600A942C7 /* DoorLockHistoryTableViewCell.swift in Sources */,
 				2B63D2EF243C488B0072ECB3 /* MulticastNearbyProfileScanner.swift in Sources */,
 				2B63D2ED243C42BC0072ECB3 /* ScanningNearbyProfileService.swift in Sources */,
 				2BED0669244282B000659CD4 /* DefaultProfileServerMapper.swift in Sources */,
+				2B27CD84249C69DD005A7B93 /* DoorLockMapper.swift in Sources */,
+				2B27CD82249C6322005A7B93 /* DoorLockDetailsView.swift in Sources */,
 				2B7A7601243A8520007C01A2 /* SQLiteRepositoryFactory.swift in Sources */,
 				2B581AE52314E7CA007D0D86 /* AppDelegate.swift in Sources */,
 				2B86C57A23F675D300D502A2 /* MenuView.swift in Sources */,
@@ -954,6 +1019,7 @@
 				2BF530702471932C00C1FABC /* SettingsView.swift in Sources */,
 				2B543105245F6F2D00D598F2 /* ProfileServerResolver.swift in Sources */,
 				2B72E62B23523B5E00F85258 /* EUI48Address.swift in Sources */,
+				2B04EC482482232700A942C7 /* DeviceMessage.swift in Sources */,
 				2B86C57423F6741300D502A2 /* ProfileLoginService.swift in Sources */,
 				2BA237BF242FBFA6000B1F14 /* SQLiteProfileLoginRepository.swift in Sources */,
 				2BA237B9242FB930000B1F14 /* ProfileLoginRepository.swift in Sources */,
@@ -967,6 +1033,7 @@
 				2BA8A69E242B05BA00B16588 /* MainEditProfileLoginPresenter.swift in Sources */,
 				2B86C57823F6754700D502A2 /* ProfileMenuPresenter.swift in Sources */,
 				2B543101245F2C4F00D598F2 /* AlamofireApiFactory.swift in Sources */,
+				2B446B40249B2F220028DDE6 /* DoorLockDetailsPresenter.swift in Sources */,
 				2B84698C234EBC8E00234153 /* CachedMessage.swift in Sources */,
 				2B543103245F598200D598F2 /* ServerResolver.swift in Sources */,
 				2B7A75F62439A37F007C01A2 /* SQLiteTable.swift in Sources */,
@@ -975,6 +1042,7 @@
 				2B54311224610B3F00D598F2 /* ProfileLoginRequestItemTableViewCell.swift in Sources */,
 				2B45D02C2428628C003DCD47 /* OAuthRefreshTokenGrantRequest.swift in Sources */,
 				2B1117162449436600AA839B /* UIColorExtensions.swift in Sources */,
+				2B04EC402481F3D600A942C7 /* ProfileDoorLockPresenter.swift in Sources */,
 				2B54311024610B0200D598F2 /* MainLoginActionPresenter.swift in Sources */,
 				2B86C57623F6753500D502A2 /* MenuPresenter.swift in Sources */,
 				2B6D7E412320C82000081579 /* SettingsViewController.swift in Sources */,
@@ -982,6 +1050,7 @@
 				2BA4B0CC23FA2C1A00A3FC6A /* ProfileLoginitem.swift in Sources */,
 				2B19B6082364F06B00F5E8D5 /* DoorLock.swift in Sources */,
 				2B5430FB245E0E0600D598F2 /* RequestProcessor.swift in Sources */,
+				2B04EC3E2481F17300A942C7 /* DoorLockView.swift in Sources */,
 				2BF5307C24723E1400C1FABC /* ProfileHomePresenter.swift in Sources */,
 				2B19B61323667E7100F5E8D5 /* DeviceMapper.swift in Sources */,
 				2B8CFBC72341A6F7000B7628 /* Permission.swift in Sources */,
@@ -989,14 +1058,17 @@
 				2B2F5AE72478CAFE0042EA8E /* CachedDevicesResponse.swift in Sources */,
 				2BE46DEE2447F1700002EFEA /* GetStartedViewController.swift in Sources */,
 				2B19B61523667F0300F5E8D5 /* ProfileDeviceMapper.swift in Sources */,
+				2B27CD86249C6A2C005A7B93 /* ProfileDoorLockMapper.swift in Sources */,
 				2B758699234BD057006B2E56 /* DevicesPresenter.swift in Sources */,
 				2BED06772443AE5700659CD4 /* PresenterFactory.swift in Sources */,
 				2BF5307A24723E0900C1FABC /* HomePresenter.swift in Sources */,
 				2B75869D234BD444006B2E56 /* Message.swift in Sources */,
 				2BF530722471937900C1FABC /* SettingsPresenter.swift in Sources */,
 				2BE46DF92447F56F0002EFEA /* MainGetStartedPresenter.swift in Sources */,
+				2B04EC542496F8CC00A942C7 /* DoorLockDetailsViewController.swift in Sources */,
 				2BA05C592406590D0033F91F /* OAuthApi.swift in Sources */,
 				2B7A75F224397B5D007C01A2 /* SQLiteLoginToken.swift in Sources */,
+				2B446B3E249B29D30028DDE6 /* MoreHistoryTableViewCell.swift in Sources */,
 				2BBC941923712C8A004D507D /* Presenter.swift in Sources */,
 				2B023480244D094C001550CC /* ProfileLoginViewModel.swift in Sources */,
 				2BF57B1C23431CA600B617B1 /* ProfileMenuViewController.swift in Sources */,
@@ -1010,6 +1082,7 @@
 				2B7A75EE243966EB007C01A2 /* SQLiteProfileServer.swift in Sources */,
 				2BF5306C2470E05100C1FABC /* ProfileMainPresenter.swift in Sources */,
 				2B6D7E3B2320C5EF00081579 /* MainViewController.swift in Sources */,
+				2B27CD88249C71F9005A7B93 /* ForceButton.swift in Sources */,
 				2B5430F9245D182E00D598F2 /* LoginRequest.swift in Sources */,
 				2BF5306A2470E03200C1FABC /* MainPresenter.swift in Sources */,
 			);
@@ -1022,10 +1095,13 @@
 				2B84698E234EC50800234153 /* SerializationTests.swift in Sources */,
 				2B63D2FE243D85310072ECB3 /* MulticastNearbyProfileScannerTests.swift in Sources */,
 				2B0D45BA244FFB1F0051F8AB /* DefaultProfileServerMapperTests.swift in Sources */,
+				2B04EC4E2482CEA900A942C7 /* MockDeviceService.swift in Sources */,
 				2B19B61123664A5C00F5E8D5 /* EUI48AddressTests.swift in Sources */,
+				2B04EC4C2482CE3800A942C7 /* FakeRouter.swift in Sources */,
 				2BED066324424EDE00659CD4 /* ScanningNearbyProfileServiceListenerTests.swift in Sources */,
 				2B581AFC2314E7CB007D0D86 /* devicecontrol_iosTests.swift in Sources */,
 				2B45D02024267DD7003DCD47 /* ProfileLoginServiceTests.swift in Sources */,
+				2B04EC4A2482CD9700A942C7 /* ProfileDoorLockPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1232,6 +1308,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B96ZR2265S;
 				INFOPLIST_FILE = "devicecontrol-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1252,6 +1329,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B96ZR2265S;
 				INFOPLIST_FILE = "devicecontrol-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1271,6 +1349,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B96ZR2265S;
 				INFOPLIST_FILE = "devicecontrol-iosUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1290,6 +1369,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B96ZR2265S;
 				INFOPLIST_FILE = "devicecontrol-iosUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

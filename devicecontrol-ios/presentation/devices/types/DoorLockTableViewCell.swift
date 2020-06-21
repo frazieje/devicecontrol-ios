@@ -1,9 +1,11 @@
 import Foundation
 import UIKit
 
-class DoorLockTableViewCell : UITableViewCell {
+class DoorLockTableViewCell : UITableViewCell, DoorLockView {
+
+    var presenter: DoorLockPresenter?
     
-    var delegate: DoorLockTableViewCellDelegate?
+    private var feedbackGenerator: UINotificationFeedbackGenerator? = nil
     
     let container: UIView = {
         let view = UIView()
@@ -119,8 +121,8 @@ class DoorLockTableViewCell : UITableViewCell {
         selectionStyle = .none
         
         layer.masksToBounds = false
-        layer.shadowOpacity = 0.23
-        layer.shadowRadius = 4
+        layer.shadowOpacity = 0.25
+        layer.shadowRadius = 3
         layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowColor = UIColor.blackCoral.cgColor
 
@@ -140,8 +142,12 @@ class DoorLockTableViewCell : UITableViewCell {
         
         addSubview(lblLastStateChange)
         
-        btnLocked.addTarget(self, action: #selector(onLockedButtonClicked), for: .touchUpInside)
-        btnUnlocked.addTarget(self, action: #selector(onUnlockedButtonClicked), for: .touchUpInside)
+        feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator?.prepare()
+        
+        btnLocked.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(onLockedButtonPressed)))
+            
+        btnUnlocked.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(onUnlockedButtonPressed)))
         
         NSLayoutConstraint.activate([
             
@@ -172,50 +178,55 @@ class DoorLockTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var index: Int?
+    private var item: DoorLock?
     
-    var item : DoorLock? {
-        didSet {
-            lblDeviceId.text = item?.deviceId
-            lblName.text = item?.name
-            switch item?.state {
-                case .locked, .unlocking:
-                    btnLocked.isHidden = false
-                    btnUnlocked.isHidden = true
-                case .unlocked, .locking:
-                    btnLocked.isHidden = true
-                    btnUnlocked.isHidden = false
-                default:
-                    btnLocked.isHidden = true
-                    btnUnlocked.isHidden = true
-            }
-            if let lastStateChangeSeconds = item?.lastStateChange?.timeIntervalSinceNow {
-                lblLastStateChange.text = "\(lastStateChangeSeconds.stringTime)"
-            }
+    func show(lock: DoorLock) {
+        self.item = lock
+        lblDeviceId.text = item?.deviceId
+        lblName.text = item?.name
+        switch item?.state {
+            case .locked, .unlocking:
+                btnLocked.isHidden = false
+                btnUnlocked.isHidden = true
+            case .unlocked, .locking:
+                btnLocked.isHidden = true
+                btnUnlocked.isHidden = false
+            default:
+                btnLocked.isHidden = true
+                btnUnlocked.isHidden = true
         }
-    }
+        if let lastStateChangeSeconds = item?.lastStateChange?.timeIntervalSinceNow {
+            lblLastStateChange.text = "\(lastStateChangeSeconds.stringTime)"
+        }
 
-    @objc func onLockedButtonClicked() {
-        btnLocked.isHidden = true
-        btnUnlocked.isHidden = false
-        if let idx = index {
-            delegate?.onUnlock(index: idx)
+    }
+    
+    @objc func onLockedButtonPressed(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == UIGestureRecognizer.State.began {
+            if let item = item {
+                feedbackGenerator?.notificationOccurred(.success)
+                presenter?.onUnlock(item: item)
+            }
         }
     }
     
-    @objc func onUnlockedButtonClicked() {
-        btnLocked.isHidden = false
-        btnUnlocked.isHidden = true
-        if let idx = index {
-            delegate?.onLock(index: idx)
+    @objc func onUnlockedButtonPressed(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == UIGestureRecognizer.State.began {
+            if let item = item {
+                feedbackGenerator?.notificationOccurred(.success)
+                presenter?.onLock(item: item)
+            }
         }
     }
     
-}
-
-protocol DoorLockTableViewCellDelegate {
-    func onLock(index: Int)
-    func onUnlock(index: Int)
+    func showError(message: String?) {
+        
+    }
+    
+    func viewController() -> UIViewController {
+        fatalError("not implemented")
+    }
+    
 }
 
 extension TimeInterval {
@@ -253,4 +264,5 @@ extension TimeInterval {
             return abs(seconds) < 10 ? "just now" : "\(abs(seconds))s ago"
         }
     }
+    
 }

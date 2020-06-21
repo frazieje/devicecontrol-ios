@@ -1,6 +1,8 @@
 import UIKit
 
 class MainViewController : UITabBarController, MainView {
+
+    
     
     private let presenter: MainPresenter
     
@@ -33,7 +35,9 @@ class MainViewController : UITabBarController, MainView {
         
         self.viewControllers = childViews.map {
             
-            let navController = UINavigationController(rootViewController: $0.viewController())
+            let vc = $0.viewController()
+            
+            let navController = UINavigationController(rootViewController: vc)
             
             navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
             navController.navigationBar.shadowImage = UIImage()
@@ -52,7 +56,7 @@ class MainViewController : UITabBarController, MainView {
             
             let barButton = UIBarButtonItem(customView: button)
             
-            $0.viewController().navigationItem.setRightBarButtonItems([barButton], animated: true)
+            vc.navigationItem.setRightBarButtonItems([barButton], animated: true)
             
             return navController
         }
@@ -67,6 +71,18 @@ class MainViewController : UITabBarController, MainView {
     
     func viewController() -> UIViewController {
         return self
+    }
+    
+    func setSelected(view: View) {
+        
+        let select = self.viewControllers?.filter { vc in
+            view.viewController() == vc
+        }.first
+        
+        if let select = select {
+            selectedViewController = select
+        }
+        
     }
     
 }

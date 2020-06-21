@@ -22,6 +22,14 @@ class ProfileLoginService : LoginService {
     
     func setActiveLogin(_ login: ProfileLogin, _ completion: @escaping (Bool, LoginServiceError?) -> Void) {
         
+        loginRequestQueue.async { [weak self] in
+            
+            guard let self = self else { return }
+            
+            _ = self.saveCurrentProfileLoginId(login.id)
+            
+        }
+        
     }
     
     func getActiveLogin(_ completion: @escaping (ProfileLogin?, LoginServiceError?) -> Void) {
@@ -81,7 +89,7 @@ class ProfileLoginService : LoginService {
             loginRequest.servers.forEach { server in
                 let request = OAuthResourceOwnerGrantRequest(clientId: loginRequest.profileId, username: loginRequest.username, password: loginRequest.password)
                 loginRequests.enter()
-                self.apiFactory.oAuthApi(server: server).login(request) { [weak self] token, apiError in
+                self.apiFactory.oAuthApi(responseQueue: self.loginRequestQueue, server: server).login(request) { [weak self] token, apiError in
                     guard let self = self else { return }
                     var loginResult: LoginResult?
                     if let token = token {

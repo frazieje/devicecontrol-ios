@@ -73,26 +73,32 @@ class TestOAuthApi : OAuthApi {
     
     var calledRefreshWithRequest: OAuthRefreshTokenGrantRequest?
     
-    func login(_ request: OAuthResourceOwnerGrantRequest, _ completion: @escaping (LoginToken?, OAuthApiError?) -> Void) {
+    func login(_ request: OAuthResourceOwnerGrantRequest, _ completion: @escaping (OAuthToken?, OAuthApiError?) -> Void) {
         calledLoginWithRequest = request
-        completion(loginToken, oAuthApiError)
+        let token =  OAuthToken(tokenKey: loginToken!.tokenKey, tokenType: loginToken!.tokenType, refreshToken: loginToken!.refreshToken, expiresIn: loginToken!.expiresIn, issuedAt: loginToken!.issuedAt)
+        completion(token, oAuthApiError)
     }
     
-    func refreshToken(_ request: OAuthRefreshTokenGrantRequest, _ completion: @escaping (LoginToken?, OAuthApiError?) -> Void) {
+    func refreshToken(_ request: OAuthRefreshTokenGrantRequest, _ completion: @escaping (OAuthToken?, OAuthApiError?) -> Void) {
         calledRefreshWithRequest = request
-        completion(loginToken, oAuthApiError)
+        let token =  OAuthToken(tokenKey: loginToken!.tokenKey, tokenType: loginToken!.tokenType, refreshToken: loginToken!.refreshToken, expiresIn: loginToken!.expiresIn, issuedAt: loginToken!.issuedAt)
+        completion(token, oAuthApiError)
     }
 
 }
 
 class TestProfileApi: ProfileApi {
-    
+
     func getPing(_ completion: @escaping (String?, ProfileApiError?) -> Void) {
         completion(nil, nil)
     }
     
     func getDevices(_ completion: @escaping ([CachedDevice], ProfileApiError?) -> Void) {
         completion([], nil)
+    }
+    
+    func postProfileMessage(toDeviceId: String, message: Message, _ completion: @escaping (ProfileApiError?) -> Void) {
+        completion(nil)
     }
     
 }
@@ -106,14 +112,14 @@ class TestApiFactory : ApiFactory {
     
     var oAuthApiCalledWithServers: [ProfileServer] = []
     
-    func oAuthApi(server: ProfileServer) -> OAuthApi {
+    func oAuthApi(responseQueue: DispatchQueue, server: ProfileServer) -> OAuthApi {
         oAuthApiCalledWithServers.append(server)
         let api = TestOAuthApi(loginToken: loginToken, oAuthApiError: oAuthApiError)
         oAuthApis.append(api)
         return api
     }
     
-    func profileApi(login: ProfileLogin) -> ProfileApi {
+    func profileApi(responseQueue: DispatchQueue, login: ProfileLogin) -> ProfileApi {
         return TestProfileApi()
     }
 
@@ -154,9 +160,9 @@ class TestLoginTokenRepository : LoginTokenRepository {
     
     var putCalledWith: LoginToken?
     
-    func put(_ item: LoginToken, _ completion: @escaping (Bool) -> Void) {
+    func put(_ item: LoginToken) throws -> LoginToken {
         putCalledWith = item
-        completion(true)
+        return putCalledWith!
     }
     
 }

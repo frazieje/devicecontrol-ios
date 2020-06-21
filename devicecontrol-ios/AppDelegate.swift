@@ -3,13 +3,17 @@ import SideMenu
 import SQLite
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, RootViewManager {
+class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, RootViewManager, DeepLinkManager {
 
     var window: UIWindow?
 
     var windowStateManager: (WindowStateManager & WindowStateObserver)?
     
+    var router: Router?
+    
     var rootView: View?
+    
+    var pendingDeviceUrl: (String, URL)?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -20,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
         ).first!
         
         windowStateManager = ApplicationDelegateWindowStateManager(delegate: self)
+        
+        let deepLinkManager: DeepLinkManager = self
         
         do {
             
@@ -41,11 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
             
             let nearbyProfileService = ScanningNearbyProfileService(scanner: nearbyProfileScanner)
             
-            let profilePresenterFactory = ProfilePresenterFactory(windowStateManager: windowStateManager!, nearbyProfileService: nearbyProfileService, loginService: loginService, deviceService: deviceService)
+            let profilePresenterFactory = ProfilePresenterFactory(windowStateManager: windowStateManager!, nearbyProfileService: nearbyProfileService, loginService: loginService, deviceService: deviceService, deepLinkManager: deepLinkManager)
             
             let profileViewFactory = ProfileViewFactory()
             
-            let profileRouter = ProfileRouter(rootViewManager: self, presenterFactory: profilePresenterFactory, viewFactory: profileViewFactory)
+            router = ProfileRouter(rootViewManager: self, presenterFactory: profilePresenterFactory, viewFactory: profileViewFactory)
             
             let semaphore = DispatchSemaphore(value: 0)
             var existingLogin: ProfileLogin?
@@ -57,9 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
             semaphore.wait()
             
             if existingLogin != nil {
-                profileRouter.routeToMain()
+                router!.routeToMain()
             } else {
-                profileRouter.routeToGetStarted()
+                router!.routeToGetStarted()
             }
 
             return true
@@ -98,6 +104,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 //        print("applicationWillTerminate")
+    }
+    
+    func application(_ application: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:] ) -> Bool {
+        
+        // Determine who sent the URL.
+        let sendingAppID = options[.sourceApplication]
+        print("source application = \(sendingAppID ?? "Unknown")")
+        
+        // Process the URL.
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+            let path = components.path,
+            let host = components.host,
+            let params = components.queryItems else {
+                print("Invalid URL or path missing")
+                return false
+        }
+        
+        if (host.lowercased() == "device") {
+        
+            if let id = params.first(where: { $0.name == "id" })?.value {
+                print("id = \(id)")
+                pendingDeviceUrl = (id, url)
+                router?.routeToMain()
+                return true
+            } else {
+                print("id missing")
+                return false
+            }
+            
+        } else {
+            print("invalid host")
+            return false
+        }
+        
+    }
+    
+    func getPendingDeviceUrl() -> (String, URL)? {
+        if let deviceUrl = pendingDeviceUrl {
+            let deviceUrl = (deviceUrl.0, deviceUrl.1)
+            pendingDeviceUrl = nil
+            return deviceUrl
+        } else {
+            return nil
+        }
     }
     
     var orientationLock = UIInterfaceOrientationMask.all

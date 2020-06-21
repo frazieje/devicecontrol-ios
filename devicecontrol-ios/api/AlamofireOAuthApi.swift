@@ -11,7 +11,10 @@ class AlamofireOAuthApi : OAuthApi {
     
     private let decoder = JSONDecoder()
     
-    init(session: Session, server: ProfileServer) {
+    private let responseQueue: DispatchQueue
+    
+    init(responseQueue: DispatchQueue, session: Session, server: ProfileServer) {
+        self.responseQueue = responseQueue
         self.session = session
         self.server = server
         decoder.dateDecodingStrategy = .millisecondsSince1970
@@ -29,7 +32,7 @@ class AlamofireOAuthApi : OAuthApi {
             
             urlRequest = try URLEncodedFormParameterEncoder().encode(request, into: urlRequest)
             
-            session.request(urlRequest).responseDecodable(of: OAuthToken.self, decoder: decoder) { response in
+            session.request(urlRequest).responseDecodable(of: OAuthToken.self, queue: responseQueue, decoder: decoder) { response in
                 do {
                     let token = try response.result.get()
                     print("token for \(urlRequest.url?.absoluteString) = \(token.tokenKey)")
@@ -57,7 +60,7 @@ class AlamofireOAuthApi : OAuthApi {
             
             urlRequest = try URLEncodedFormParameterEncoder().encode(request, into: urlRequest)
             
-            session.request(urlRequest).responseDecodable(of: OAuthToken.self, decoder: decoder) { response in
+            session.request(urlRequest).responseDecodable(of: OAuthToken.self, queue: responseQueue, decoder: decoder) { response in
                 do {
                     let token = try response.result.get()
                     print("refreshed token for \(urlRequest.url?.absoluteString) = \(token.tokenKey)")

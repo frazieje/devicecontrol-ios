@@ -2,7 +2,7 @@ import SideMenu
 import UIKit
 
 class ProfileRouter : Router {
-
+    
     private let rootViewManager: RootViewManager
     private let presenterFactory: PresenterFactory
     private let viewFactory: ViewFactory
@@ -94,6 +94,13 @@ class ProfileRouter : Router {
         rootViewManager.setRoot(view: view, animated: false, wrapWithNavController: true)
         
     }
+    
+    func routeToViewController(_ vc: UIViewController, from: View) {
+        
+        from.viewController().show(vc, sender: from)
+        
+    }
+    
     
     func showMenu() {
         if let menu = sideMenu {

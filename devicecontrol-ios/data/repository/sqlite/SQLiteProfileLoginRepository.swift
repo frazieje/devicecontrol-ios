@@ -160,7 +160,7 @@ class SQLiteProfileLoginRepository : ProfileLoginRepository {
                         try db.run(token.update(
                             SQLiteLoginToken.tokenKey <- value.tokenKey,
                             SQLiteLoginToken.profileLoginId <- item.id,
-                            SQLiteLoginToken.clientId <- value.clientId ?? item.profileId,
+                            SQLiteLoginToken.clientId <- value.clientId,
                             SQLiteLoginToken.serverId <- key.id,
                             SQLiteLoginToken.tokenType <- value.tokenType,
                             SQLiteLoginToken.refreshToken <- value.refreshToken,

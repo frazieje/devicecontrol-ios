@@ -16,11 +16,11 @@ class AlamofireApiFactory : ApiFactory {
         self.tokenRepository = tokenRepository
     }
     
-    func oAuthApi(server: ProfileServer) -> OAuthApi {
-        return AlamofireOAuthApi(session: Session.default, server: server)
+    func oAuthApi(responseQueue: DispatchQueue, server: ProfileServer) -> OAuthApi {
+        return AlamofireOAuthApi(responseQueue: responseQueue, session: Session.default, server: server)
     }
     
-    func profileApi(login: ProfileLogin) -> ProfileApi {
+    func profileApi(responseQueue: DispatchQueue, login: ProfileLogin) -> ProfileApi {
         var session: Session?
         let server = serverResolver.resolveFor(login: login)
         let token = login.loginTokens[server]!
@@ -33,14 +33,14 @@ class AlamofireApiFactory : ApiFactory {
                 if let existing = profileSessions[hashCode] {
                     session = existing
                 } else {
-                    let oAuthApiForServer = oAuthApi(server: server)
+                    let oAuthApiForServer = oAuthApi(responseQueue: responseQueue, server: server)
                     session = Session(interceptor: ProfileRequestInterceptor(loginToken: token, oAuthApi: oAuthApiForServer, tokenRepository: tokenRepository))
                     profileSessions[hashCode] = session
                 }
             }
         }
         
-        return AlamofireProfileApi(session: session!, server: server, profileId: login.profileId)
+        return AlamofireProfileApi(responseQueue: responseQueue, session: session!, server: server, profileId: login.profileId)
         
     }
     

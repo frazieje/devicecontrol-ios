@@ -6,14 +6,17 @@ class AlamofireProfileApi : ProfileApi {
     private let profilePath = "profile"
     private let pingPath = "ping"
     private let devicesPath = "devices"
+    private let deviceLogPath = "deviceLog"
     
+    private let responseQueue: DispatchQueue
     private let session: Session
     private let serverUrl: URL
     private let profileId: String
     
     private let decoder = JSONDecoder()
     
-    init(session: Session, server: ProfileServer, profileId: String) {
+    init(responseQueue: DispatchQueue, session: Session, server: ProfileServer, profileId: String) {
+        self.responseQueue = responseQueue
         self.session = session
         self.serverUrl = try! server.asURL()
         self.profileId = profileId
@@ -24,7 +27,7 @@ class AlamofireProfileApi : ProfileApi {
         let requestUrl = serverUrl.appendingPathComponent(pingPath)
         var urlRequest = URLRequest(url: requestUrl)
         urlRequest.method = .get
-        session.request(urlRequest).responseDecodable(of: String.self) { response in
+        session.request(urlRequest).responseDecodable(of: String.self, queue: responseQueue, decoder: decoder) { response in
             do {
                 let result = try response.result.get()
                 completion(result, nil)
@@ -44,7 +47,7 @@ class AlamofireProfileApi : ProfileApi {
         var urlRequest = URLRequest(url: requestUrl)
         urlRequest.method = .get
         
-        session.request(urlRequest).responseDecodable(of: [CachedDevice].self, decoder: decoder) { response in
+        session.request(urlRequest).responseDecodable(of: [CachedDevice].self, queue: responseQueue, decoder: decoder) { response in
             do {
                 let result = try response.result.get()
                 print("\(result.count) devices from \(urlRequest.url?.absoluteString)")
@@ -55,5 +58,58 @@ class AlamofireProfileApi : ProfileApi {
         }
         
     }
+    
+    func postProfileMessage(toDeviceId: String, message: Message, _ completion: @escaping (ProfileApiError?) -> Void) {
+        
+        let requestUrl = serverUrl
+            .appendingPathComponent(profilePath)
+            .appendingPathComponent(profileId)
+            .appendingPathComponent(toDeviceId)
+        
+        var urlRequest = URLRequest(url: requestUrl)
+        urlRequest.method = .post
+        
+        do {
+            urlRequest = try JSONParameterEncoder().encode(message, into: urlRequest)
+        } catch {
+            completion(.ErrorFormingRequest("\(error)"))
+        }
+        
+        session.request(urlRequest).response(queue: responseQueue) { data in
+            if let response = data.response {
+                if response.statusCode < 200 || response.statusCode > 299 {
+                    completion(.HttpError("Server returned unacceptable response code \(response.statusCode)"))
+                } else {
+                    completion(nil)
+                }
+            } else {
+                completion(.UnknownError("Unknown request error"))
+            }
+        }
+        
+    }
+    
+    func getDeviceLog(id: String, _ completion: @escaping ([CachedMessage], ProfileApiError?) -> Void) {
+        
+        let requestUrl = serverUrl
+            .appendingPathComponent(profilePath)
+            .appendingPathComponent(profileId)
+            .appendingPathComponent(deviceLogPath)
+            .appendingPathComponent(id)
+        
+        var urlRequest = URLRequest(url: requestUrl)
+        urlRequest.method = .get
+        
+        session.request(urlRequest).responseDecodable(of: [CachedMessage].self, queue: responseQueue, decoder: decoder) { response in
+            do {
+                let result = try response.result.get()
+                completion(result, nil)
+            } catch {
+                completion([], .HttpError("\(error)"))
+            }
+        }
+        
+    }
+    
     
 }

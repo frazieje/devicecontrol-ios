@@ -8,11 +8,14 @@ class ProfilePresenterFactory : PresenterFactory {
     
     private let deviceService: DeviceService
     
-    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, loginService: LoginService, deviceService: DeviceService) {
+    private let deepLinkManager: DeepLinkManager
+    
+    init(windowStateManager: WindowStateManager, nearbyProfileService: NearbyProfileService, loginService: LoginService, deviceService: DeviceService, deepLinkManager: DeepLinkManager) {
         self.windowStateManager = windowStateManager
         self.nearbyProfileService = nearbyProfileService
         self.loginService = loginService
         self.deviceService = deviceService
+        self.deepLinkManager = deepLinkManager
     }
     
     func getStartedPresenter(router: Router) -> GetStartedPresenter {
@@ -61,7 +64,9 @@ class ProfilePresenterFactory : PresenterFactory {
         
         let deviceMapper = ProfileDeviceMapper()
         
-        return ProfileDevicesPresenter(deviceService: deviceService, deviceMapper: deviceMapper)
+        let deviceViewFactory = ProfileDeviceViewFactory(router: router, deviceService: deviceService)
+        
+        return ProfileDevicesPresenter(router: router, deviceService: deviceService, deviceMapper: deviceMapper, viewFactory: deviceViewFactory, deepLinkManager: deepLinkManager)
     }
     
     func settings(router: Router) -> SettingsPresenter {

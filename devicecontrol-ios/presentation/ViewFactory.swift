@@ -9,6 +9,7 @@ protocol ViewFactory {
     func menu(presenter: MenuPresenter) -> MenuView
     
     func devices(presenter: DevicesPresenter) -> DevicesView
+    
     func home(presenter: HomePresenter) -> HomeView
     func settings(presenter: SettingsPresenter) -> SettingsView
     

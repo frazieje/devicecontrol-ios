@@ -249,7 +249,7 @@
 		2B5431132461225F00D598F2 /* SQLiteRequestLogItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteRequestLogItem.swift; sourceTree = "<group>"; };
 		2B543115246122D600D598F2 /* RequestLogItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLogItem.swift; sourceTree = "<group>"; };
 		2B5431172462695200D598F2 /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
-		2B581AE12314E7CA007D0D86 /* devicecontrol-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "devicecontrol-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B581AE12314E7CA007D0D86 /* FAR Access.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FAR Access.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B581AE42314E7CA007D0D86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B581AED2314E7CB007D0D86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B581AF02314E7CB007D0D86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -435,7 +435,7 @@
 		2B581AE22314E7CA007D0D86 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2B581AE12314E7CA007D0D86 /* devicecontrol-ios.app */,
+				2B581AE12314E7CA007D0D86 /* FAR Access.app */,
 				2B581AF72314E7CB007D0D86 /* devicecontrol-iosTests.xctest */,
 				2B581B022314E7CB007D0D86 /* devicecontrol-iosUITests.xctest */,
 			);
@@ -819,7 +819,7 @@
 				2B63D2FB243D7C8F0072ECB3 /* NIO */,
 			);
 			productName = "devicecontrol-ios";
-			productReference = 2B581AE12314E7CA007D0D86 /* devicecontrol-ios.app */;
+			productReference = 2B581AE12314E7CA007D0D86 /* FAR Access.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2B581AF62314E7CB007D0D86 /* devicecontrol-iosTests */ = {
@@ -1260,6 +1260,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B96ZR2265S;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1272,8 +1273,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.spoohapps.devicecontrol-ios";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.farsystem.devicecontrol-ios";
+				PRODUCT_NAME = "FAR Access";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1283,6 +1285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B96ZR2265S;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1295,8 +1298,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.spoohapps.devicecontrol-ios";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.farsystem.devicecontrol-ios";
+				PRODUCT_NAME = "FAR Access";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

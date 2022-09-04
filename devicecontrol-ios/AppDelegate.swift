@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
             
             let cacheFactory: CacheFactory = UserDefaultsCacheFactory()
             
-            let apiFactory: ApiFactory = AlamofireApiFactory(serverResolver: serverResolveer, tokenRepository: repositoryFactory.getLoginTokenRepository())
+            let apiFactory: ApiFactory = AlamofireApiFactory(serverResolver: serverResolveer, tokenRepository: repositoryFactory.getLoginTokenRepository(), returnToLogin)
             
             let loginService: LoginService = ProfileLoginService(apiFactory: apiFactory, loginRepository: repositoryFactory.getProfileLoginRepository(), cacheFactory: cacheFactory)
             
@@ -201,6 +201,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WindowStateController, Ro
     
     func getRootView() -> View {
         return rootView!
+    }
+    
+    private func returnToLogin(login: ProfileLogin) {
+        DispatchQueue.main.async {
+            let mapper = DefaultProfileLoginMapper()
+            let item = mapper.from(profileId: login.profileId, servers: login.loginTokens.map { $0.key })
+            self.router?.routeToRelogin(item: item, user: login.username)
+        }
     }
 
 }

@@ -2,6 +2,8 @@ import Foundation
 import Alamofire
 
 class ProfileRequestInterceptor : RequestInterceptor {
+    
+    private let login: ProfileLogin
 
     private var loginToken: LoginToken
     
@@ -13,15 +15,19 @@ class ProfileRequestInterceptor : RequestInterceptor {
     
     private var queuedRetries: [(RetryResult) -> Void] = []
     
+    private let refreshTokenFailureHandler: (ProfileLogin) -> Void
+    
     private let concurrentQueue =
     DispatchQueue(
       label: "net.spoohapps.devicecontrol.requestInterceptor",
       attributes: .concurrent)
     
-    init(loginToken: LoginToken, oAuthApi: OAuthApi, tokenRepository: LoginTokenRepository) {
+    init(login: ProfileLogin, loginToken: LoginToken, oAuthApi: OAuthApi, tokenRepository: LoginTokenRepository, _ refreshTokenFailureHandler: @escaping (ProfileLogin) -> Void) {
+        self.login = login
         self.loginToken = loginToken
         self.oAuthApi = oAuthApi
         self.tokenRepository = tokenRepository
+        self.refreshTokenFailureHandler = refreshTokenFailureHandler
     }
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
@@ -93,13 +99,17 @@ class ProfileRequestInterceptor : RequestInterceptor {
                                 } catch {
                                     succeeded = false
                                 }
-                                
-                                print("refreshi token due to 401")
                             
                             }
                             
+                            print("refresh token due to 401 - \(succeeded ? "success" : "failed")")
+                            
                             self.queuedRetries.forEach {
                                 $0(succeeded ? .retry : .doNotRetry)
+                            }
+                            
+                            if (!succeeded) {
+                                self.refreshTokenFailureHandler(self.login)
                             }
                             
                             self.queuedRetries.removeAll()

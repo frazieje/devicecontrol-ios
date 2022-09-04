@@ -11,9 +11,12 @@ class AlamofireApiFactory : ApiFactory {
     
     private let queue = DispatchQueue(label: "net.farsystem.devicecontrol.apiFactory", attributes: .concurrent)
     
-    init(serverResolver: ServerResolver, tokenRepository: LoginTokenRepository) {
+    private let refreshTokenFailureHandler: (ProfileLogin) -> Void
+    
+    init(serverResolver: ServerResolver, tokenRepository: LoginTokenRepository, _ refreshTokenFailureHandler: @escaping (ProfileLogin) -> Void) {
         self.serverResolver = serverResolver
         self.tokenRepository = tokenRepository
+        self.refreshTokenFailureHandler = refreshTokenFailureHandler
     }
     
     func oAuthApi(responseQueue: DispatchQueue, server: ProfileServer) -> OAuthApi {
@@ -34,7 +37,7 @@ class AlamofireApiFactory : ApiFactory {
                     session = existing
                 } else {
                     let oAuthApiForServer = oAuthApi(responseQueue: responseQueue, server: server)
-                    session = Session(interceptor: ProfileRequestInterceptor(loginToken: token, oAuthApi: oAuthApiForServer, tokenRepository: tokenRepository))
+                    session = Session(interceptor: ProfileRequestInterceptor(login: login, loginToken: token, oAuthApi: oAuthApiForServer, tokenRepository: tokenRepository, refreshTokenFailureHandler))
                     profileSessions[hashCode] = session
                 }
             }

@@ -10,7 +10,7 @@ class DefaultProfileLoginMapper : ProfileLoginMapper {
         return items
     }
     
-    private func from(profileId: String, servers: [ProfileServer]) -> ProfileServerItem {
+    func from(profileId: String, servers: [ProfileServer]) -> ProfileServerItem {
         return servers.reduce(PendingProfileServerItem(profileId: profileId), { pending, next in
             var updated = pending
             updated.servers.append(ServerItem(host: next.host, port: next.port, secure: next.secure))
@@ -18,10 +18,13 @@ class DefaultProfileLoginMapper : ProfileLoginMapper {
             }).get()
     }
     
-    func from(serverItem: ProfileServerItem?) -> ProfileLoginViewModel? {
+    func from(serverItem: ProfileServerItem?, user: String?) -> ProfileLoginViewModel? {
         if let item = serverItem {
             let servers = item.servers.map { server -> String in
                 return from(host: server.host, port: server.port, secure: server.secure)
+            }
+            if let username = user {
+                return ProfileLoginViewModel(username: username, password: "", profileId: item.profileId, servers: servers)
             }
             return ProfileLoginViewModel(username: "", password: "", profileId: item.profileId, servers: servers)
         } else {

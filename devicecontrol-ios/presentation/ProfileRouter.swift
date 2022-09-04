@@ -26,7 +26,7 @@ class ProfileRouter : Router {
     
     func routeToEditProfileLogin(from: View, item: ProfileServerItem?) {
         
-        let presenter = presenterFactory.editProfileLogin(router: self, item)
+        let presenter = presenterFactory.editProfileLogin(router: self, item, nil)
         
         let view = viewFactory.editProfileLogin(presenter: presenter)
         
@@ -98,6 +98,16 @@ class ProfileRouter : Router {
     func routeToViewController(_ vc: UIViewController, from: View) {
         
         from.viewController().show(vc, sender: from)
+        
+    }
+    
+    func routeToRelogin(item: ProfileServerItem, user: String) {
+        
+        let presenter = presenterFactory.editProfileLogin(router: self, item, user)
+        
+        let view = viewFactory.editProfileLogin(presenter: presenter)
+        
+        rootViewManager.setRoot(view: view, animated: true, wrapWithNavController: true)
         
     }
     

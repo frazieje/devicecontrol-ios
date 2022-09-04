@@ -6,10 +6,13 @@ class ProfileMainPresenter : MainPresenter {
     
     private let router: Router
     
+    private let windowStateManager: WindowStateManager
+    
     private let loginService: LoginService
     
-    init(router: Router, loginService: LoginService) {
+    init(router: Router, windowStateManager: WindowStateManager, loginService: LoginService) {
         self.router = router
+        self.windowStateManager = windowStateManager
         self.loginService = loginService
     }
 
@@ -32,11 +35,12 @@ class ProfileMainPresenter : MainPresenter {
     }
     
     func onViewAppear() {
-        
+        windowStateManager.lockOrientationPortrait()
+        windowStateManager.rotateToPortrait()
     }
     
     func onViewDisappear() {
-        
+        windowStateManager.lockOrientationAll()
     }
     
     func onProfileButtonClicked() {

@@ -414,6 +414,8 @@ class EditProfileLoginViewController : UIViewController, EditProfileLoginView {
     func prefill(with: ProfileLoginViewModel?) {
         let advancedEnabled = with != nil
         
+        txtUsername.text = with?.username ?? ""
+        
         txtProfileId.text = with?.profileId ?? ""
         
         var serverUIItems = (with?.servers ?? []).map { item in

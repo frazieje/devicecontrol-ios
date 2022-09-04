@@ -8,6 +8,8 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
     private var prefillServerItem: ProfileServerItem?
     
+    private var prefillUser: String?
+    
     private var advancedEnabled: Bool = false
     
     private let mapper: ProfileLoginMapper
@@ -16,11 +18,12 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
     private var loginInProgress: Bool = false
     
-    init(mapper: ProfileLoginMapper, router: Router, validator: ProfileLoginViewModelValidator, _ item: ProfileServerItem? = nil) {
+    init(mapper: ProfileLoginMapper, router: Router, validator: ProfileLoginViewModelValidator, _ item: ProfileServerItem? = nil, _ user: String? = nil) {
         self.router = router
         self.mapper = mapper
         self.validator = validator
         self.prefillServerItem = item
+        self.prefillUser = user
         if item != nil {
             advancedEnabled = true
         }
@@ -28,7 +31,7 @@ class MainEditProfileLoginPresenter : EditProfileLoginPresenter {
     
     func onViewLoad() {
         print("presenter view load")
-        view?.prefill(with: mapper.from(serverItem: prefillServerItem))
+        view?.prefill(with: mapper.from(serverItem: prefillServerItem, user: prefillUser))
     }
     
     func onViewAppear() {

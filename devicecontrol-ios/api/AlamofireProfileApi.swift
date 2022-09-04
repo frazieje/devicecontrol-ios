@@ -78,7 +78,7 @@ class AlamofireProfileApi : ProfileApi {
         session.request(urlRequest).response(queue: responseQueue) { data in
             if let response = data.response {
                 if response.statusCode < 200 || response.statusCode > 299 {
-                    completion(.HttpError("Server returned unacceptable response code \(response.statusCode)"))
+                    completion(.HttpError("Error \(response.statusCode)"))
                 } else {
                     completion(nil)
                 }

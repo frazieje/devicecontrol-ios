@@ -30,13 +30,13 @@ class ProfilePresenterFactory : PresenterFactory {
         
     }
     
-    func editProfileLogin(router: Router, _ item: ProfileServerItem?) -> EditProfileLoginPresenter {
+    func editProfileLogin(router: Router, _ item: ProfileServerItem?, _ user: String?) -> EditProfileLoginPresenter {
         
         let serverItemMapper: ProfileLoginMapper = DefaultProfileLoginMapper()
         
         let serverItemValidator: ProfileLoginViewModelValidator = MainProfileLoginViewModelValidator()
         
-        return MainEditProfileLoginPresenter(mapper: serverItemMapper, router: router, validator: serverItemValidator, item)
+        return MainEditProfileLoginPresenter(mapper: serverItemMapper, router: router, validator: serverItemValidator, item, user)
     }
     
     func loginAction(router: Router, item: ProfileLoginViewModel) -> LoginActionPresenter {
@@ -48,7 +48,7 @@ class ProfilePresenterFactory : PresenterFactory {
     
     func main(router: Router) -> MainPresenter {
         
-        return ProfileMainPresenter(router: router, loginService: loginService)
+        return ProfileMainPresenter(router: router, windowStateManager: windowStateManager, loginService: loginService)
         
     }
     
